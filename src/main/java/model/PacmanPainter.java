@@ -22,11 +22,10 @@ public class PacmanPainter implements GamePainter {
 
 	/**
 	 * appelle constructeur parent
-	 * 
-	 * @param game
-	 *            le jeutest a afficher
+	 *
 	 */
 	public PacmanPainter() {
+		super();
 	}
 
 	/**

@@ -36,10 +36,10 @@ public class PacmanController implements GameController {
 		return this.commandeEnCours;
 	}
 
-	@Override
 	/**
 	 * met a jour les commandes en fonctions des touches appuyees
 	 */
+	@Override
 	public void keyPressed(KeyEvent e) {
 
 		switch (e.getKeyChar()) {
@@ -52,18 +52,18 @@ public class PacmanController implements GameController {
 
 	}
 
-	@Override
 	/**
 	 * met a jour les commandes quand le joueur relache une touche
 	 */
+	@Override
 	public void keyReleased(KeyEvent e) {
 		this.commandeEnCours = Cmd.IDLE;
 	}
 
-	@Override
 	/**
 	 * ne fait rien
 	 */
+	@Override
 	public void keyTyped(KeyEvent e) {
 
 	}

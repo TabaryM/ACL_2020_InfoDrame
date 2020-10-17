@@ -37,7 +37,7 @@ public class PacmanGame implements Game {
 	/**
 	 * faire evoluer le jeu suite a une commande
 	 * 
-	 * @param commande
+	 * @param commande Cmd input saisis par l'utilisateur
 	 */
 	@Override
 	public void evolve(Cmd commande) {
