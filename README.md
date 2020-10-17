@@ -40,9 +40,21 @@ Paul-Emile Watelot
 
 
 ### Répartition des responsabilité
-Mathieu et Paul-Emile : 1. + 4.1 + 4.2
+Mathieu et Paul-Emile : 1 + 4.1 + 4.2
 
-Corentin + Jordan : 2. + 3. + 4.3
+Corentin + Jordan : 2 + 3. + 4.3
+
+### Diagrammes
+#### Diagramme de classe
+Objectif d'implémentation : 
+![ClassDiag](conception/diagrammes/class/Objectif Sprint 1.png)
+
+#### Diagrammes de séquence
+Déroulement du jeu : 
+![ClassDiag](conception/diagrammes/sequence/MainGame.png)
+
+![ClassDiag](conception/diagrammes/sequence/UserPlaying.png)
 
 
-### Fonctionnalitées implémentées une fois le sprint 1 fini
+### Fonctionnalités implémentées une fois le Sprint 1 fini
+Il faut d'abord finir le sprint
