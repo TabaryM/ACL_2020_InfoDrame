@@ -51,7 +51,9 @@ Objectif d'implémentation :
 
 #### Diagrammes de séquence
 Déroulement du jeu : 
+
 ![ClassDiag](conception/diagrammes/sequence/MainGame.svg)
+
 
 ![ClassDiag](conception/diagrammes/sequence/UserPlaying.svg)
 
