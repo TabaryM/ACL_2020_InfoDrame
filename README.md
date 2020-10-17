@@ -47,13 +47,13 @@ Corentin + Jordan : 2 + 3. + 4.3
 ### Diagrammes
 #### Diagramme de classe
 Objectif d'implémentation : 
-![ClassDiag](conception/diagrammes/class/Objectif_Sprint1.png)
+![ClassDiag](conception/diagrammes/class/Objectif_Sprint1.svg)
 
 #### Diagrammes de séquence
 Déroulement du jeu : 
-![ClassDiag](conception/diagrammes/sequence/MainGame.png)
+![ClassDiag](conception/diagrammes/sequence/MainGame.svg)
 
-![ClassDiag](conception/diagrammes/sequence/UserPlaying.png)
+![ClassDiag](conception/diagrammes/sequence/UserPlaying.svg)
 
 
 ### Fonctionnalités implémentées une fois le Sprint 1 fini
