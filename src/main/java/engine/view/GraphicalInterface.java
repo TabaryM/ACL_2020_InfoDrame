@@ -1,4 +1,6 @@
-package engine;
+package engine.view;
+
+import engine.controller.GameController;
 
 import javax.swing.JFrame;
 

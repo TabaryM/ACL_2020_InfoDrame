@@ -1,8 +1,8 @@
 package start;
 
-import model.PacmanPainter;
+import engine.view.PacmanPainter;
 import engine.GameEngineGraphical;
-import model.PacmanController;
+import engine.controller.PacmanController;
 import model.PacmanGame;
 
 /**

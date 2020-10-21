@@ -1,5 +1,11 @@
 package engine;
 
+import engine.controller.Cmd;
+import engine.controller.Game;
+import engine.controller.GameController;
+import engine.view.GamePainter;
+import engine.view.GraphicalInterface;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *

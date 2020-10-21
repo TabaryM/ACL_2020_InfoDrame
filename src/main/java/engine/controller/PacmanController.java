@@ -1,9 +1,6 @@
-package model;
+package engine.controller;
 
 import java.awt.event.KeyEvent;
-
-import engine.Cmd;
-import engine.GameController;
 
 
 /**

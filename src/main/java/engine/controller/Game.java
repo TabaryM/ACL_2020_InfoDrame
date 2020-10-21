@@ -1,4 +1,4 @@
-package engine;
+package engine.controller;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas

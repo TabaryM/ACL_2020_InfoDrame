@@ -1,4 +1,4 @@
-package engine;
+package engine.view;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas

@@ -1,4 +1,4 @@
-package engine;
+package engine.controller;
 
 import java.awt.event.KeyListener;
 

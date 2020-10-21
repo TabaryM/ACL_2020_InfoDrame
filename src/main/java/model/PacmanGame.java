@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import engine.Cmd;
-import engine.Game;
+import engine.controller.Cmd;
+import engine.controller.Game;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
