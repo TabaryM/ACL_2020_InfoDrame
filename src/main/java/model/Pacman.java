@@ -3,5 +3,6 @@ package model;
 /**
  * @author Tabary
  */
-public class Pacman {
+public class Pacman extends Personnage{
+
 }

@@ -47,7 +47,9 @@ public class PacmanGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		System.out.println("Execute "+commande);
+		// System.out.println("Execute "+commande);
+		monde.setPacmanDir(commande);
+		monde.nextStep();
 	}
 
 	/**
