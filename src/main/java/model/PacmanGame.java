@@ -15,6 +15,7 @@ import engine.controller.Game;
  * 
  */
 public class PacmanGame implements Game {
+	private final Monde monde;
 
 	/**
 	 * constructeur avec fichier source pour le help
@@ -32,6 +33,11 @@ public class PacmanGame implements Game {
 		} catch (IOException e) {
 			System.out.println("Help not available");
 		}
+		monde = new Monde();
+	}
+
+	public PacmanGame(){
+		monde = new Monde();
 	}
 
 	/**
