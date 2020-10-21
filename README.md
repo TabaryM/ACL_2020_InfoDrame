@@ -1,5 +1,17 @@
 # ACL_2020_InfoDrame
 
+## Compilation et lancement :
+
+Vous pouvez cloner ce projet, le compiler et l'executer en copiant 
+et collant les 4 lignes suivantes dans votre terminal
+
+```
+git clone https://github.com/TabaryM/ACL_2020_InfoDrame.git
+cd ACL_2020_InfoDrame
+mvn package
+java -jar target\ACL-2020-InfoDrame-0.0-SNAPSHOT.jar
+```
+
 ## Membres du groupe : 
 Corentin Roberge-Mentec
 
@@ -51,7 +63,9 @@ Objectif d'implémentation :
 
 #### Diagrammes de séquence
 Déroulement du jeu : 
+
 ![ClassDiag](conception/diagrammes/sequence/MainGame.svg)
+
 
 ![ClassDiag](conception/diagrammes/sequence/UserPlaying.svg)
 
