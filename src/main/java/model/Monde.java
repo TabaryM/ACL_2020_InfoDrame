@@ -16,10 +16,10 @@ public class Monde {
     private final List<Personnage> personnages;
 
     // TODO : parametre via lecture de fichier
-    Monde(){
+    Monde(Labyrinthe labyrinthe){
+        this.labyrinthe = labyrinthe;
         pacman = new Pacman();
         score = new Score();
-        labyrinthe = new Labyrinthe();
         personnages = new ArrayList<Personnage>();
         personnages.add(pacman);
     }

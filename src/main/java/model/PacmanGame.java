@@ -33,11 +33,11 @@ public class PacmanGame implements Game {
 		} catch (IOException e) {
 			System.out.println("Help not available");
 		}
-		monde = new Monde();
+		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
 
 	public PacmanGame(){
-		monde = new Monde();
+		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
 
 	/**

@@ -39,6 +39,5 @@ public abstract class Personnage {
                 position.moveRight();
                 break;
         }
-        //System.out.println(position);
     }
 }

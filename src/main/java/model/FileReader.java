@@ -3,9 +3,11 @@ package model;
 import java.io.*;
 
 /**
+ * @author Watelot
  * Classe permettant la lecture d'un plateau de jeu à partir d'un fichier texte
  */
 public class FileReader {
+
 
     /**
      * Construit le plateau de jeu à partir d'un fichier
