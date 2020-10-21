@@ -38,26 +38,23 @@ public class PacmanController implements GameController {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// Jeu raciste, on ne joue qu'avec un clavier Fronçais
-		switch (e.getKeyChar()) {
-			case 'q':
-			case 'Q':
-				this.commandeEnCours = Cmd.LEFT;
-				break;
-			case 'z':
-			case 'Z':
+		switch (e.getKeyCode()){
+			case KeyEvent.VK_Z:
+			case KeyEvent.VK_UP:
 				this.commandeEnCours = Cmd.UP;
 				break;
-			case 's':
-			case 'S':
+			case KeyEvent.VK_S:
+			case KeyEvent.VK_DOWN:
 				this.commandeEnCours = Cmd.DOWN;
 				break;
-			case 'd':
-			case 'D':
+			case KeyEvent.VK_Q:
+			case KeyEvent.VK_LEFT:
+				this.commandeEnCours = Cmd.LEFT;
+				break;
+			case KeyEvent.VK_D:
+			case KeyEvent.VK_RIGHT:
 				this.commandeEnCours = Cmd.RIGHT;
 				break;
-			default:
-				//System.out.println(e.getKeyChar()+"\t"+e.getKeyCode()+"\t"+e.getKeyLocation());
 		}
 	}
 
