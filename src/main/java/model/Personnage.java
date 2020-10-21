@@ -13,7 +13,7 @@ public abstract class Personnage {
 
     public Personnage(Position position) {
         this.position = position;
-        this.currentDirection = Cmd.RIGHT; // L'orientation initiale de Pacman est vers la droite
+        this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
     }
 
     public Personnage(){
@@ -39,5 +39,18 @@ public abstract class Personnage {
                 position.moveRight();
                 break;
         }
+    }
+
+    public void setPosition(int x, int y){
+        this.position.setX(x);
+        this.position.setY(y);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public Cmd getCurrentDirection() {
+        return currentDirection;
     }
 }

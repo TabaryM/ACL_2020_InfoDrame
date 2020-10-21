@@ -1,6 +1,8 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author Watelot
@@ -16,18 +18,28 @@ public class FileReader {
      */
     public int[][] buildPlateau(String chemin){
         int[][] plateau = new int[30][28];
+        ArrayList<String> validEntry = new ArrayList<String>(Arrays.asList("0", "1", "2", "3", "P"));
+
         try {
             File file = new File(chemin);
 
             BufferedReader reader = new BufferedReader(new java.io.FileReader(file));
 
             String line;
+            String temp;
             int x = 0;
             while((line = reader.readLine()) != null){
                 if(!line.startsWith("//")){
-                    //System.out.println(line);
                     for (int y = 0; y < 28; y++) {
-                        plateau[x][y] = Integer.parseInt(String.valueOf(line.charAt(y)));
+                        temp = String.valueOf(line.charAt(y));
+                        if(validEntry.contains(temp)){
+                            plateau[x][y] = Integer.parseInt(temp);
+                        }
+                        else{
+                            //TODO :: faire remonter l'exception ?
+                            System.out.println("Erreur lecture: Plateau invalide");
+                            return null;
+                        }
                     }
                     x++;
                 }

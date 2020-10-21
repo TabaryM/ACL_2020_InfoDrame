@@ -28,4 +28,8 @@ public class Labyrinthe {
         return stringBuilder.toString();
     }
 
+    public int getCasePlateau(int x, int y){
+        return plateau[y][x];
+    }
+
 }
