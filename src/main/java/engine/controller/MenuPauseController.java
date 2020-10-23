@@ -3,5 +3,5 @@ package engine.controller;
 /**
  * @author Tabary
  */
-public class MenuPauseController {
+public class MenuPauseController implements MenuController {
 }

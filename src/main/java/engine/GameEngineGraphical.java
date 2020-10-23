@@ -1,10 +1,10 @@
 package engine;
 
-import engine.controller.Cmd;
-import engine.controller.Game;
-import engine.controller.GameController;
+import engine.controller.*;
 import engine.view.GamePainter;
 import engine.view.GraphicalInterface;
+import engine.view.MenuPrincipalPainter;
+import engine.view.MenuUI;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -34,6 +34,10 @@ public class GameEngineGraphical {
 	 */
 	private GraphicalInterface gui;
 
+	private MenuUI menuUI;
+
+	private MenuController menuController;
+
 	/**
 	 * construit un moteur
 	 * 
@@ -45,11 +49,13 @@ public class GameEngineGraphical {
 	 *            controlleur a utiliser
 	 *            
 	 */
-	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController) {
+	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController, MenuUI menuUI, MenuController menuController) {
 		// creation du game
 		this.game = game;
 		this.gamePainter = gamePainter;
 		this.gameController = gameController;
+		this.menuUI = menuUI;
+		this.menuController = menuController;
 	}
 
 	/**
@@ -57,11 +63,13 @@ public class GameEngineGraphical {
 	 */
 	public void run() throws InterruptedException {
 
+		menuUI.display();
+
 		// creation de l'interface graphique
-		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
+		//this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
 
 		// boucle de game
-		while (!this.game.isFinished()) {
+		/*while (!this.game.isFinished()) {
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
 			// fait evoluer le game
@@ -70,7 +78,7 @@ public class GameEngineGraphical {
 			this.gui.paint();
 			// met en attente
 			Thread.sleep(100);
-		}
+		}*/
 	}
 
 }

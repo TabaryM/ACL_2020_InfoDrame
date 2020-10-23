@@ -2,7 +2,8 @@ package engine.view;
 
 import engine.controller.GameController;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 
 /**
@@ -48,5 +49,4 @@ public class GraphicalInterface  {
 	public void paint() {
 		this.panel.drawGame();	
 	}
-	
 }
