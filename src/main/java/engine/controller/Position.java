@@ -4,8 +4,18 @@ package engine.controller;
  * @author Tabary
  */
 public class Position {
-    private Integer x = 0;
-    private Integer y = 0;
+    private Integer x;
+    private Integer y;
+
+    public Position(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public Position(){
+        this.x = 0;
+        this.y = 0;
+    }
 
     public Integer getX() {
         return x;

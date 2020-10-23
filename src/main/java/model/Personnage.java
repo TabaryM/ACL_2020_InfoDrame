@@ -46,6 +46,10 @@ public abstract class Personnage {
         this.position.setY(y);
     }
 
+    public void setPosition(Position position){
+        setPosition(position.getX(), position.getY());
+    }
+
     public Position getPosition() {
         return position;
     }

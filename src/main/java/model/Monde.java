@@ -21,7 +21,7 @@ public class Monde {
         this.labyrinthe = labyrinthe;
         pacman = new Pacman();
         //pacman.setPosition(23,16);  //TODO : a ameliorer
-        pacman.setPosition(1,1);
+        pacman.setPosition(labyrinthe.getPositionPacman());
         score = new Score();
         personnages = new ArrayList<Personnage>();
         personnages.add(pacman);
@@ -38,8 +38,9 @@ public class Monde {
             if(personnagePeutAvancer(p)){
                 p.move();
             }
-            System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
+            //System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
+        //System.out.println(labyrinthe+"\n\n");
     }
 
     public boolean personnagePeutAvancer(Personnage p){

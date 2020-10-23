@@ -1,17 +1,27 @@
 package model;
 
+import engine.controller.Position;
+
 /**
  * @author Tabary
  */
 public class Labyrinthe {
 
-    private int[][] plateau;
+    private char[][] plateau;
+    private Position posInitPacman;
 
     public Labyrinthe(String path){
-        this(new FileReader().buildPlateau(path));
+        this(FileReader.getInstance().buildPlateau(path));
+        for(int i = 0; i < plateau.length; i++){
+            for(int j = 0; j < plateau[i].length; j++){
+                if(plateau[i][j] == 'P'){
+                    posInitPacman = new Position(i,j);
+                }
+            }
+        }
     }
 
-    public Labyrinthe(int[][] plateau){
+    public Labyrinthe(char[][] plateau){
         this.plateau = plateau;
         System.out.println(this);
     }
@@ -32,4 +42,7 @@ public class Labyrinthe {
         return plateau[y][x];
     }
 
+    public Position getPositionPacman() {
+        return posInitPacman;
+    }
 }
