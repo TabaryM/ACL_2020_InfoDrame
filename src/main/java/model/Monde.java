@@ -3,6 +3,7 @@ package model;
 import engine.controller.Cmd;
 import engine.controller.Position;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ public class Monde {
     Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman();
-        //pacman.setPosition(23,16);  //TODO : a ameliorer
         pacman.setPosition(labyrinthe.getPositionPacman());
         score = new Score();
         personnages = new ArrayList<Personnage>();
@@ -38,9 +38,9 @@ public class Monde {
             if(personnagePeutAvancer(p)){
                 p.move();
             }
-            //System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
+            System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
-        //System.out.println(labyrinthe+"\n\n");
+        //System.out.println(labyrinthe);
     }
 
     public boolean personnagePeutAvancer(Personnage p){
@@ -48,16 +48,16 @@ public class Monde {
         Position pos = p.getPosition();
         switch (p.getCurrentDirection()){
             case LEFT:
-                tmp = labyrinthe.getCasePlateau(pos.getX()-1, pos.getY()) != 1;
+                tmp = labyrinthe.getCasePlateau(pos.getX()-1, pos.getY()) != '1';
                 break;
             case DOWN:
-                tmp = labyrinthe.getCasePlateau(pos.getX(), pos.getY()+1) != 1;
+                tmp = labyrinthe.getCasePlateau(pos.getX(), pos.getY()+1) != '1';
                 break;
             case UP:
-                tmp = labyrinthe.getCasePlateau(pos.getX(), pos.getY()-1) != 1;
+                tmp = labyrinthe.getCasePlateau(pos.getX(), pos.getY()-1) != '1';
                 break;
             case RIGHT:
-                tmp = labyrinthe.getCasePlateau(pos.getX()+1, pos.getY()) != 1;
+                tmp = labyrinthe.getCasePlateau(pos.getX()+1, pos.getY()) != '1';
                 break;
         }
         return tmp;
