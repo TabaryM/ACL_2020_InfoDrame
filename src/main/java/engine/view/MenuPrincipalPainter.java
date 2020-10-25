@@ -34,6 +34,7 @@ public class MenuPrincipalPainter implements MenuUI, ActionListener {
         f = new JFrame();
         f.setTitle("PacMan");
         f.setMinimumSize(dimension);
+        f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setContentPane(panel);
         f.pack();
