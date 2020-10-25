@@ -20,7 +20,7 @@ public class MenuPrincipalPainter implements MenuUI, ActionListener {
     }
 
     @Override
-    public void create() throws InterruptedException {
+    public void create() {
         JPanel panel = new JPanel();
         JButton button = new JButton("Play");
         JTextArea title = new JTextArea("PacMan");

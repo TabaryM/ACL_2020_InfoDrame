@@ -8,11 +8,15 @@ public class MenuPauseController implements MenuController {
     private boolean play;
 
     public MenuPauseController(){
-        play = false;
+        play = true;
     }
 
     @Override
     public boolean play() {
         return play;
+    }
+
+    public void changePlay(){
+        play = !play;
     }
 }

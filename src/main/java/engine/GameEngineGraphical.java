@@ -37,6 +37,10 @@ public class GameEngineGraphical {
 
 	private MenuController menuController;
 
+	private MenuUI pauseUI;
+
+	private MenuController pauseController;
+
 	/**
 	 * construit un moteur
 	 * 
@@ -48,13 +52,15 @@ public class GameEngineGraphical {
 	 *            controlleur a utiliser
 	 *            
 	 */
-	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController, MenuUI menuUI, MenuController menuController) {
+	public GameEngineGraphical(Game game, GamePainter gamePainter, GameController gameController, MenuUI menuUI, MenuController menuController, MenuUI pauseUI, MenuController pauseController) {
 		// creation du game
 		this.game = game;
 		this.gamePainter = gamePainter;
 		this.gameController = gameController;
 		this.menuUI = menuUI;
 		this.menuController = menuController;
+		this.pauseUI = pauseUI;
+		this.pauseController = pauseController;
 	}
 
 	/**
@@ -64,6 +70,7 @@ public class GameEngineGraphical {
 
 		// Creation de la fenêtre du menu principal
 		menuUI.create();
+		pauseUI.create();
 
 		// Boucle d'affichage du menu principal
 		while (!menuController.play()){
@@ -81,6 +88,14 @@ public class GameEngineGraphical {
 		while (!this.game.isFinished()) {
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
+			if (c == Cmd.PAUSE){
+				pauseController.changePlay();
+				gameController.setCommand(Cmd.IDLE);
+			}
+			while (!pauseController.play()){
+				pauseUI.display();
+			}
+			pauseUI.erase();
 			// fait evoluer le game
 			this.game.evolve(c);
 			// affiche le game
