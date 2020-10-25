@@ -31,7 +31,6 @@ public class MenuPausePainter implements MenuUI, ActionListener {
         dimension.setSize(300, 400);
 
         f = new JFrame();
-        f.getRootPane().putClientProperty("Window.alpha", 0.8f);
         f.setTitle("PacMan");
         f.setMinimumSize(dimension);
         f.setLocationRelativeTo(null);

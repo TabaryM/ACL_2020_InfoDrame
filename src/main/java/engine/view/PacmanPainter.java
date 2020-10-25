@@ -64,14 +64,11 @@ public class PacmanPainter implements GamePainter {
 	public void drawIcon(Graphics2D graphics2D) {
 		int n= 3;
 		try {
-			URL url = PacmanPainter.class.getClassLoader().getResource("images/Pacman.png");
-			if (url != null) {
-				BufferedImage image = ImageIO.read(new File(url.getPath()));
-				BufferedImage imScale = resize(image, 20, 20);
-				for (int i = 0; i < n; i++) {
-					int x = 20 * i + 10;
-					graphics2D.drawImage(imScale, x, 680, null);
-				}
+			BufferedImage image = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
+			BufferedImage imScale = resize(image, 20, 20);
+			for (int i = 0; i < n; i++) {
+				int x = 20 * i + 10;
+				graphics2D.drawImage(imScale, x, 680, null);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
