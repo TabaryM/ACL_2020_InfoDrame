@@ -1,8 +1,11 @@
 package engine.view;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -15,8 +18,8 @@ public class PacmanPainter implements GamePainter {
 	/**
 	 * la taille des cases
 	 */
-	protected static final int WIDTH = 100;
-	protected static final int HEIGHT = 100;
+	protected static final int WIDTH = 1080;
+	protected static final int HEIGHT = 720;
 
 	/**
 	 * appelle constructeur parent
@@ -31,9 +34,66 @@ public class PacmanPainter implements GamePainter {
 	 */
 	@Override
 	public void draw(BufferedImage im) {
-		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		crayon.setColor(Color.blue);
-		crayon.fillOval(0,0,10,10);
+		Graphics2D graphics2D = im.createGraphics();
+		Color background = new Color(0, 0, 0);
+		graphics2D.setColor(background);
+		graphics2D.fillRect(0, 0, getWidth(), getHeight());
+		drawFont(graphics2D);
+		drawIcon(graphics2D);
+		graphics2D.dispose();
+	}
+
+	/**
+	 * Dessine sur l'image un font
+	 * @param graphics2D de type Graphic2D
+	 */
+	public void drawFont(Graphics2D graphics2D) {
+		Color font = new Color(255, 255, 255);
+		graphics2D.setColor(font);
+		graphics2D.setFont(graphics2D.getFont().deriveFont(25f));
+		graphics2D.drawString("Score: 9000", 900, 50);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
+	}
+
+	/**
+	 * Dessine le nombre de vie du joueur sur l'image
+	 * @param graphics2D de type Graphics2D
+	 */
+	public void drawIcon(Graphics2D graphics2D) {
+		int n= 3;
+		try {
+			URL url = PacmanPainter.class.getClassLoader().getResource("images/Pacman.png");
+			if (url != null) {
+				BufferedImage image = ImageIO.read(new File(url.getPath()));
+				BufferedImage imScale = resize(image, 20, 20);
+				for (int i = 0; i < n; i++) {
+					int x = 20 * i + 10;
+					graphics2D.drawImage(imScale, x, 680, null);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Redimensionne un image au valeur donner en paramètre
+	 * @param img de type BufferedImage
+	 * @param newW de type int (Width)
+	 * @param newH de type int (Height)
+	 * @return un BufferedImage
+	 */
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+		Graphics2D g2d = dimg.createGraphics();
+		g2d.drawImage(tmp, 0, 0, null);
+		g2d.dispose();
+
+		return dimg;
 	}
 
 	@Override

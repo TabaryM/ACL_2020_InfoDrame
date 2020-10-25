@@ -1,6 +1,6 @@
 package engine.view;
 
-/**
+/*
  * @author Horatiu Cirstea, Vincent Thomas
  *
  */
@@ -63,6 +63,7 @@ public class DrawingPanel extends JPanel {
 	 * nouvelle image vide sur laquelle dessiner
 	 */
 	public void drawGame() {
+
 		// generer la nouvelle image
 		this.painter.draw(this.nextImage);
 
