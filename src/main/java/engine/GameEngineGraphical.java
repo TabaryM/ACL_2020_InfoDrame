@@ -3,7 +3,6 @@ package engine;
 import engine.controller.*;
 import engine.view.GamePainter;
 import engine.view.GraphicalInterface;
-import engine.view.MenuPrincipalPainter;
 import engine.view.MenuUI;
 
 /**
@@ -63,13 +62,23 @@ public class GameEngineGraphical {
 	 */
 	public void run() throws InterruptedException {
 
-		menuUI.display();
+		// Creation de la fenêtre du menu principal
+		menuUI.create();
+
+		// Boucle d'affichage du menu principal
+		while (!menuController.play()){
+			menuUI.display();
+		}
+
+		// Suppression de la fenêtre du menu principal
+		menuUI.erase();
 
 		// creation de l'interface graphique
-		//this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
+		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
+
 
 		// boucle de game
-		/*while (!this.game.isFinished()) {
+		while (!this.game.isFinished()) {
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
 			// fait evoluer le game
@@ -78,7 +87,7 @@ public class GameEngineGraphical {
 			this.gui.paint();
 			// met en attente
 			Thread.sleep(100);
-		}*/
+		}
 	}
 
 }

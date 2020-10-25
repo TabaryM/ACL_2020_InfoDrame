@@ -1,6 +1,6 @@
 package engine.controller;
 
-import java.awt.event.KeyEvent;
+import engine.view.GraphicalInterface;
 
 /**
  * @author Tabary
@@ -15,5 +15,9 @@ public class MenuPrincipalController implements MenuController {
 
     public boolean play(){
         return play;
+    }
+
+    public void changePlay(){
+        play = !play;
     }
 }
