@@ -22,7 +22,9 @@ public class MenuPausePainter implements MenuUI, ActionListener {
 
     @Override
     public void create() {
+
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(0,0,0,0));
         JButton button = new JButton("Resume");
 
         button.addActionListener(this);
@@ -30,13 +32,18 @@ public class MenuPausePainter implements MenuUI, ActionListener {
         Dimension dimension = new Dimension();
         dimension.setSize(300, 400);
 
+        Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+
         f = new JFrame();
         f.setTitle("PacMan");
         f.setMinimumSize(dimension);
-        f.setLocationRelativeTo(null);
+        f.setLocation(new Point((screen.width-dimension.width)/2, (screen.height-dimension.height)/2));
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setUndecorated(true);
+        f.setBackground(new Color(0,0,0,0));
         f.setContentPane(panel);
         f.pack();
+
     }
 
     @Override

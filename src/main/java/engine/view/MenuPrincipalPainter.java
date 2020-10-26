@@ -38,9 +38,6 @@ public class MenuPrincipalPainter implements MenuUI, ActionListener {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setContentPane(panel);
         f.pack();
-        f.setVisible(true);
-        f.getContentPane().setFocusable(true);
-        f.getContentPane().requestFocus();
     }
 
     @Override

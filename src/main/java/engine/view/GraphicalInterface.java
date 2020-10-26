@@ -29,7 +29,8 @@ public class GraphicalInterface  {
 	public GraphicalInterface(GamePainter gamePainter, GameController gameController){
 		JFrame f=new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLocationRelativeTo(null);
+		Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+		f.setLocation(new Point((screen.width-gamePainter.getWidth())/2, (screen.height-gamePainter.getHeight())/2));
 		
 		// attacher le panel contenant l'afficheur du game
 		this.panel=new DrawingPanel(gamePainter);
