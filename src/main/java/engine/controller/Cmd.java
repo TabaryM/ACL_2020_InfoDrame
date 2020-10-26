@@ -5,5 +5,5 @@ package engine.controller;
  *
  */
 public enum Cmd {
-	 LEFT,RIGHT,UP,DOWN,IDLE; 
+	 LEFT,RIGHT,UP,DOWN,IDLE,PAUSE;
 }

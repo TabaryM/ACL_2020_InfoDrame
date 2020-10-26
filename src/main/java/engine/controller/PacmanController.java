@@ -33,12 +33,17 @@ public class PacmanController implements GameController {
 		return this.commandeEnCours;
 	}
 
+
+	public void setCommand(Cmd cmd) {
+		commandeEnCours = cmd;
+	}
+
 	/**
 	 * met a jour les commandes en fonctions des touches appuyees
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()){
+		switch (e.getKeyCode()) {
 			case KeyEvent.VK_Z:
 			case KeyEvent.VK_UP:
 				this.commandeEnCours = Cmd.UP;
@@ -55,7 +60,11 @@ public class PacmanController implements GameController {
 			case KeyEvent.VK_RIGHT:
 				this.commandeEnCours = Cmd.RIGHT;
 				break;
+			case KeyEvent.VK_P:
+				this.commandeEnCours = Cmd.PAUSE;
+				break;
 		}
+
 	}
 
 	/**
@@ -63,7 +72,7 @@ public class PacmanController implements GameController {
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.commandeEnCours = Cmd.IDLE;
+		//this.commandeEnCours = Cmd.IDLE;
 	}
 
 	/**
