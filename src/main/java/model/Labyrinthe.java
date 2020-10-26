@@ -15,7 +15,7 @@ public class Labyrinthe {
         for(int i = 0; i < plateau.length; i++){
             for(int j = 0; j < plateau[i].length; j++){
                 if(plateau[i][j] == 'P'){
-                    posInitPacman = new Position(i,j);
+                    posInitPacman = new Position(j,i);
                 }
             }
         }
