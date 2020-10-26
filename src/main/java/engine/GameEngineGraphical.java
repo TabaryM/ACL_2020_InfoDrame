@@ -75,6 +75,7 @@ public class GameEngineGraphical {
 		// Boucle d'affichage du menu principal
 		while (!menuController.play()){
 			menuUI.display();
+			Thread.sleep(100);
 		}
 
 		// Suppression de la fenêtre du menu principal
@@ -94,6 +95,7 @@ public class GameEngineGraphical {
 			}
 			while (!pauseController.play()){
 				pauseUI.display();
+				Thread.sleep(100);
 			}
 			pauseUI.erase();
 			// fait evoluer le game
