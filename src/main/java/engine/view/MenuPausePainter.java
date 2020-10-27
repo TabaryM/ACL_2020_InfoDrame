@@ -15,11 +15,19 @@ public class MenuPausePainter implements MenuUI, ActionListener {
     private MenuPauseController menuPauseController;
     private JFrame f;
 
+    /**
+     * Constructeur de l'afficheur du menu pause. Il construit la nouvelle fenêtre qui va acceuillir le menu pause
+     * et défini son controller.
+     * @param menuPauseController le controller de l'afficheur du menu pause.
+     */
     public MenuPausePainter(MenuPauseController menuPauseController){
         this.menuPauseController = menuPauseController;
         f = new JFrame();
     }
 
+    /**
+     * Crée les composants de la fenêtre de l'afficheur.
+     */
     @Override
     public void create() {
 
@@ -46,6 +54,9 @@ public class MenuPausePainter implements MenuUI, ActionListener {
 
     }
 
+    /**
+     * Affiche la fenêtre du menu pause.
+     */
     @Override
     public void display() {
         f.setVisible(true);
@@ -53,11 +64,18 @@ public class MenuPausePainter implements MenuUI, ActionListener {
         f.getContentPane().requestFocus();
     }
 
+    /**
+     * Efface la fenêtre du menu pause.
+     */
     @Override
     public void erase() {
         f.dispose();
     }
 
+    /**
+     * Permet de notifier le controller d'un événement ayant eu lieu dans la fenêtre.
+     * @param e l'événement ayant eu lieu dans la fenêtre de l'afficheur.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         menuPauseController.changePlay();

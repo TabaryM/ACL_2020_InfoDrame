@@ -18,6 +18,10 @@ public interface GameController extends KeyListener {
 	 */
 	public Cmd getCommand();
 
+	/**
+	 * Permet de définir une nouvelle commande en cours
+	 * @param cmd la nouvelle commande en cours
+	 */
 	public void setCommand(Cmd cmd);
 
 }

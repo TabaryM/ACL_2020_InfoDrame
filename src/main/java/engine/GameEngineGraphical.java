@@ -89,6 +89,7 @@ public class GameEngineGraphical {
 		while (!this.game.isFinished()) {
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
+
 			if (c == Cmd.PAUSE){
 				pauseController.changePlay();
 				gameController.setCommand(Cmd.IDLE);

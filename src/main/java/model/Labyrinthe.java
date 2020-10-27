@@ -56,6 +56,28 @@ public class Labyrinthe {
         return posInitPacman;
     }
 
+    /**
+     * Méthode permettant de retrouver le type de pièce située à la position indiquée par les coordonnées i et j,
+     * représentant respectivement les axes x et y.
+     * @param i entier représentant la position des pièces sur l'axe des x
+     * @param j entier représentant la position des pièces sur l'axe des y
+     * @return la pièce se trouvant à la position (i,j).
+     */
+    public Piece getPiece(int i, int j){
+        Piece piece = null;
+        for (Piece p : pieces){
+            if (p.getX() == i && p.getY() == j){
+                piece = p;
+            }
+        }
+        return piece;
+    }
+
+    /**
+     * Méthode permettant de supprimer les pièces que PacMan récupère, une par une.
+     * @param i entier représentant la position des pièces sur l'axe des x
+     * @param j entier représentant la position des pièces sur l'axe des y
+     */
     public void deletePiece(int i, int j){
         Piece removedPiece = null;
         for (Piece p : pieces){

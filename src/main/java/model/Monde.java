@@ -37,12 +37,9 @@ public class Monde {
         for (Personnage p : personnages){
             if(personnagePeutAvancer(p)){
                 p.move();
-                if (labyrinthe.getCasePlateau(p.getPosition().getX(), p.getPosition().getY()) == '2'){
-                    increaseScore(10);
-                    labyrinthe.deletePiece(p.getPosition().getX(), p.getPosition().getY());
-                }
-                if (labyrinthe.getCasePlateau(p.getPosition().getX(), p.getPosition().getY()) == '3'){
-                    increaseScore(50);
+                if (labyrinthe.getPiece(p.getPosition().getX(), p.getPosition().getY()) != null){
+                    increaseScore(labyrinthe.getPiece(p.getPosition().getX(), p.getPosition().getY()).getScore());
+                    System.out.println(labyrinthe.getPiece(p.getPosition().getX(), p.getPosition().getY()).getScore());
                     labyrinthe.deletePiece(p.getPosition().getX(), p.getPosition().getY());
                 }
             }
@@ -72,6 +69,10 @@ public class Monde {
         return tmp;
     }
 
+    /**
+     * Méthode permettant d'augmenter le score du joueur en fonction des pièces récupérées.
+     * @param i les points ajoutés au score lorsque le joueur récupère une pièce.
+     */
     public void increaseScore(int i) {
         score += i;
     }
