@@ -13,7 +13,7 @@ import java.util.List;
 public class Monde {
     // TODO : modifier diagramme de classe (déplacement des pieces dans le labyrinthe)
     private final Pacman pacman;
-    private final Score score;
+    private int score;
     private final Labyrinthe labyrinthe;
     private final List<Personnage> personnages;
 
@@ -22,7 +22,7 @@ public class Monde {
         this.labyrinthe = labyrinthe;
         pacman = new Pacman();
         pacman.setPosition(labyrinthe.getPositionPacman());
-        score = new Score();
+        score = 0;
         personnages = new ArrayList<Personnage>();
         personnages.add(pacman);
     }
@@ -37,10 +37,19 @@ public class Monde {
         for (Personnage p : personnages){
             if(personnagePeutAvancer(p)){
                 p.move();
+                if (labyrinthe.getCasePlateau(p.getPosition().getX(), p.getPosition().getY()) == '2'){
+                    increaseScore(10);
+                    labyrinthe.deletePiece(p.getPosition().getX(), p.getPosition().getY());
+                }
+                if (labyrinthe.getCasePlateau(p.getPosition().getX(), p.getPosition().getY()) == '3'){
+                    increaseScore(50);
+                    labyrinthe.deletePiece(p.getPosition().getX(), p.getPosition().getY());
+                }
             }
             System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
         //System.out.println(labyrinthe);
+        System.out.println(score);
     }
 
     public boolean personnagePeutAvancer(Personnage p){
@@ -61,5 +70,9 @@ public class Monde {
                 break;
         }
         return tmp;
+    }
+
+    public void increaseScore(int i) {
+        score += i;
     }
 }
