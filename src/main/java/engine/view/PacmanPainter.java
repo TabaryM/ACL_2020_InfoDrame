@@ -52,10 +52,12 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 * @param graphics2D de type Graphic2D
 	 */
 	public void drawFont(Graphics2D graphics2D) {
+		int height = HEIGHT/10;
+		int width = WIDTH - WIDTH/5;
 		Color font = new Color(255, 255, 255);
 		graphics2D.setColor(font);
 		graphics2D.setFont(graphics2D.getFont().deriveFont(25f));
-		graphics2D.drawString("Score: " + score, 900, 50);
+		graphics2D.drawString("Score: " + score, width, height);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
@@ -67,12 +69,13 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 */
 	public void drawIcon(Graphics2D graphics2D) {
 		int n= this.vie;
+		int heigth = HEIGHT - HEIGHT/10;
 		try {
 			BufferedImage image = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
 			BufferedImage imScale = resize(image, 20, 20);
 			for (int i = 0; i < n; i++) {
 				int x = 20 * i + 10;
-				graphics2D.drawImage(imScale, x, 680, null);
+				graphics2D.drawImage(imScale, x, heigth, null);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
