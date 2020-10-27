@@ -33,6 +33,7 @@ public class Monde  {
 
     public void addObserver(PropertyChangeListener l) {
         pcs.addPropertyChangeListener("score", l);
+        pcs.addPropertyChangeListener("vie", l);
     }
 
 
@@ -86,5 +87,14 @@ public class Monde  {
         int scoreOld = this.score;
         score += i;
         pcs.firePropertyChange("score", scoreOld, this.score);
+    }
+
+    /**
+     * Méthode qui enlève une vie au joueur (pacman)
+     */
+    public void decreasedVie() {
+        int oldVie = pacman.getVie();
+        pacman.decreasedVie();
+        pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 }

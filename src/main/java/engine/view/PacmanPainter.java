@@ -23,6 +23,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	protected static final int WIDTH = 1080;
 	protected static final int HEIGHT = 720;
 	private int score = 0;
+	private int vie = 3;
 
 	/**
 	 * appelle constructeur parent
@@ -65,7 +66,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 * @param graphics2D de type Graphics2D
 	 */
 	public void drawIcon(Graphics2D graphics2D) {
-		int n= 3;
+		int n= this.vie;
 		try {
 			BufferedImage image = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
 			BufferedImage imScale = resize(image, 20, 20);
@@ -111,6 +112,10 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 
 		if (evt.getPropertyName().equals("score")) {
 			this.score = (Integer) evt.getNewValue();
+
+		} else if (evt.getPropertyName().equals("vie")) {
+			this.vie = (Integer) evt.getNewValue();
+
 		}
 	}
 }
