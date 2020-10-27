@@ -61,4 +61,7 @@ public class PacmanGame implements Game {
 		return false;
 	}
 
+	public Monde getMonde() {
+		return monde;
+	}
 }

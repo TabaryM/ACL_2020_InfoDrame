@@ -26,6 +26,8 @@ public class Main {
 		MenuPauseController menuPauseController = new MenuPauseController();
 		MenuPausePainter menuPausePainter = new MenuPausePainter(menuPauseController);
 
+		game.getMonde().addObserver(painter);
+
 		// classe qui lance le moteur de jeu generique
 		GameEngineGraphical engine = new GameEngineGraphical(game, painter, controller, menuPrincipalPainter, menuPrincipalController, menuPausePainter, menuPauseController);
 		engine.run();

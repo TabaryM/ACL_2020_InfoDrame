@@ -3,6 +3,8 @@ package model;
 import engine.controller.Cmd;
 import engine.controller.Position;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +12,13 @@ import java.util.List;
 /**
  * @author Tabary
  */
-public class Monde {
+public class Monde  {
     // TODO : modifier diagramme de classe (déplacement des pieces dans le labyrinthe)
     private final Pacman pacman;
     private int score;
     private final Labyrinthe labyrinthe;
     private final List<Personnage> personnages;
+    private PropertyChangeSupport pcs;
 
     // TODO : parametre via lecture de fichier
     Monde(Labyrinthe labyrinthe){
@@ -25,7 +28,13 @@ public class Monde {
         score = 0;
         personnages = new ArrayList<Personnage>();
         personnages.add(pacman);
+        this.pcs = new PropertyChangeSupport(this);
     }
+
+    public void addObserver(PropertyChangeListener l) {
+        pcs.addPropertyChangeListener("score", l);
+    }
+
 
     public void setPacmanDir(Cmd commande) {
         if(!commande.equals(Cmd.IDLE)){
@@ -74,6 +83,8 @@ public class Monde {
      * @param i les points ajoutés au score lorsque le joueur récupère une pièce.
      */
     public void increaseScore(int i) {
+        int scoreOld = this.score;
         score += i;
+        pcs.firePropertyChange("score", scoreOld, this.score);
     }
 }

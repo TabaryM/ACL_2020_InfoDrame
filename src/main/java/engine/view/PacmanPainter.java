@@ -3,6 +3,8 @@ package engine.view;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -13,13 +15,14 @@ import java.net.URL;
  * afficheur graphique pour le game
  * 
  */
-public class PacmanPainter implements GamePainter {
+public class PacmanPainter implements GamePainter, PropertyChangeListener {
 
 	/**
 	 * la taille des cases
 	 */
 	protected static final int WIDTH = 1080;
 	protected static final int HEIGHT = 720;
+	private int score = 0;
 
 	/**
 	 * appelle constructeur parent
@@ -51,7 +54,7 @@ public class PacmanPainter implements GamePainter {
 		Color font = new Color(255, 255, 255);
 		graphics2D.setColor(font);
 		graphics2D.setFont(graphics2D.getFont().deriveFont(25f));
-		graphics2D.drawString("Score: 9000", 900, 50);
+		graphics2D.drawString("Score: " + score, 900, 50);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
@@ -103,4 +106,11 @@ public class PacmanPainter implements GamePainter {
 		return HEIGHT;
 	}
 
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+
+		if (evt.getPropertyName().equals("score")) {
+			this.score = (Integer) evt.getNewValue();
+		}
+	}
 }
