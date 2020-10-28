@@ -1,4 +1,5 @@
-// 28 x 30
+30 //nombre de lignes
+28 //nombre de colonnes
 // 0 : vide
 // 1 : mur
 // 2 : piece

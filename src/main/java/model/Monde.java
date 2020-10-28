@@ -33,6 +33,10 @@ public class Monde  {
         this.pcs = new PropertyChangeSupport(this);
     }
 
+    /**
+     * Ajoute un PropertyChangeListener au PropertyChangeSupport
+     * @param l de type PropertyChangeListener
+     */
     public void addObserver(PropertyChangeListener l) {
         pcs.addPropertyChangeListener("score", l);
         pcs.addPropertyChangeListener("vie", l);

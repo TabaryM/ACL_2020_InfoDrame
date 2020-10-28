@@ -1,5 +1,7 @@
 package model;
 
+import exception.PlateauException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,10 +29,9 @@ public class FileReader {
      * @param chemin le chemin du fichier à lire
      * @return un tableau de 2 dimensions d'entier
      */
-    public char[][] buildPlateau(String chemin){
-        char[][] plateau = new char[30][28];
-        ArrayList<Character> validEntry = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', 'P'));
-
+    public char[][] buildPlateau(String chemin) {
+        ArrayList<Character> validEntry = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', 'P', 'x', 'y'));
+        char[][] plateau = null;
         try {
             File file = new File(chemin);
 
@@ -39,24 +40,35 @@ public class FileReader {
             String line;
             char temp;
             int x = 0;
+            line = reader.readLine();
+            int nbLignes = Integer.parseInt(line.split(" ")[0]);
+            line = reader.readLine();
+            int nbColonnes = Integer.parseInt(line.split(" ")[0]);
+            plateau = new char[nbLignes][nbColonnes];
+
+            int commentCount=2;
             while((line = reader.readLine()) != null){
                 if(!line.startsWith("//")){
-                    for (int y = 0; y < 28; y++) {
+                    if(x >= nbLignes){
+                        throw new PlateauException("Erreur plateau invalide : nombre de lignes invalide !");
+                    }
+                    for (int y = 0; y < nbColonnes; y++) {
                         temp = line.charAt(y);
                         if(validEntry.contains(temp)){
                             plateau[x][y] = temp;
                         }
                         else{
-                            //TODO :: faire remonter l'exception ?
-                            System.out.println("Erreur lecture: Plateau invalide");
-                            return null;
+                            throw new PlateauException("Erreur plateau invalide : ligne:"+(x+commentCount)+" colonne:"+y);
                         }
                     }
                     x++;
                 }
+                else{
+                    commentCount++;
+                }
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
