@@ -19,7 +19,6 @@ public class PacmanGame implements Game {
 
 	/**
 	 * constructeur avec fichier source pour le help
-	 * 
 	 */
 	public PacmanGame(String source) {
 		BufferedReader helpReader;
@@ -36,6 +35,9 @@ public class PacmanGame implements Game {
 		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
 
+	/**
+	 * Constructeur sans fichier source pour le help
+	 */
 	public PacmanGame(){
 		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
@@ -61,6 +63,10 @@ public class PacmanGame implements Game {
 		return false;
 	}
 
+	/**
+	 * Retourne le monde afin de le faire suivre par la vue graphique
+	 * @return monde
+	 */
 	public Monde getMonde() {
 		return monde;
 	}

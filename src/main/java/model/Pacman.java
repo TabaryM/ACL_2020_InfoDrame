@@ -16,10 +16,18 @@ public class Pacman extends Personnage{
         this.vie--;
     }
 
+    /**
+     * Retourne le nombre de vie de pacman
+     * @return int vie
+     */
     public int getVie() {
         return vie;
     }
 
+    /**
+     * Fixe le nombre de vie à Pacman
+     * @param vie int le nombre de vie de Pacman
+     */
     public void setVie(int vie) {
         this.vie = vie;
     }

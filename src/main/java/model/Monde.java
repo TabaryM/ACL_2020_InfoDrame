@@ -5,7 +5,6 @@ import engine.controller.Position;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +17,16 @@ public class Monde  {
     private int score;
     private final Labyrinthe labyrinthe;
     private final List<Personnage> personnages;
-    private PropertyChangeSupport pcs;
+    private final PropertyChangeSupport pcs;
 
-    // TODO : parametre via lecture de fichier
+    /**
+     * Initialisation du monde à partir d'un labyrinthe
+     * @param labyrinthe le plateau de jeu initial
+     */
     Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman();
-        pacman.setPosition(labyrinthe.getPositionPacman());
+        pacman.setPosition(labyrinthe.getPositionInitialPacman());
         score = 0;
         personnages = new ArrayList<Personnage>();
         personnages.add(pacman);
@@ -36,13 +38,19 @@ public class Monde  {
         pcs.addPropertyChangeListener("vie", l);
     }
 
-
+    /**
+     * Met à jour la direction de Pacman
+     * @param commande la commande saisie par l'utilisateur
+     */
     public void setPacmanDir(Cmd commande) {
         if(!commande.equals(Cmd.IDLE)){
             pacman.setDir(commande);
         }
     }
 
+    /**
+     * Calcule la prochaine étape du jeu
+     */
     public void nextStep(){
         for (Personnage p : personnages){
             if(personnagePeutAvancer(p)){
@@ -59,6 +67,11 @@ public class Monde  {
         System.out.println(score);
     }
 
+    /**
+     * Calcul si un personnage peut avancer (s'il n'avance pas vers un mur)
+     * @param p Personnage qui peut (ou non) avancer
+     * @return boolean true si le personnage peut avancer, false sinon
+     */
     public boolean personnagePeutAvancer(Personnage p){
         boolean tmp = true;
         Position pos = p.getPosition();
