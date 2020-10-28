@@ -47,7 +47,7 @@ public class Monde  {
      * @param commande la commande saisie par l'utilisateur
      */
     public void setPacmanDir(Cmd commande) {
-        if(!commande.equals(Cmd.IDLE)){
+        if(commande.equals(Cmd.LEFT) || commande.equals(Cmd.UP) || commande.equals(Cmd.RIGHT) || commande.equals(Cmd.DOWN)){
             pacman.setDir(commande);
         }
     }

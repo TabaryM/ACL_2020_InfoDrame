@@ -7,9 +7,9 @@ import engine.controller.Position;
  * @author Tabary
  */
 public abstract class Personnage {
-    private Cmd currentDirection;
     // TODO : ajouter au diagramme de classe
-    private final Position position;
+    protected Cmd currentDirection;
+    protected final Position position;
 
     /**
      * Initialise un personnage à la position donnée en paramètre
@@ -17,7 +17,6 @@ public abstract class Personnage {
      */
     public Personnage(Position position) {
         this.position = position;
-        this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
     }
 
     /**
@@ -27,28 +26,7 @@ public abstract class Personnage {
         this(new Position());
     }
 
-    // TODO : faire ça uniquement pour Pacman
-    public void setDir(Cmd commande) {
-        currentDirection = commande;
-    }
-
-    // TODO : abstract pour que les fantomes se déplacent par eux mêmes
-    public void move() {
-        switch (currentDirection){
-            case LEFT:
-                position.moveLeft();
-                break;
-            case DOWN:
-                position.moveDown();
-                break;
-            case UP:
-                position.moveUp();
-                break;
-            case RIGHT:
-                position.moveRight();
-                break;
-        }
-    }
+    public abstract void move();
 
     /**
      * Fixe la position du personnage
