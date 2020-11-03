@@ -59,15 +59,15 @@ Corentin + Jordan : 2 + 3. + 4.3
 ### Diagrammes
 #### Diagramme de classe
 Objectif d'implémentation : 
-![ClassDiag](https://raw.githubusercontent.com/TabaryM/ACL_2020_InfoDrame/a05f8afcb46a40d756050e0346835bb8722fa0a2/conception/diagrammes/class/Objectif_Sprint1.svg?token=AKJ4FHAQDN6YKUPCR7HQDFC7UFPL4)
+![ClassDiag](conception/diagrammes/class/Objectif_Sprint1.svg)
 
 #### Diagrammes de séquence
 Déroulement du jeu : 
 
-![ClassDiag](https://raw.githubusercontent.com/TabaryM/ACL_2020_InfoDrame/a05f8afcb46a40d756050e0346835bb8722fa0a2/conception/diagrammes/sequence/MainGame.svg?token=AKJ4FHE47WFULCLEKLWNFBC7UFPRQ)
+![ClassDiag](conception/diagrammes/sequence/MainGame.svg)
 
 
-![ClassDiag](https://raw.githubusercontent.com/TabaryM/ACL_2020_InfoDrame/a05f8afcb46a40d756050e0346835bb8722fa0a2/conception/diagrammes/sequence/UserPlaying.svg?token=AKJ4FHERRZ5EMMW5MGW2PJ27UFPRS)
+![ClassDiag](conception/diagrammes/sequence/UserPlaying.svg)
 
 
 ### Fonctionnalités implémentées une fois le Sprint 1 fini
