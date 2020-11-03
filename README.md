@@ -27,9 +27,11 @@ Paul-Emile Watelot
 ### Objectifs
 - 1 Fantômes
     - 1.1 Des monstres sont placés dans l’enclos de départ
-    - 1.2 Les monstres se déplacent de manière aléatoire
-    - 1.3 Les monstres se déplacent de manière intelligente en essayant d’attraper Pac-Man
-    - 1.4 Les fantômes fuient Pac-Man lorsqu’il a mangé l’objet pour les tuer
+    - 1.2 Les monstres se déplacent en essayant d’attraper Pac-Man
+        - 1.2.1 A* (plus court chemin) entre le fantôme et Pac-Man
+        - 1.2.2 Deux fantômes "piégeurs" qui essaient d'encercler Pac-Man
+        - 1.2.3 Fantôme qui maintient une distance constante avec Pac-Man, mais à un élan de courage trop tard (quand Pac-Man va manger la Pièce-Attaque) 
+    - 1.3 Les fantômes fuient Pac-Man lorsqu’il a mangé l’objet pour les tuer
 - 2 Attaques
     - 2.1 Pac-Man est tué au contact d’un fantôme
     - 2.2 Pac-Man peut attaquer les fantômes avec lesquels il est en contact lorsqu’il a mangé l’objet permettant de les tuer. Ceux-ci sont tués à son contact
