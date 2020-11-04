@@ -47,8 +47,15 @@ Jordan : 3
 
 ### Diagrammes
 #### Diagramme de classe
+Objectif d'implémentation : 
+
+![ClassDiag](conception/diagrammes/class/Objectif_Sprint2.svg)
 
 #### Diagrammes de séquence
+Cas de déplacement avec attaque possible : 
+
+![ClassDiag](conception/diagrammes/sequence/UserPlayingAttaque.svg)
+
 
 <!---
 ## Backlog Sprint 2 : 
@@ -97,6 +104,7 @@ Corentin + Jordan : 2 + 3. + 4.3
 ### Diagrammes
 #### Diagramme de classe
 Objectif d'implémentation : 
+
 ![ClassDiag](conception/diagrammes/class/Objectif_Sprint1.svg)
 
 #### Diagrammes de séquence
