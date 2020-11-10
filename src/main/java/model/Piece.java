@@ -1,7 +1,5 @@
 package model;
 
-import engine.controller.Position;
-
 /**
  * @author Tabary
  */

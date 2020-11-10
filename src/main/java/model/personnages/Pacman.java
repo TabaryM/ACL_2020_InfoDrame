@@ -1,38 +1,43 @@
-package model;
+package model.personnages;
 
 import engine.controller.Cmd;
+import interfaceModel.Joueur;
+import interfaceModel.Monde;
+import model.plateau.Case;
+import model.plateau.Position;
 
 /**
  * @author Tabary
  */
-public class Pacman extends Personnage{
+public class Pacman extends Personnage implements Joueur {
     private int vie = 3 ;
 
-    public Pacman(){
-        super();
+    public Pacman(Monde monde, Position position){
+        super(monde, position);
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
     }
 
     @Override
     public void move() {
+        Case[] voisins = monde.getVoisins(position);
         switch (currentDirection){
             case LEFT:
-                position.moveLeft();
-                break;
-            case DOWN:
-                position.moveDown();
+                if(voisins[0].getCoutAcces() <= 1) position.moveLeft();
                 break;
             case UP:
-                position.moveUp();
+                if(voisins[1].getCoutAcces() <= 1) position.moveUp();
                 break;
             case RIGHT:
-                position.moveRight();
+                if(voisins[2].getCoutAcces() <= 1) position.moveRight();
+                break;
+            case DOWN:
+                if(voisins[3].getCoutAcces() <= 1) position.moveDown();
                 break;
         }
     }
 
     /**
-     * Methode qui decremnte de 1 la vie de pacman
+     * Methode qui decrémente de 1 la vie de pacman
      */
     public void decreasedVie() {
         this.vie--;
@@ -54,7 +59,6 @@ public class Pacman extends Personnage{
         this.vie = vie;
     }
 
-    // TODO : faire ça uniquement pour Pacman
     public void setDir(Cmd commande) {
         currentDirection = commande;
     }

@@ -1,12 +1,14 @@
-package model;
+package model.personnages;
 
 import engine.controller.Cmd;
-import engine.controller.Position;
+import interfaceModel.Monde;
+import model.plateau.Position;
 
 /**
  * @author Tabary
  */
 public abstract class Personnage {
+    protected final Monde monde;
     // TODO : ajouter au diagramme de classe
     protected Cmd currentDirection;
     protected final Position position;
@@ -15,15 +17,9 @@ public abstract class Personnage {
      * Initialise un personnage à la position donnée en paramètre
      * @param position la position initiale du personnage
      */
-    public Personnage(Position position) {
+    public Personnage(Monde monde, Position position) {
+        this.monde = monde;
         this.position = position;
-    }
-
-    /**
-     * Initialise un personnage à une position par défaut (0, 0)
-     */
-    public Personnage(){
-        this(new Position());
     }
 
     public abstract void move();

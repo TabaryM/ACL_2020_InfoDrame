@@ -1,4 +1,4 @@
-package engine.controller;
+package model.plateau;
 
 /**
  * @author Tabary
@@ -15,14 +15,6 @@ public class Position {
     public Position(int x, int y){
         this.x = x;
         this.y = y;
-    }
-
-    /**
-     * Initialisation d'une position en 2D en 0, 0
-     */
-    public Position(){
-        this.x = 0;
-        this.y = 0;
     }
 
     /**

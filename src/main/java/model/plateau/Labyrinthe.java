@@ -1,17 +1,22 @@
-package model;
+package model.plateau;
 
-import engine.controller.Position;
+import model.FileReader;
+import model.Piece;
+import model.PieceAttaque;
+import model.PieceScore;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Tabary
  */
 public class Labyrinthe {
-    private final char[][] plateau;
+    private final Case[][] plateau;
     private Position posInitPacman;
-    private final Collection<Piece> pieces;
+    private final Map<Position, Piece> pieces;
 
     /**
      * Initialise le labyrinthe à partir d'un fichier texte.
@@ -26,19 +31,29 @@ public class Labyrinthe {
      * @param plateau tableau à deux dimensions contenant les positions des pièces et du joueur
      */
     public Labyrinthe(char[][] plateau){
-        this.plateau = plateau;
-        pieces = new ArrayList<Piece>();
+        this.plateau = new Case[plateau.length][plateau[0].length];
+        pieces = new HashMap<Position, Piece>();
         for(int i = 0; i < plateau.length; i++){
             for(int j = 0; j < plateau[i].length; j++){
                 if(plateau[i][j] == 'P'){
+                    // Position du joueur
                     posInitPacman = new Position(j,i);
                     plateau[i][j] = '0';
                 } else if (plateau[i][j] == '2'){
-                    pieces.add(new PieceScore(j, i));
+                    // Position d'une piece de score
+                    pieces.put(new Position(i, j), new PieceScore(j, i));
                     plateau[i][j] = '0';
                 } else if (plateau[i][j] == '3'){
-                    pieces.add(new PieceAttaque(j, i));
+                    // Position d'une piece d'attaque
+                    pieces.put(new Position(i, j), new PieceAttaque(j, i));
                     plateau[i][j] = '0';
+                }
+                if(plateau[i][j] == '1'){
+                    // Mur
+                    this.plateau[i][j] = new Mur(i, j);
+                } else {
+                    // Case inconnue ou couloir
+                    this.plateau[i][j] = new Couloir(i, j);
                 }
             }
         }
@@ -54,7 +69,7 @@ public class Labyrinthe {
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = 0; i < plateau.length; i++){
             for(int j = 0; j < plateau[i].length; j++){
-                stringBuilder.append(plateau[i][j]);
+                stringBuilder.append(plateau[i][j].toString());
             }
             stringBuilder.append('\n');
         }
@@ -67,7 +82,7 @@ public class Labyrinthe {
      * @param y coordonnée en ordonnée
      * @return char le caractère à la case du plateau
      */
-    public char getCasePlateau(int x, int y){
+    public Case getCasePlateau(int x, int y){
         return plateau[y][x];
     }
 
@@ -80,36 +95,19 @@ public class Labyrinthe {
     }
 
     /**
-     * Méthode permettant de retrouver le type de pièce située à la position indiquée par les coordonnées i et j,
-     * représentant respectivement les axes x et y.
-     * @param i entier représentant la position des pièces sur l'axe des x
-     * @param j entier représentant la position des pièces sur l'axe des y
-     * @return la pièce se trouvant à la position (i,j).
+     * Méthode permettant de retrouver le type de pièce située à la position position.
+     * @param position position de la piece
+     * @return la pièce se trouvant à la position demandée.
      */
-    public Piece getPiece(int i, int j){
-        Piece piece = null;
-        for (Piece p : pieces){
-            if (p.getX() == i && p.getY() == j){
-                piece = p;
-            }
-        }
-        return piece;
+    public Piece getPiece(Position position){
+        return pieces.get(position);
     }
 
     /**
      * Méthode permettant de supprimer les pièces que PacMan récupère, une par une.
-     * @param i entier représentant la position des pièces sur l'axe des x
-     * @param j entier représentant la position des pièces sur l'axe des y
+     * @param pos Position de la piece à retirer
      */
-    public void deletePiece(int i, int j){
-        Piece removedPiece = null;
-        for (Piece p : pieces){
-            if (p.getX() == i && p.getY() == j){
-                removedPiece = p;
-            }
-        }
-        if (removedPiece != null) {
-            pieces.remove(removedPiece);
-        }
+    public void deletePiece(Position pos){
+        pieces.remove(pos);
     }
 }
