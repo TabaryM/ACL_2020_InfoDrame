@@ -22,16 +22,24 @@ public class Pacman extends Personnage implements Joueur {
         Case[] voisins = monde.getVoisins(position);
         switch (currentDirection){
             case LEFT:
-                if(voisins[0].getCoutAcces() <= 1) position.moveLeft();
+                if(voisins[0].getCoutAcces() <= 10) {
+                    position.moveLeft();
+                }
                 break;
             case UP:
-                if(voisins[1].getCoutAcces() <= 1) position.moveUp();
+                if(voisins[1].getCoutAcces() <= 10) {
+                    position.moveUp();
+                }
                 break;
             case RIGHT:
-                if(voisins[2].getCoutAcces() <= 1) position.moveRight();
+                if(voisins[2].getCoutAcces() <= 10) {
+                    position.moveRight();
+                }
                 break;
             case DOWN:
-                if(voisins[3].getCoutAcces() <= 1) position.moveDown();
+                if(voisins[3].getCoutAcces() <= 10) {
+                    position.moveDown();
+                }
                 break;
         }
     }

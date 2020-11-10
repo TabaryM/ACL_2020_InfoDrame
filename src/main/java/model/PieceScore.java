@@ -1,5 +1,7 @@
 package model;
 
+import model.plateau.Position;
+
 /**
  * @author Tabary
  */
@@ -7,11 +9,10 @@ public class PieceScore extends Piece {
 
     /**
      * Constructeur d'une pièce augmentant le score. Il définit la pièce en fonction de sa position.
-     * @param x la position sur l'axe x de la pièce.
-     * @param y la position sur l'axe y de la pièce.
+     * @param position la position de la pièce dans le monde.
      */
-    public PieceScore(int x, int y) {
-        super(x, y);
+    public PieceScore(Position position) {
+        super(position);
     }
 
     /**

@@ -9,7 +9,6 @@ import model.plateau.Position;
  */
 public abstract class Personnage {
     protected final Monde monde;
-    // TODO : ajouter au diagramme de classe
     protected Cmd currentDirection;
     protected final Position position;
 

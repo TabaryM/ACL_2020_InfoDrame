@@ -49,9 +49,9 @@ public class MondePacman implements Monde {
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
         res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
-        res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en haut
+        res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
         res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
-        res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en bas
+        res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
         return res;
     }
 

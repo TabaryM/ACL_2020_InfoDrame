@@ -1,5 +1,7 @@
 package model.plateau;
 
+import java.util.Objects;
+
 /**
  * @author Tabary
  */
@@ -88,5 +90,19 @@ public class Position {
     @Override
     public String toString(){
         return "(x="+x+"  y="+y+")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x.equals(position.x) &&
+                y.equals(position.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

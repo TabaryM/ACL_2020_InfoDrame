@@ -1,5 +1,7 @@
 package model;
 
+import model.plateau.Position;
+
 /**
  * @author Tabary
  */
@@ -7,11 +9,10 @@ public class PieceAttaque extends Piece{
 
     /**
      * Constructeur d'une pièce permettant l'attaque. Il définit la pièce en fonction de sa position.
-     * @param x la position sur l'axe x de la pièce.
-     * @param y la position sur l'axe y de la pièce.
+     * @param position la position de la pièce dans le monde.
      */
-    public PieceAttaque(int x, int y) {
-        super(x, y);
+    public PieceAttaque(Position position) {
+        super(position);
     }
 
     /**

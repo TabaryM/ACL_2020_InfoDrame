@@ -5,8 +5,6 @@ import model.Piece;
 import model.PieceAttaque;
 import model.PieceScore;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,27 +31,32 @@ public class Labyrinthe {
     public Labyrinthe(char[][] plateau){
         this.plateau = new Case[plateau.length][plateau[0].length];
         pieces = new HashMap<Position, Piece>();
-        for(int i = 0; i < plateau.length; i++){
-            for(int j = 0; j < plateau[i].length; j++){
+        for(int i = 0; i < plateau.length; i++){        // Parcours des lignes
+            for(int j = 0; j < plateau[i].length; j++){ // Parcours des colonnes
+
+                // Création des objets de Gameplay
+                Position tmp = new Position(j, i);
                 if(plateau[i][j] == 'P'){
                     // Position du joueur
-                    posInitPacman = new Position(j,i);
+                    posInitPacman = tmp;
                     plateau[i][j] = '0';
                 } else if (plateau[i][j] == '2'){
                     // Position d'une piece de score
-                    pieces.put(new Position(i, j), new PieceScore(j, i));
+                    pieces.put(tmp, new PieceScore(tmp));
                     plateau[i][j] = '0';
                 } else if (plateau[i][j] == '3'){
                     // Position d'une piece d'attaque
-                    pieces.put(new Position(i, j), new PieceAttaque(j, i));
+                    pieces.put(tmp, new PieceAttaque(tmp));
                     plateau[i][j] = '0';
                 }
+
+                // Création du monde
                 if(plateau[i][j] == '1'){
                     // Mur
-                    this.plateau[i][j] = new Mur(i, j);
+                    this.plateau[i][j] = new Mur(j, i);
                 } else {
                     // Case inconnue ou couloir
-                    this.plateau[i][j] = new Couloir(i, j);
+                    this.plateau[i][j] = new Couloir(j, i);
                 }
             }
         }
@@ -67,9 +70,15 @@ public class Labyrinthe {
     @Override
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
+        Position tmp = null;
         for(int i = 0; i < plateau.length; i++){
             for(int j = 0; j < plateau[i].length; j++){
-                stringBuilder.append(plateau[i][j].toString());
+                tmp = new Position(j, i);
+                if(pieces.containsKey(tmp)){
+                    stringBuilder.append(pieces.get(tmp).toString());
+                } else {
+                    stringBuilder.append(plateau[i][j].toString());
+                }
             }
             stringBuilder.append('\n');
         }
@@ -83,7 +92,10 @@ public class Labyrinthe {
      * @return char le caractère à la case du plateau
      */
     public Case getCasePlateau(int x, int y){
-        return plateau[y][x];
+        if(x <= plateau.length && y <= plateau[0].length){
+            return plateau[y][x];
+        }
+        return plateau[0][0];
     }
 
     /**

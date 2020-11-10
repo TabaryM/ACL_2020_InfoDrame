@@ -1,21 +1,20 @@
 package model;
 
+import model.plateau.Position;
+
 /**
  * @author Tabary
  */
 public abstract class Piece {
 
-    protected int x;
-    protected int y;
+    private final Position position;
 
     /**
      * Constructeur d'une pièce. Il définit la pièce en fonction de sa position.
-     * @param x la position sur l'axe x d'une pièce.
-     * @param y la position sur l'axe y d'une pièce.
+     * @param position la position de la pièce dans le monde.
      */
-    public Piece(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Piece(Position position){
+        this.position = position;
     }
 
     /**
@@ -23,7 +22,7 @@ public abstract class Piece {
      * @return la position d'une pièce sur l'axe x.
      */
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     /**
@@ -31,7 +30,7 @@ public abstract class Piece {
      * @return la position d'une pièce sur l'axe y.
      */
     public int getY() {
-        return y;
+        return position.getY();
     }
 
     /**
@@ -39,4 +38,9 @@ public abstract class Piece {
      * @return la valeur de score d'une pièce.
      */
     public abstract int getScore();
+
+    @Override
+    public String toString(){
+        return "o ";
+    }
 }
