@@ -1,7 +1,7 @@
 package model.personnages;
 
 import engine.controller.Cmd;
-import interfaceModel.Monde;
+import model.Monde;
 import model.plateau.Position;
 
 /**

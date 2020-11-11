@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import engine.controller.Cmd;
 import engine.controller.Game;
-import interfaceModel.Monde;
 import model.plateau.Labyrinthe;
 
 /**
@@ -34,14 +33,14 @@ public class PacmanGame implements Game {
 		} catch (IOException e) {
 			System.out.println("Help not available");
 		}
-		monde = new MondePacman(new Labyrinthe("src/main/resources/labyClassic.txt"));
+		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
 
 	/**
 	 * Constructeur sans fichier source pour le help
 	 */
 	public PacmanGame(){
-		monde = new MondePacman(new Labyrinthe("src/main/resources/labyClassic.txt"));
+		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
 	}
 
 	/**

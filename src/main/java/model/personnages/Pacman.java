@@ -1,15 +1,14 @@
 package model.personnages;
 
 import engine.controller.Cmd;
-import interfaceModel.Joueur;
-import interfaceModel.Monde;
+import model.Monde;
 import model.plateau.Case;
 import model.plateau.Position;
 
 /**
  * @author Tabary
  */
-public class Pacman extends Personnage implements Joueur {
+public class Pacman extends Personnage  {
     private int vie = 3 ;
 
     public Pacman(Monde monde, Position position){

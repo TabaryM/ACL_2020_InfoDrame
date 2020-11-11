@@ -1,7 +1,6 @@
 package model;
 
 import engine.controller.Cmd;
-import interfaceModel.Monde;
 import model.plateau.Case;
 import model.plateau.Position;
 import model.personnages.Pacman;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * @author Tabary
  */
-public class MondePacman implements Monde {
+public class Monde {
     private final Pacman pacman;
     private int score;
     private final Labyrinthe labyrinthe;
@@ -27,7 +26,7 @@ public class MondePacman implements Monde {
      * Initialisation du monde à partir d'un labyrinthe
      * @param labyrinthe le plateau de jeu initial
      */
-    MondePacman(Labyrinthe labyrinthe){
+    Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
         score = 0;
@@ -45,7 +44,6 @@ public class MondePacman implements Monde {
         pcs.addPropertyChangeListener("vie", l);
     }
 
-    @Override
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
         res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
@@ -59,7 +57,6 @@ public class MondePacman implements Monde {
      * Met à jour la direction de Pacman
      * @param commande la commande saisie par l'utilisateur
      */
-    @Override
     public void setJoueurDir(Cmd commande) {
         if(commande.equals(Cmd.LEFT) || commande.equals(Cmd.UP) || commande.equals(Cmd.RIGHT) || commande.equals(Cmd.DOWN)){
             pacman.setDir(commande);
