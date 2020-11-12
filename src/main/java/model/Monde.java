@@ -1,6 +1,8 @@
 package model;
 
 import engine.controller.Cmd;
+import model.personnages.Fantome;
+import model.personnages.FantomePisteur;
 import model.plateau.Case;
 import model.plateau.Position;
 import model.personnages.Pacman;
@@ -10,6 +12,7 @@ import model.plateau.Labyrinthe;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,9 +20,10 @@ import java.util.List;
  */
 public class Monde {
     private final Pacman pacman;
+    private final Fantome fantomePisteur;
     private int score;
     private final Labyrinthe labyrinthe;
-    private final List<Personnage> personnages;
+    private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
 
     /**
@@ -29,9 +33,11 @@ public class Monde {
     Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
+        fantomePisteur = new FantomePisteur(this, new Position(1, 1), pacman.getPosition());
         score = 0;
-        personnages = new ArrayList<Personnage>();
+        personnages = new ArrayList<>();
         personnages.add(pacman);
+        personnages.add(fantomePisteur);
         this.pcs = new PropertyChangeSupport(this);
     }
 
@@ -46,10 +52,19 @@ public class Monde {
 
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
-        res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
-        res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
-        res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
-        res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
+
+        if(position.getX() > 0){
+            res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
+        }
+        if(position.getX() < labyrinthe.getCote()-1){
+            res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
+        }
+        if(position.getY() > 0){
+            res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
+        }
+        if(position.getY() < labyrinthe.getCote()-1){
+            res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
+        }
         return res;
     }
 
@@ -67,6 +82,7 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
+        fantomePisteur.ia();
         for (Personnage p : personnages){
             p.move();
             if (labyrinthe.getPiece(p.getPosition()) != null){
@@ -97,5 +113,13 @@ public class Monde {
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    public int getCote() {
+        return labyrinthe.getCote();
+    }
+
+    public Case getCaseAt(Position position){
+        return labyrinthe.getCasePlateau(position);
     }
 }

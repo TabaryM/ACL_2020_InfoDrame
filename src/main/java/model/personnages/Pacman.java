@@ -13,7 +13,7 @@ public class Pacman extends Personnage  {
 
     public Pacman(Monde monde, Position position){
         super(monde, position);
-        this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
+        this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
     }
 
     @Override

@@ -98,6 +98,13 @@ public class Labyrinthe {
         return plateau[0][0];
     }
 
+    public Case getCasePlateau(Position position){
+        if(position.getX() <= plateau.length && position.getY() <= plateau[0].length){
+            return plateau[position.getY()][position.getX()];
+        }
+        return plateau[0][0];
+    }
+
     /**
      * Retourne la position initiale du joueur
      * @return Position la position initiale du joueur
@@ -121,5 +128,9 @@ public class Labyrinthe {
      */
     public void deletePiece(Position pos){
         pieces.remove(pos);
+    }
+
+    public int getCote() {
+        return plateau.length;
     }
 }
