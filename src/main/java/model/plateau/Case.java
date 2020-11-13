@@ -15,5 +15,5 @@ public abstract class Case extends Position{
         super(x, y);
     }
 
-    public abstract double getCoutAcces();
+    public abstract int getCoutAcces();
 }
