@@ -7,6 +7,8 @@ import model.Piece;
 import model.plateau.Case;
 import model.plateau.Position;
 
+import java.util.Collection;
+
 /**
  * @author Tabary
  */
@@ -15,7 +17,7 @@ public class Pacman extends Personnage  {
     private double timeToKill = 0.0;
 
     public Pacman(Monde monde, Position position){
-        super(monde, position);
+        super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
     }
 
@@ -39,8 +41,10 @@ public class Pacman extends Personnage  {
      */
     private void grabCoin() {
         Piece piece = monde.grabPieceAt(position);
-        monde.increaseScore(piece.getScore());
-        increaseTimeToKill(piece.getAttackTime());
+        if(piece != null){
+            monde.increaseScore(piece.getScore());
+            increaseTimeToKill(piece.getAttackTime());
+        }
     }
 
     /**
@@ -63,6 +67,15 @@ public class Pacman extends Personnage  {
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
     private void attack() {
+        Collection<Personnage> personnages = monde.getPersonnagesAt(position);
+        personnages.remove(this);
+        if(timeToKill > 0){
+            for (Personnage p : personnages){
+                monde.kill(p);
+            }
+        } else if(personnages.size() > 0){
+            monde.kill(this);
+        }
     }
 
     /**

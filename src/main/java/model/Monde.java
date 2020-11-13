@@ -85,12 +85,7 @@ public class Monde {
         fantomePisteur.ia();
         for (Personnage p : personnages){
             // TODO : faire vivre les personnages (move + le reste)
-            p.move();
-            if (labyrinthe.getPiece(p.getPosition()) != null){
-                increaseScore(labyrinthe.getPiece(p.getPosition()).getScore());
-                System.out.println(labyrinthe.getPiece(p.getPosition()).getScore());
-                labyrinthe.deletePiece(p.getPosition());
-            }
+            p.live();
             System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
         //System.out.println(labyrinthe);
@@ -137,5 +132,26 @@ public class Monde {
             labyrinthe.deletePiece(position);
         }
         return piece;
+    }
+
+    /**
+     * Méthode listant les personnages à une position
+     * @param position la position où on regarde
+     * @return la liste des personnages à la position demandée
+     * TODO : choisir une action s'il n'y a aucun personnage
+     */
+    public Collection<Personnage> getPersonnagesAt(Position position){
+        Collection<Personnage> res = new ArrayList<>();
+        for (Personnage p : personnages){
+            if (p.getPosition().equals(position)){
+                res.add(p);
+            }
+        }
+        return res;
+    }
+
+    public void kill(Personnage personnage) {
+        // TODO réinitialiser la position du personnage
+        System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
     }
 }
