@@ -23,4 +23,9 @@ public class PieceScore extends Piece {
     public int getScore() {
         return 10;
     }
+
+    @Override
+    public double getAttackTime() {
+        return 0;
+    }
 }

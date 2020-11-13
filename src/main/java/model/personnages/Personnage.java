@@ -21,6 +21,10 @@ public abstract class Personnage {
         this.position = position;
     }
 
+    public void live(){
+        move();
+    }
+
     public abstract void move();
 
     /**

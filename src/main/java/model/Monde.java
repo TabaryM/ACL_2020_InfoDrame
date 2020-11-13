@@ -68,6 +68,7 @@ public class Monde {
      */
     public void nextStep(){
         for (Personnage p : personnages){
+            // TODO : faire vivre les personnages (move + le reste)
             p.move();
             if (labyrinthe.getPiece(p.getPosition()) != null){
                 increaseScore(labyrinthe.getPiece(p.getPosition()).getScore());
@@ -97,5 +98,20 @@ public class Monde {
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    /**
+     * Regarde à la position passée en paramètre.
+     * S'il y a une pièce, la retire du labyrinthe
+     * @param position la position de la pièce ramassée
+     * @return Si elle existe, la pièce.
+     *         Sinon, null.
+     */
+    public Piece grabPieceAt(Position position){
+        Piece piece = labyrinthe.getPiece(position);
+        if(piece != null){
+            labyrinthe.deletePiece(position);
+        }
+        return piece;
     }
 }
