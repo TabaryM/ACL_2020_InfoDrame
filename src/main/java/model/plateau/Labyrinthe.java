@@ -92,7 +92,7 @@ public class Labyrinthe {
      * @return char le caractère à la case du plateau
      */
     public Case getCasePlateau(int x, int y){
-        if(x <= plateau.length && y <= plateau[0].length){
+        if(y < plateau.length  && x < plateau[0].length  && x >= 0 && y >= 0){
             return plateau[y][x];
         }
         return plateau[0][0];
@@ -121,5 +121,13 @@ public class Labyrinthe {
      */
     public void deletePiece(Position pos){
         pieces.remove(pos);
+    }
+
+    public Case[][] getPlateau() {
+        return plateau;
+    }
+
+    public Map<Position, Piece> getPieces() {
+        return pieces;
     }
 }

@@ -102,7 +102,7 @@ public class GameEngineGraphical {
 			// fait evoluer le game
 			this.game.evolve(c);
 			// affiche le game
-			this.gui.paint();
+			this.gui.paint(this.game.getMonde());
 			// met en attente
 			Thread.sleep(100);
 		}

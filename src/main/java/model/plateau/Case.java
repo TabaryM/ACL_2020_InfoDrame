@@ -16,4 +16,6 @@ public abstract class Case extends Position{
     }
 
     public abstract double getCoutAcces();
+
+    public abstract boolean isMur();
 }

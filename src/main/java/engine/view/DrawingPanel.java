@@ -4,6 +4,8 @@ package engine.view;
  * @author Horatiu Cirstea, Vincent Thomas
  *
  */
+import model.Monde;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -62,10 +64,10 @@ public class DrawingPanel extends JPanel {
 	 * demande de mettre a jour le rendu de l'image sur le Panel. Creer une
 	 * nouvelle image vide sur laquelle dessiner
 	 */
-	public void drawGame() {
+	public void drawGame(Monde monde) {
 
 		// generer la nouvelle image
-		this.painter.draw(this.nextImage);
+		this.painter.draw(this.nextImage, monde);
 
 		// inverses les images doublebuffereing
 		BufferedImage temp = this.currentImage;

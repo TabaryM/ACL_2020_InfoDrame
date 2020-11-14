@@ -20,6 +20,11 @@ public class Mur extends Case{
     }
 
     @Override
+    public boolean isMur() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "░░";
     }

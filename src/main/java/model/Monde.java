@@ -98,4 +98,12 @@ public class Monde {
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
+
+    public Labyrinthe getLabyrinthe() {
+        return labyrinthe;
+    }
+
+    public Pacman getPacman() {
+        return pacman;
+    }
 }

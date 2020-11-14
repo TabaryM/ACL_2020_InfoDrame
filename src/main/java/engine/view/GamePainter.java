@@ -1,5 +1,7 @@
 package engine.view;
 
+import model.Monde;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -17,7 +19,7 @@ public interface GamePainter {
 	 * @param image
 	 *            image sur laquelle dessiner
 	 */
-	public abstract void draw(BufferedImage image);
+	public abstract void draw(BufferedImage image, Monde monde);
 
 	public abstract int getWidth();
 

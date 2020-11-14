@@ -20,6 +20,11 @@ public class Couloir extends Case{
     }
 
     @Override
+    public boolean isMur() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "  ";
     }

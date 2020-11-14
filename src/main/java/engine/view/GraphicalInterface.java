@@ -1,6 +1,7 @@
 package engine.view;
 
 import engine.controller.GameController;
+import model.Monde;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +49,7 @@ public class GraphicalInterface  {
 	/**
 	 * mise a jour du dessin
 	 */
-	public void paint() {
-		this.panel.drawGame();	
+	public void paint(Monde monde) {
+		this.panel.drawGame(monde);
 	}
 }
