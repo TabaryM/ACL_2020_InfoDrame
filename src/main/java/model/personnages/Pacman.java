@@ -110,6 +110,13 @@ public class Pacman extends Personnage  {
         }
     }
 
+    @Override
+    public void resetPosition() {
+        Position posInit = monde.getPosInitPacman();
+        position.setX(posInit.getX());
+        position.setY(posInit.getY());
+    }
+
     /**
      * Methode qui decrémente de 1 la vie de pacman
      */

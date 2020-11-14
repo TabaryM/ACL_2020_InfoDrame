@@ -1,6 +1,7 @@
 package model;
 
 import engine.controller.Cmd;
+import exception.PacmanException;
 import model.personnages.Fantome;
 import model.personnages.FantomePisteur;
 import model.plateau.Case;
@@ -14,6 +15,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Tabary
@@ -150,8 +152,26 @@ public class Monde {
         return res;
     }
 
+    /**
+     * Tue un personnage et le remet à sa position de départ
+     * @param personnage le personnage qui est mort
+     */
     public void kill(Personnage personnage) {
-        // TODO réinitialiser la position du personnage
         System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
+        personnage.resetPosition();
+    }
+
+    /**
+     * Retourne une position de spawn pour un fantôme aléatoire parmis toutes disponible
+     * @return Position une position de spawn de fantôme
+     */
+    public Position getPosSpawnFantome() throws PacmanException {
+        List<Position> positions = labyrinthe.getPosInitFantome();
+        Random random = new Random(System.currentTimeMillis());
+        return positions.get(random.nextInt(positions.size()));
+    }
+
+    public Position getPosInitPacman() {
+        return labyrinthe.getPositionInitialPacman();
     }
 }

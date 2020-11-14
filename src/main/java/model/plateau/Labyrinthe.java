@@ -5,7 +5,9 @@ import model.Piece;
 import model.PieceAttaque;
 import model.PieceScore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Map;
 public class Labyrinthe {
     private final Case[][] plateau;
     private Position posInitPacman;
+    private final List<Position> posInitFantome; // TODO faire un caractère spécial pour le point (ou la zone) de spawn des fantômes
     private final Map<Position, Piece> pieces;
 
     /**
@@ -30,6 +33,7 @@ public class Labyrinthe {
      */
     public Labyrinthe(char[][] plateau){
         this.plateau = new Case[plateau.length][plateau[0].length];
+        posInitFantome = new ArrayList<>();
         pieces = new HashMap<Position, Piece>();
         for(int i = 0; i < plateau.length; i++){        // Parcours des lignes
             for(int j = 0; j < plateau[i].length; j++){ // Parcours des colonnes
@@ -39,6 +43,9 @@ public class Labyrinthe {
                 if(plateau[i][j] == 'P'){
                     // Position du joueur
                     posInitPacman = tmp;
+                    plateau[i][j] = '0';
+                } else if (plateau[i][j] == 'F') {
+                    posInitFantome.add(tmp);
                     plateau[i][j] = '0';
                 } else if (plateau[i][j] == '2'){
                     // Position d'une piece de score
@@ -60,6 +67,10 @@ public class Labyrinthe {
                 }
             }
         }
+        // TODO Vérifier que toutes les parties importantes sont initialisées :
+        // Position de spawn de Pacman
+        // Positions de spawns de fantômes
+        // Les bords sont tous des murs (sauf portails)
         System.out.println(this);
     }
 
@@ -107,10 +118,18 @@ public class Labyrinthe {
 
     /**
      * Retourne la position initiale du joueur
-     * @return Position la position initiale du joueur
+     * @return une copie profonde de la position initiale du joueur
      */
     public Position getPositionInitialPacman() {
-        return posInitPacman;
+        return new Position(posInitPacman);
+    }
+
+    /**
+     * Retourne la liste des positions initiales des fantômes
+     * @return copie profonde (à vérifier) de la liste de position initiale
+     */
+    public List<Position> getPosInitFantome(){
+        return new ArrayList<>(posInitFantome);
     }
 
     /**

@@ -60,4 +60,6 @@ public abstract class Personnage {
     public Cmd getCurrentDirection() {
         return currentDirection;
     }
+
+    public abstract void resetPosition();
 }
