@@ -62,4 +62,13 @@ public abstract class Personnage {
     }
 
     public abstract void resetPosition();
+
+    /**
+     * Retourne le score procuré par le meurtre du personnage
+     * @return 300 Si c'est un Fantôme.
+     *         0 sinon.
+     */
+    protected int getScore() {
+        return 0;
+    }
 }

@@ -88,7 +88,6 @@ public class Monde {
     public void nextStep(){
         fantomePisteur.ia();
         for (Personnage p : personnages){
-            // TODO : faire vivre les personnages (move + le reste)
             p.live();
             System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }

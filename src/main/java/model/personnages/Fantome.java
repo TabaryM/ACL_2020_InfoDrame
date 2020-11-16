@@ -49,4 +49,9 @@ public abstract class Fantome extends Personnage {
         setPosition(monde.getPosSpawnFantome());
         setSleepingTime(15);
     }
+
+    @Override
+    protected int getScore() {
+        return 300;
+    }
 }

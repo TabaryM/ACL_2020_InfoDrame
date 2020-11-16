@@ -16,7 +16,7 @@ import java.util.Map;
 public class Labyrinthe {
     private final Case[][] plateau;
     private Position posInitPacman;
-    private final List<Position> posInitFantome; // TODO faire un caractère spécial pour le point (ou la zone) de spawn des fantômes
+    private final List<Position> posInitFantome;
     private final Map<Position, Piece> pieces;
 
     /**

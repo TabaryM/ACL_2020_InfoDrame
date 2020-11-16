@@ -69,9 +69,10 @@ public class Pacman extends Personnage  {
     private void attack() {
         Collection<Personnage> personnages = monde.getPersonnagesAt(position);
         personnages.remove(this);
-        if(timeToKill > 0){
+        if(isAggressif()){
             for (Personnage p : personnages){
                 monde.kill(p);
+                monde.increaseScore(p.getScore());
             }
         } else if(personnages.size() > 0){
             monde.kill(this);
