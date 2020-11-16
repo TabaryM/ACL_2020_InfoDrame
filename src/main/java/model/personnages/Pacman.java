@@ -144,4 +144,12 @@ public class Pacman extends Personnage  {
         currentDirection = commande;
     }
 
+    /**
+     * Méthode permettant de dire si Pacman est en train d'attaquer
+     * @return vrai si Pacman peut manger les fantômes,
+     *         faux sinon.
+     */
+    public boolean isAggressif(){
+        return timeToKill > 0;
+    }
 }
