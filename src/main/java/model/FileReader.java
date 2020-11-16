@@ -30,7 +30,7 @@ public class FileReader {
      * @return un tableau de 2 dimensions d'entier
      */
     public char[][] buildPlateau(String chemin) {
-        ArrayList<Character> validEntry = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', 'P', 'x', 'y'));
+        ArrayList<Character> validEntry = new ArrayList<Character>(Arrays.asList('0', '1', '2', '3', 'P', 'F', 'x', 'y'));
         char[][] plateau = null;
         try {
             File file = new File(chemin);

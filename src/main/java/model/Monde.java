@@ -17,6 +17,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import static engine.GameEngineGraphical.TIMESTEP;
+
 /**
  * @author Tabary
  */
@@ -35,7 +37,7 @@ public class Monde {
     Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
-        fantomePisteur = new FantomePisteur(this, new Position(1, 1), pacman.getPosition());
+        fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         score = 0;
         personnages = new ArrayList<>();
         personnages.add(pacman);
