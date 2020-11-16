@@ -141,7 +141,6 @@ public class Monde {
      * Méthode listant les personnages à une position
      * @param position la position où on regarde
      * @return la liste des personnages à la position demandée
-     * TODO : choisir une action s'il n'y a aucun personnage
      */
     public Collection<Personnage> getPersonnagesAt(Position position){
         Collection<Personnage> res = new ArrayList<>();
