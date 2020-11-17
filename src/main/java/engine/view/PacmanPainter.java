@@ -16,6 +16,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -25,13 +26,16 @@ import java.util.Map;
  * 
  */
 public class PacmanPainter implements GamePainter, PropertyChangeListener {
-//TODO: piece attaque
+
 
 	/**
 	 * la taille des cases
 	 */
 	protected static final int WIDTH = 1080;
 	protected static final int HEIGHT = 800;
+	protected static final int SPRITE_SIZE = 24;
+	protected static final int DECALAGE_X = 100;
+	protected static final int DECALAGE_Y = 10;
 	private int score = 0;
 	private int vie = 3;
 	private BufferedImage laby;
@@ -109,159 +113,136 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		}
 	}
 
-	public void drawWall (int ligne, int colonne , Monde monde, Graphics2D graphics2D) {
-		Case[][] plateau = monde.getLabyrinthe().getPlateau();
-		try {
-			BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
-			BufferedImage wall;
-			if (ligne == 0 && colonne == 0) {
-				wall = ImageFactory.getInstance().getCoinHautGauche();
+	public BufferedImage drawWallCoin(Monde monde, Case[] voisin) {
+		BufferedImage wall = null;
+		Case[] voisinGauche = monde.getVoisins(new Position(voisin[0].getX(), voisin[0].getY()));
+		Case[] voisinDroite = monde.getVoisins(new Position(voisin[2].getX(), voisin[2].getY()));
 
-			} else if (ligne == 0 && colonne == plateau[ligne].length - 1) {
-				wall = ImageFactory.getInstance().getCoinHautDroit();
+		if (!voisinDroite[3].isMur() && !voisinDroite[1].isMur() && !voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasGauche();
 
+		} else if (!voisinGauche[3].isMur() && !voisinGauche[1].isMur() && !voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasDroit();
 
-			} else if ((ligne == plateau.length - 1) && colonne == 0) {
-				wall = ImageFactory.getInstance().getCoinBasGauche();
+		} else if (!voisinGauche[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinHautDroit();
 
+		} else if (!voisinGauche[1].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasDroit();
 
-			} else if ((ligne == plateau.length - 1) && colonne == plateau[ligne].length - 1) {
-				wall = ImageFactory.getInstance().getCoinBasDroit();
+		} else if (!voisinDroite[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinHautGauche();
 
+		} else if (!voisinDroite[1].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasGauche();
 
-			} else {
-				if (plateau[ligne][colonne].isMur()) {
-					Case[] voisin = monde.getVoisins(new Position(colonne, ligne));
-					boolean murHaut = false;
-					boolean murBas = false;
-					boolean murGauche = false;
-					boolean murDroite = false;
-
-					if (voisin[0].isMur()) {
-						murGauche = true;
-					}
-
-					if (voisin[1].isMur()) {
-						murHaut = true;
-					}
-
-					if (voisin[2].isMur()) {
-						murDroite = true;
-					}
-
-					if (voisin[3].isMur()) {
-						murBas = true;
-					}
-
-					if (murDroite && murGauche && murHaut && !murBas) {
-						if (colonne == 0) {
-							wall = ImageFactory.getInstance().getCoinBasGauche();
-						} else if (colonne == plateau[ligne].length - 1) {
-							wall = ImageFactory.getInstance().getCoinBasDroit();
-						} else {
-							wall = ImageFactory.getInstance().getMurHorizontal();
-						}
-
-					} else if (murDroite && murGauche && !murHaut && murBas) {
-						if (colonne == 0) {
-							wall = sprite.getSubimage(100, 4, 24, 24);
-						} else if (colonne == plateau[ligne].length - 1) {
-							wall = sprite.getSubimage(164, 4, 24, 24);
-						} else {
-							wall = ImageFactory.getInstance().getMurHorizontal();
-						}
-
-					} else if (murDroite && !murGauche && murHaut && murBas) {
-						wall = ImageFactory.getInstance().getMurVertical();
-
-					} else if (!murDroite && murGauche && murHaut && murBas) {
-						wall = ImageFactory.getInstance().getMurVertical();
-
-					} else if (murDroite && !murGauche && !murHaut && murBas) {
-						wall = ImageFactory.getInstance().getCoinHautGauche();
-
-					} else if (!murDroite && murGauche && !murHaut && murBas) {
-						wall = ImageFactory.getInstance().getCoinHautDroit();
-
-					} else if (murDroite && !murGauche && murHaut && !murBas) {
-						wall = ImageFactory.getInstance().getCoinBasGauche();
-
-					} else if (!murDroite && murGauche && murHaut && !murBas) {
-						wall = ImageFactory.getInstance().getCoinBasDroit();
-
-					} else if (murDroite && murGauche && !murHaut && !murBas) {
-						wall = ImageFactory.getInstance().getMurHorizontal();
-
-					} else if (!murDroite && !murGauche && murHaut && murBas) {
-						wall = ImageFactory.getInstance().getMurVertical();
-
-					} else if (murDroite && murGauche && murHaut && murBas) {
-						Case[] voisinVoisin = monde.getVoisins(new Position(voisin[0].getX(), voisin[0].getY()));
-						voisinVoisin = monde.getVoisins(new Position(voisin[0].getX(), voisin[0].getY()));
-						boolean voisinVoisinGaucheBas = voisinVoisin[3].isMur();
-						boolean voisinVoisinGaucheHaut = voisinVoisin[1].isMur();
-						voisinVoisin = monde.getVoisins(new Position(voisin[2].getX(), voisin[2].getY()));
-						boolean voisinVoisinDroiteBas = voisinVoisin[3].isMur();
-						voisinVoisin = monde.getVoisins(new Position(voisin[1].getX(), voisin[1].getY()));
-						boolean voisinVoisinHautDroite = voisinVoisin[2].isMur();
-
-
-						if (!voisinVoisinGaucheBas) {
-							wall = ImageFactory.getInstance().getCoinHautDroit();
-
-						} else if (!voisinVoisinDroiteBas) {
-							wall = ImageFactory.getInstance().getCoinHautGauche();
-
-						} else if (!voisinVoisinGaucheHaut) {
-							wall = ImageFactory.getInstance().getCoinBasDroit();
-
-						} else if (!voisinVoisinHautDroite) {
-							wall = ImageFactory.getInstance().getCoinBasGauche();
-
-						} else {
-							wall = null;
-						}
-
-
-					} else {
-						wall = null;
-					}
-
-
-
-				} else {
-					wall = null;
-				}
-			}
-
-			graphics2D.drawImage(wall,   colonne * 24,     ligne * 24, null);
-
-
-
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
+		return wall;
+	}
+
+	public BufferedImage drawWallSpecial(Case[] voisin) {
+		BufferedImage wall = null;
+		if (voisin[2].isMur() && voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinHautGauche();
+
+		} else if ( voisin[1].isMur() && voisin[2].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasGauche();
+
+		} else if ( voisin[0].isMur() && voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getCoinHautDroit();
+
+		} else if ( voisin[0].isMur() && voisin[1].isMur()) {
+			wall = ImageFactory.getInstance().getCoinBasDroit();
+
+		}
+		return wall;
+	}
+
+	public BufferedImage drawWallBord(Case[] voisin) {
+		BufferedImage wall = null;
+		if (!voisin[0].isMur() || !voisin[2].isMur()) {
+			wall = ImageFactory.getInstance().getMurVertical();
+
+		} else if (!voisin[1].isMur() || !voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getMurHorizontal();
+		}
+
+		return wall;
+	}
+
+	public BufferedImage drawWallBasic(Case[] voisin) {
+		BufferedImage wall = null;
+		if (voisin[2].isMur() && voisin[0].isMur()) {
+			wall = ImageFactory.getInstance().getMurHorizontal();
+
+		} else if (voisin[1].isMur() && voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getMurVertical();
+
+		}
+
+		return wall;
+	}
+
+	public void drawWall (int ligne, int colonne , Monde monde, Graphics2D graphics2D) {
+		BufferedImage wall = null;
+		if (monde.getLabyrinthe().getCasePlateau(colonne, ligne).isMur()) {
+			Case[] voisin = monde.getVoisins(new Position(colonne, ligne));
+			boolean voisinHaut, voisinBas, voisinDroite, voisinGauche;
+			voisinHaut = voisin[1].isMur();
+			voisinBas = voisin[3].isMur();
+			voisinDroite = voisin[2].isMur();
+			voisinGauche = voisin[0].isMur();
+
+			if (voisinHaut && voisinBas && voisinGauche && voisinDroite) {
+				wall = drawWallCoin(monde, voisin);
+
+			} else if (voisinDroite && voisinGauche && voisinHaut || voisinDroite && voisinGauche && voisinBas) {
+
+				if (colonne == 0 || colonne == monde.getLabyrinthe().getPlateau()[ligne].length -1) {
+					wall = drawWallCoin(monde, voisin);
+
+				} else {
+					wall = drawWallBord(voisin);
+				}
+
+			} else if (voisinHaut && voisinBas && voisinGauche || voisinHaut && voisinBas && voisinDroite ) {
+				wall = drawWallBord(voisin);
+
+			} else if (voisinGauche && voisinDroite || voisinHaut && voisinBas) {
+				wall = drawWallBasic(voisin);
+
+			} else if (voisinBas && voisinDroite || voisinHaut && voisinDroite
+						|| voisinBas && voisinGauche || voisinHaut && voisinGauche) {
+				wall = drawWallSpecial(voisin);
+			}
+		}
+
+			graphics2D.drawImage(wall,   colonne * 24,     ligne * 24, null);
 	}
 
 	public void drawPacman(Monde monde, Graphics2D graphics2D) {
 		BufferedImage sprite = monde.getPacman().getImage();
 		BufferedImage imScale = resize(sprite, 20, 20);
 		Pacman pacman = monde.getPacman();
-		int posx = pacman.getPosition().getX();
-		int posy = pacman.getPosition().getY();
-		graphics2D.drawImage(imScale, posx * 24 + 102, posy * 24 + 12, null);
+		int decalage = (24 - imScale.getWidth())/2;
+		int posx = (pacman.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
+		int posy = (pacman.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
+		graphics2D.drawImage(imScale, posx, posy, null);
 
 	}
 
 	public void drawPiece(Monde monde, Graphics2D graphics2D) {
 		Map<Position, Piece> pieces = monde.getLabyrinthe().getPieces();
 		BufferedImage sprite;
+		int decalage, posx, posy;
 		for (Position position : pieces.keySet()) {
 			Piece piece = pieces.get(position);
 			sprite = piece.getImage();
-			int decalage = (24 - sprite.getWidth())/2;
-			graphics2D.drawImage(piece.getImage(), position.getX() * 24 + 100 + decalage, position.getY() * 24 + 10 + decalage, null);
+			decalage = (24 - sprite.getWidth())/2;
+			posx = (position.getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
+			posy = (position.getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
+			graphics2D.drawImage(piece.getImage(), posx, posy, null);
 		}
 	}
 
@@ -275,7 +256,6 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
 		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
 		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
 		Graphics2D g2d = dimg.createGraphics();
 		g2d.drawImage(tmp, 0, 0, null);
 		g2d.dispose();
