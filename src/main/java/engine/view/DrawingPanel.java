@@ -93,4 +93,8 @@ public class DrawingPanel extends JPanel {
 				getWidth(), getHeight(), null);
 	}
 
+	public void paintLaby(Monde monde) {
+		this.painter.drawLaby(monde);
+	}
+
 }

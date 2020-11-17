@@ -1,14 +1,18 @@
 package model.personnages;
 
+import dataFactories.ImageFactory;
 import engine.controller.Cmd;
+import model.Drawable;
 import model.Monde;
 import model.plateau.Case;
 import model.plateau.Position;
 
+import java.awt.image.BufferedImage;
+
 /**
  * @author Tabary
  */
-public class Pacman extends Personnage  {
+public class Pacman extends Personnage {
     private int vie = 3 ;
 
     public Pacman(Monde monde, Position position){
@@ -70,4 +74,8 @@ public class Pacman extends Personnage  {
         currentDirection = commande;
     }
 
+    @Override
+    public BufferedImage getImage() {
+        return ImageFactory.getInstance().getPacman();
+    }
 }

@@ -1,6 +1,9 @@
 package model;
 
+import dataFactories.ImageFactory;
 import model.plateau.Position;
+
+import java.awt.image.BufferedImage;
 
 /**
  * @author Tabary
@@ -22,5 +25,10 @@ public class PieceScore extends Piece {
     @Override
     public int getScore() {
         return 10;
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return ImageFactory.getInstance().getPieceScore();
     }
 }

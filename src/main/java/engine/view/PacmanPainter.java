@@ -1,5 +1,6 @@
 package engine.view;
 
+import dataFactories.ImageFactory;
 import model.Monde;
 import model.Piece;
 import model.personnages.Pacman;
@@ -24,6 +25,7 @@ import java.util.Map;
  * 
  */
 public class PacmanPainter implements GamePainter, PropertyChangeListener {
+//TODO: piece attaque
 
 	/**
 	 * la taille des cases
@@ -32,6 +34,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	protected static final int HEIGHT = 800;
 	private int score = 0;
 	private int vie = 3;
+	private BufferedImage laby;
 
 	/**
 	 * appelle constructeur parent
@@ -39,6 +42,8 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 */
 	public PacmanPainter() {
 		super();
+		this.laby = new BufferedImage(WIDTH, HEIGHT,
+				BufferedImage.TYPE_INT_RGB);
 	}
 
 	/**
@@ -50,7 +55,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		Color background = new Color(0, 0, 0);
 		graphics2D.setColor(background);
 		graphics2D.fillRect(0, 0, getWidth(), getHeight());
-		drawLaby(monde, graphics2D);
+		graphics2D.drawImage(this.laby, 100 , 10, null);
 		drawFont(graphics2D);
 		drawIcon(graphics2D);
 		drawPiece(monde, graphics2D);
@@ -93,9 +98,9 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		}
 	}
 
-	public void drawLaby (Monde monde, Graphics2D graphics2D) {
+	public void drawLaby (Monde monde) {
 		Labyrinthe laby = monde.getLabyrinthe();
-
+		Graphics2D graphics2D = this.laby.createGraphics();
 		for (int ligne = 0;  ligne < laby.getPlateau().length; ligne++) {
 			for (int colonne = 0; colonne < laby.getPlateau()[ligne].length; colonne++) {
 				drawWall(ligne, colonne, monde , graphics2D);
@@ -110,18 +115,18 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
 			BufferedImage wall;
 			if (ligne == 0 && colonne == 0) {
-				wall = sprite.getSubimage(100, 4, 24, 24);
+				wall = ImageFactory.getInstance().getCoinHautGauche();
 
 			} else if (ligne == 0 && colonne == plateau[ligne].length - 1) {
-				wall = sprite.getSubimage(164, 4, 24, 24);
+				wall = ImageFactory.getInstance().getCoinHautDroit();
 
 
 			} else if ((ligne == plateau.length - 1) && colonne == 0) {
-				wall = sprite.getSubimage(100, 68, 24, 24);
+				wall = ImageFactory.getInstance().getCoinBasGauche();
 
 
 			} else if ((ligne == plateau.length - 1) && colonne == plateau[ligne].length - 1) {
-				wall = sprite.getSubimage(164, 68, 24, 24);
+				wall = ImageFactory.getInstance().getCoinBasDroit();
 
 
 			} else {
@@ -150,11 +155,11 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 
 					if (murDroite && murGauche && murHaut && !murBas) {
 						if (colonne == 0) {
-							wall = sprite.getSubimage(100, 68, 24, 24);
+							wall = ImageFactory.getInstance().getCoinBasGauche();
 						} else if (colonne == plateau[ligne].length - 1) {
-							wall = sprite.getSubimage(164, 68, 24, 24);
+							wall = ImageFactory.getInstance().getCoinBasDroit();
 						} else {
-							wall = sprite.getSubimage(248, 4, 24, 24);
+							wall = ImageFactory.getInstance().getMurHorizontal();
 						}
 
 					} else if (murDroite && murGauche && !murHaut && murBas) {
@@ -163,32 +168,32 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 						} else if (colonne == plateau[ligne].length - 1) {
 							wall = sprite.getSubimage(164, 4, 24, 24);
 						} else {
-							wall = sprite.getSubimage(248, 4, 24, 24);
+							wall = ImageFactory.getInstance().getMurHorizontal();
 						}
 
 					} else if (murDroite && !murGauche && murHaut && murBas) {
-						wall = sprite.getSubimage(196, 24, 24, 24);
+						wall = ImageFactory.getInstance().getMurVertical();
 
 					} else if (!murDroite && murGauche && murHaut && murBas) {
-						wall = sprite.getSubimage(196, 24, 24, 24);
+						wall = ImageFactory.getInstance().getMurVertical();
 
 					} else if (murDroite && !murGauche && !murHaut && murBas) {
-						wall = sprite.getSubimage(100, 4, 24, 24);
+						wall = ImageFactory.getInstance().getCoinHautGauche();
 
 					} else if (!murDroite && murGauche && !murHaut && murBas) {
-						wall = sprite.getSubimage(164, 4, 24, 24);
+						wall = ImageFactory.getInstance().getCoinHautDroit();
 
 					} else if (murDroite && !murGauche && murHaut && !murBas) {
-						wall = sprite.getSubimage(100, 68, 24, 24);
+						wall = ImageFactory.getInstance().getCoinBasGauche();
 
 					} else if (!murDroite && murGauche && murHaut && !murBas) {
-						wall = sprite.getSubimage(164, 68, 24, 24);
+						wall = ImageFactory.getInstance().getCoinBasDroit();
 
 					} else if (murDroite && murGauche && !murHaut && !murBas) {
-						wall = sprite.getSubimage(248, 4, 24, 24);
+						wall = ImageFactory.getInstance().getMurHorizontal();
 
 					} else if (!murDroite && !murGauche && murHaut && murBas) {
-						wall = sprite.getSubimage(196, 24, 24, 24);
+						wall = ImageFactory.getInstance().getMurVertical();
 
 					} else if (murDroite && murGauche && murHaut && murBas) {
 						Case[] voisinVoisin = monde.getVoisins(new Position(voisin[0].getX(), voisin[0].getY()));
@@ -202,16 +207,16 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 
 
 						if (!voisinVoisinGaucheBas) {
-							wall = sprite.getSubimage(164, 4, 24, 24);
+							wall = ImageFactory.getInstance().getCoinHautDroit();
 
 						} else if (!voisinVoisinDroiteBas) {
-							wall = sprite.getSubimage(100, 4, 24, 24);
+							wall = ImageFactory.getInstance().getCoinHautGauche();
 
 						} else if (!voisinVoisinGaucheHaut) {
-							wall = sprite.getSubimage(164, 68, 24, 24);
+							wall = ImageFactory.getInstance().getCoinBasDroit();
 
 						} else if (!voisinVoisinHautDroite) {
-							wall = sprite.getSubimage(100, 68, 24, 24);
+							wall = ImageFactory.getInstance().getCoinBasGauche();
 
 						} else {
 							wall = null;
@@ -229,7 +234,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 				}
 			}
 
-			graphics2D.drawImage(wall,  100 + colonne * 24,    10  + ligne * 24, null);
+			graphics2D.drawImage(wall,   colonne * 24,     ligne * 24, null);
 
 
 
@@ -240,31 +245,23 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	}
 
 	public void drawPacman(Monde monde, Graphics2D graphics2D) {
-		try {
-			BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
-			BufferedImage imScale = resize(sprite, 20, 20);
-			Pacman pacman = monde.getPacman();
-			int posx = pacman.getPosition().getX();
-			int posy = pacman.getPosition().getY();
-			graphics2D.drawImage(imScale, posx * 24 + 104, posy * 24 + 14, null);
+		BufferedImage sprite = monde.getPacman().getImage();
+		BufferedImage imScale = resize(sprite, 20, 20);
+		Pacman pacman = monde.getPacman();
+		int posx = pacman.getPosition().getX();
+		int posy = pacman.getPosition().getY();
+		graphics2D.drawImage(imScale, posx * 24 + 102, posy * 24 + 12, null);
 
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void drawPiece(Monde monde, Graphics2D graphics2D) {
-		try {
-
-			BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
-			BufferedImage pieceImg = sprite.getSubimage(300, 76, 8, 8);
-			Map<Position, Piece> pieces = monde.getLabyrinthe().getPieces();
-			for (Position position : pieces.keySet()) {
-				graphics2D.drawImage(pieceImg,position.getX() * 24 + 108 , position.getY() * 24 + 18 , null);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		Map<Position, Piece> pieces = monde.getLabyrinthe().getPieces();
+		BufferedImage sprite;
+		for (Position position : pieces.keySet()) {
+			Piece piece = pieces.get(position);
+			sprite = piece.getImage();
+			int decalage = (24 - sprite.getWidth())/2;
+			graphics2D.drawImage(piece.getImage(), position.getX() * 24 + 100 + decalage, position.getY() * 24 + 10 + decalage, null);
 		}
 	}
 

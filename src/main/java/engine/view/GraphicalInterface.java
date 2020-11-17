@@ -52,4 +52,8 @@ public class GraphicalInterface  {
 	public void paint(Monde monde) {
 		this.panel.drawGame(monde);
 	}
+
+	public void paintLaby(Monde monde) {
+		this.panel.paintLaby(monde);
+	}
 }

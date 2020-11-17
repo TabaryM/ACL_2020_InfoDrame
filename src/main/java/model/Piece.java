@@ -5,7 +5,7 @@ import model.plateau.Position;
 /**
  * @author Tabary
  */
-public abstract class Piece {
+public abstract class Piece implements Drawable {
 
     private final Position position;
 

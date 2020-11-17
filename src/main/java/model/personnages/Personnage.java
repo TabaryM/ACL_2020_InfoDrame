@@ -1,13 +1,14 @@
 package model.personnages;
 
 import engine.controller.Cmd;
+import model.Drawable;
 import model.Monde;
 import model.plateau.Position;
 
 /**
  * @author Tabary
  */
-public abstract class Personnage {
+public abstract class Personnage implements Drawable {
     protected final Monde monde;
     protected Cmd currentDirection;
     protected final Position position;

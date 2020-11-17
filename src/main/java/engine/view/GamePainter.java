@@ -21,6 +21,8 @@ public interface GamePainter {
 	 */
 	public abstract void draw(BufferedImage image, Monde monde);
 
+	public abstract void drawLaby(Monde monde);
+
 	public abstract int getWidth();
 
 	public abstract int getHeight();

@@ -83,7 +83,7 @@ public class GameEngineGraphical {
 
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
-
+		this.gui.paintLaby(this.game.getMonde());
 
 		// boucle de game
 		while (!this.game.isFinished()) {
