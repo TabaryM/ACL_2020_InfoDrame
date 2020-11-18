@@ -29,7 +29,7 @@ public class PieceAttaque extends Piece{
 
     @Override
     public double getAttackTime() {
-        return 20;
+        return 5;
     }
 
     @Override

@@ -71,7 +71,7 @@ public class Labyrinthe {
         // Position de spawn de Pacman
         // Positions de spawns de fantômes
         // Les bords sont tous des murs (sauf portails)
-        System.out.println(this);
+        //System.out.println(this);
     }
 
     /**
