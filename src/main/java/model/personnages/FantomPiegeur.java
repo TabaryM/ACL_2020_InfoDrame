@@ -1,5 +1,6 @@
 package model.personnages;
 
+import dataFactories.ImageFactory;
 import model.Monde;
 import model.personnages.Fantome;
 import model.plateau.Position;
@@ -23,6 +24,6 @@ public class FantomPiegeur extends Fantome {
 
     @Override
     public BufferedImage getImage() {
-        return null;
+        return ImageFactory.getInstance().getFantomePiegeur();
     }
 }

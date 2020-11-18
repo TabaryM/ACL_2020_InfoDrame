@@ -18,11 +18,15 @@ public class ImageFactory {
     private static BufferedImage pieceScore;
     private static BufferedImage pieceAttaque;
     private static BufferedImage fantomePisteur;
+    private static BufferedImage fantomePeureux;
+    private static BufferedImage fantomePiegeur;
+    private static BufferedImage fantomeFaible;
 
     public ImageFactory() {
         try {
             BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
             BufferedImage ghostSprite = ImageIO.read(new File("src/main/resources/images/Ghost.png"));
+            BufferedImage spriteAll = ImageIO.read(new File("src/main/resources/images/sprites.png"));
             pacman = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
             coinHautGauche = sprite.getSubimage(100, 4, SPRITE_SIZE, SPRITE_SIZE);
             coinHautDroit  = sprite.getSubimage(164, 4, SPRITE_SIZE, SPRITE_SIZE);
@@ -33,6 +37,9 @@ public class ImageFactory {
             pieceScore = sprite.getSubimage(300, 76, 8, 8);
             pieceAttaque = sprite.getSubimage(231, 71, 18, 18);
             fantomePisteur = ghostSprite.getSubimage(0, 0, 160, 160);
+            fantomePeureux = ghostSprite.getSubimage(400, 0, 160, 160);
+            fantomePiegeur = ghostSprite.getSubimage(400, 380, 160, 160);
+            fantomeFaible = spriteAll.getSubimage(946, 0, 210, 210);
 
 
 
@@ -79,6 +86,18 @@ public class ImageFactory {
 
     public BufferedImage getFantomePisteur() {
         return fantomePisteur;
+    }
+
+    public BufferedImage getFantomePeureux() {
+        return fantomePeureux;
+    }
+
+    public BufferedImage getFantomePiegeur() {
+        return fantomePiegeur;
+    }
+
+    public BufferedImage getFantomeFaible() {
+        return fantomeFaible;
     }
 
     public static ImageFactory getInstance() {
