@@ -57,18 +57,14 @@ public class Monde {
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
 
-        if(position.getX() > 0){
             res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
-        }
-        if(position.getX() < labyrinthe.getCote()-1){
+
             res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
-        }
-        if(position.getY() > 0){
+
             res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
-        }
-        if(position.getY() < labyrinthe.getCote()-1){
+
             res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
-        }
+
         return res;
     }
 
@@ -181,5 +177,9 @@ public class Monde {
 
     public Pacman getPacman() {
         return pacman;
+    }
+
+    public Collection<Personnage> getPersonnages() {
+        return personnages;
     }
 }

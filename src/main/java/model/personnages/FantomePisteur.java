@@ -1,12 +1,14 @@
 package model.personnages;
 
 import algorithmes.AEtoile;
+import dataFactories.ImageFactory;
 import engine.controller.Cmd;
 import model.Monde;
 import model.personnages.Fantome;
 import model.plateau.Case;
 import model.plateau.Position;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -46,5 +48,10 @@ public class FantomePisteur extends Fantome {
             currentDirection = Cmd.DOWN;
             position.moveDown();
         }
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return ImageFactory.getInstance().getFantomePisteur();
     }
 }

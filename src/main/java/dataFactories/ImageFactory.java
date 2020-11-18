@@ -17,10 +17,12 @@ public class ImageFactory {
     private static BufferedImage pacman;
     private static BufferedImage pieceScore;
     private static BufferedImage pieceAttaque;
+    private static BufferedImage fantomePisteur;
 
     public ImageFactory() {
         try {
             BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
+            BufferedImage ghostSprite = ImageIO.read(new File("src/main/resources/images/Ghost.png"));
             pacman = ImageIO.read(new File("src/main/resources/images/Pacman.png"));
             coinHautGauche = sprite.getSubimage(100, 4, SPRITE_SIZE, SPRITE_SIZE);
             coinHautDroit  = sprite.getSubimage(164, 4, SPRITE_SIZE, SPRITE_SIZE);
@@ -30,6 +32,7 @@ public class ImageFactory {
             murVertical =  sprite.getSubimage(196, 24, SPRITE_SIZE, SPRITE_SIZE);
             pieceScore = sprite.getSubimage(300, 76, 8, 8);
             pieceAttaque = sprite.getSubimage(231, 71, 18, 18);
+            fantomePisteur = ghostSprite.getSubimage(0, 0, 160, 160);
 
 
 
@@ -72,6 +75,10 @@ public class ImageFactory {
 
     public BufferedImage getPieceAttaque() {
         return pieceAttaque;
+    }
+
+    public BufferedImage getFantomePisteur() {
+        return fantomePisteur;
     }
 
     public static ImageFactory getInstance() {

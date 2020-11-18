@@ -4,6 +4,8 @@ import model.Monde;
 import model.personnages.Fantome;
 import model.plateau.Position;
 
+import java.awt.image.BufferedImage;
+
 public class FantomPiegeur extends Fantome {
 
     public FantomPiegeur(Monde monde, Position position, Position pacmanPosition) {
@@ -17,5 +19,10 @@ public class FantomPiegeur extends Fantome {
     @Override
     public void move() {
 
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return null;
     }
 }

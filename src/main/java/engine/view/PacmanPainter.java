@@ -4,6 +4,7 @@ import dataFactories.ImageFactory;
 import model.Monde;
 import model.Piece;
 import model.personnages.Pacman;
+import model.personnages.Personnage;
 import model.plateau.Case;
 import model.plateau.Labyrinthe;
 import model.plateau.Position;
@@ -17,6 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -288,14 +291,17 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 * @param graphics2D de type graphics2D
 	 */
 	private void drawPersonnage(Monde monde, Graphics2D graphics2D) {
-		BufferedImage spritePacman = monde.getPacman().getImage();
-		BufferedImage pacmanScale = resize(spritePacman, 20, 20);
-		Pacman pacman = monde.getPacman();
+		BufferedImage spritePerso;
+		Collection<Personnage> personnages = monde.getPersonnages();
 
-		int decalage = (24 - pacmanScale.getWidth())/2;
-		int posx = (pacman.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
-		int posy = (pacman.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
-		graphics2D.drawImage(pacmanScale, posx, posy, null);
+		for (Personnage personnage : personnages) {
+			spritePerso = personnage.getImage();
+			BufferedImage persoScale = resize(spritePerso, 20, 20);
+			int decalage = (24 - persoScale.getWidth()) / 2;
+			int posx = (personnage.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
+			int posy = (personnage.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
+			graphics2D.drawImage(persoScale, posx, posy, null);
+		}
 
 	}
 
