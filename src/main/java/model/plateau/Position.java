@@ -19,6 +19,10 @@ public class Position {
         this.y = y;
     }
 
+    public Position(Position position) {
+        this(position.x, position.y);
+    }
+
     /**
      * Retourne la position en abscisse
      * @return x

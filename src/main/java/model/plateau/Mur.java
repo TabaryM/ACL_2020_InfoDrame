@@ -15,8 +15,8 @@ public class Mur extends Case{
     }
 
     @Override
-    public double getCoutAcces() {
-        return Double.MAX_VALUE;
+    public int getCoutAcces() {
+        return 999;
     }
 
     @Override

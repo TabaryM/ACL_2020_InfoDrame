@@ -15,7 +15,7 @@ public class Couloir extends Case{
     }
 
     @Override
-    public double getCoutAcces() {
+    public int getCoutAcces() {
         return 1;
     }
 

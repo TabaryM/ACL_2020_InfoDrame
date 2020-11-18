@@ -28,6 +28,11 @@ public class PieceScore extends Piece {
     }
 
     @Override
+    public double getAttackTime() {
+        return 0;
+    }
+
+    @Override
     public BufferedImage getImage() {
         return ImageFactory.getInstance().getPieceScore();
     }

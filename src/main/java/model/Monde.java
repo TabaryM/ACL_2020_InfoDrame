@@ -1,6 +1,9 @@
 package model;
 
 import engine.controller.Cmd;
+import exception.PacmanException;
+import model.personnages.Fantome;
+import model.personnages.FantomePisteur;
 import model.plateau.Case;
 import model.plateau.Position;
 import model.personnages.Pacman;
@@ -10,16 +13,21 @@ import model.plateau.Labyrinthe;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
+
+import static engine.GameEngineGraphical.TIMESTEP;
 
 /**
  * @author Tabary
  */
 public class Monde {
     private final Pacman pacman;
+    private final Fantome fantomePisteur;
     private int score;
     private final Labyrinthe labyrinthe;
-    private final List<Personnage> personnages;
+    private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
 
     /**
@@ -29,9 +37,11 @@ public class Monde {
     Monde(Labyrinthe labyrinthe){
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
+        fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         score = 0;
-        personnages = new ArrayList<Personnage>();
+        personnages = new ArrayList<>();
         personnages.add(pacman);
+        personnages.add(fantomePisteur);
         this.pcs = new PropertyChangeSupport(this);
     }
 
@@ -46,10 +56,19 @@ public class Monde {
 
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
-        res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
-        res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
-        res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
-        res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
+
+        if(position.getX() > 0){
+            res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
+        }
+        if(position.getX() < labyrinthe.getCote()-1){
+            res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
+        }
+        if(position.getY() > 0){
+            res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
+        }
+        if(position.getY() < labyrinthe.getCote()-1){
+            res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
+        }
         return res;
     }
 
@@ -67,13 +86,9 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
+        fantomePisteur.ia();
         for (Personnage p : personnages){
-            p.move();
-            if (labyrinthe.getPiece(p.getPosition()) != null){
-                increaseScore(labyrinthe.getPiece(p.getPosition()).getScore());
-                System.out.println(labyrinthe.getPiece(p.getPosition()).getScore());
-                labyrinthe.deletePiece(p.getPosition());
-            }
+            p.live();
             System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
         //System.out.println(labyrinthe);
@@ -97,6 +112,67 @@ public class Monde {
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    public int getCote() {
+        return labyrinthe.getCote();
+    }
+
+    public Case getCaseAt(Position position){
+        return labyrinthe.getCasePlateau(position);
+    }
+
+    /**
+     * Regarde à la position passée en paramètre.
+     * S'il y a une pièce, la retire du labyrinthe
+     * @param position la position de la pièce ramassée
+     * @return Si elle existe, la pièce.
+     *         Sinon, null.
+     */
+    public Piece grabPieceAt(Position position){
+        Piece piece = labyrinthe.getPiece(position);
+        if(piece != null){
+            labyrinthe.deletePiece(position);
+        }
+        return piece;
+    }
+
+    /**
+     * Méthode listant les personnages à une position
+     * @param position la position où on regarde
+     * @return la liste des personnages à la position demandée
+     */
+    public Collection<Personnage> getPersonnagesAt(Position position){
+        Collection<Personnage> res = new ArrayList<>();
+        for (Personnage p : personnages){
+            if (p.getPosition().equals(position)){
+                res.add(p);
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Tue un personnage et le remet à sa position de départ
+     * @param personnage le personnage qui est mort
+     */
+    public void kill(Personnage personnage) {
+        System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
+        personnage.resetPosition();
+    }
+
+    /**
+     * Retourne une position de spawn pour un fantôme aléatoire parmis toutes disponible
+     * @return Position une position de spawn de fantôme
+     */
+    public Position getPosSpawnFantome() throws PacmanException {
+        List<Position> positions = labyrinthe.getPosInitFantome();
+        Random random = new Random(System.currentTimeMillis());
+        return positions.get(random.nextInt(positions.size()));
+    }
+
+    public Position getPosInitPacman() {
+        return labyrinthe.getPositionInitialPacman();
     }
 
     public Labyrinthe getLabyrinthe() {

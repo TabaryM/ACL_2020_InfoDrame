@@ -13,6 +13,8 @@ import engine.view.MenuUI;
  */
 public class GameEngineGraphical {
 
+	public static final int TIMESTEP = 100;
+
 	/**
 	 * le game a executer
 	 */
@@ -75,7 +77,7 @@ public class GameEngineGraphical {
 		// Boucle d'affichage du menu principal
 		while (!menuController.play()){
 			menuUI.display();
-			Thread.sleep(100);
+			Thread.sleep(TIMESTEP);
 		}
 
 		// Suppression de la fenêtre du menu principal
@@ -96,7 +98,7 @@ public class GameEngineGraphical {
 			}
 			while (!pauseController.play()){
 				pauseUI.display();
-				Thread.sleep(100);
+				Thread.sleep(TIMESTEP);
 			}
 			pauseUI.erase();
 			// fait evoluer le game
@@ -104,7 +106,7 @@ public class GameEngineGraphical {
 			// affiche le game
 			this.gui.paint(this.game.getMonde());
 			// met en attente
-			Thread.sleep(100);
+			Thread.sleep(TIMESTEP);
 		}
 	}
 

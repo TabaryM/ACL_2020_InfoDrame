@@ -28,6 +28,11 @@ public class PieceAttaque extends Piece{
     }
 
     @Override
+    public double getAttackTime() {
+        return 20;
+    }
+
+    @Override
     public BufferedImage getImage() {
         return ImageFactory.getInstance().getPieceAttaque();
     }

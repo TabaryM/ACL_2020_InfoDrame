@@ -34,10 +34,16 @@ public abstract class Piece implements Drawable {
     }
 
     /**
-     * Méthode abstraite permettant de récupéré la valeur du score d'un epièce.
+     * Méthode abstraite permettant de récupéré la valeur du score d'une pièce.
      * @return la valeur de score d'une pièce.
      */
     public abstract int getScore();
+
+    /**
+     * Retourne le temps d'attaque donné par la pièce.
+     * @return le temps qu'ajoute la pièce au temps d'attaque
+     */
+    public abstract double getAttackTime();
 
     @Override
     public String toString(){

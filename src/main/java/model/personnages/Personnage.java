@@ -22,6 +22,10 @@ public abstract class Personnage implements Drawable {
         this.position = position;
     }
 
+    public void live(){
+        move();
+    }
+
     public abstract void move();
 
     /**
@@ -56,5 +60,16 @@ public abstract class Personnage implements Drawable {
      */
     public Cmd getCurrentDirection() {
         return currentDirection;
+    }
+
+    public abstract void resetPosition();
+
+    /**
+     * Retourne le score procuré par le meurtre du personnage
+     * @return 300 Si c'est un Fantôme.
+     *         0 sinon.
+     */
+    protected int getScore() {
+        return 0;
     }
 }
