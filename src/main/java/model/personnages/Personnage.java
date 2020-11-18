@@ -22,11 +22,11 @@ public abstract class Personnage implements Drawable {
         this.position = position;
     }
 
-    public void live(){
-        move();
-    }
+    public abstract void live();
 
     public abstract void move();
+
+    public abstract void attack();
 
     /**
      * Fixe la position du personnage
@@ -64,6 +64,8 @@ public abstract class Personnage implements Drawable {
 
     public abstract void resetPosition();
 
+    public abstract void die();
+
     /**
      * Retourne le score procuré par le meurtre du personnage
      * @return 300 Si c'est un Fantôme.
@@ -71,5 +73,9 @@ public abstract class Personnage implements Drawable {
      */
     protected int getScore() {
         return 0;
+    }
+
+    public boolean isPacman(){
+        return getScore() == 0;
     }
 }

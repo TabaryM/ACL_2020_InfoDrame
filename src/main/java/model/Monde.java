@@ -141,6 +141,7 @@ public class Monde {
     public Collection<Personnage> getPersonnagesAt(Position position){
         Collection<Personnage> res = new ArrayList<>();
         for (Personnage p : personnages){
+            System.out.println(p.getPosition());
             if (p.getPosition().equals(position)){
                 res.add(p);
             }
@@ -154,7 +155,7 @@ public class Monde {
      */
     public void kill(Personnage personnage) {
         System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
-        personnage.resetPosition();
+        personnage.die();
     }
 
     /**

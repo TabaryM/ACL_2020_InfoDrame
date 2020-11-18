@@ -7,6 +7,7 @@ import model.personnages.Personnage;
 import model.plateau.Labyrinthe;
 import model.plateau.Position;
 
+import java.util.Collection;
 import java.util.List;
 
 public abstract class Fantome extends Personnage {
@@ -42,6 +43,29 @@ public abstract class Fantome extends Personnage {
             throw new PacmanException("Pas de temps de jeu incorrect");
         }
         sleepingTime -= time;
+    }
+
+    @Override
+    public void live() {
+        move();
+        attack();
+    }
+
+    @Override
+    public void attack() {
+        Collection<Personnage> personnages = monde.getPersonnagesAt(position);
+        personnages.remove(this);
+        for (Personnage p : personnages){
+            if(p.isPacman()) {
+                monde.kill(p);
+            }
+        }
+    }
+
+    @Override
+    public void die() {
+        resetPosition();
+        monde.increaseScore(getScore());
     }
 
     @Override

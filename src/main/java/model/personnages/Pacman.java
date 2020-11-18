@@ -86,16 +86,13 @@ public class Pacman extends Personnage {
     /**
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
-    private void attack() {
+    public void attack() {
         Collection<Personnage> personnages = monde.getPersonnagesAt(position);
         personnages.remove(this);
         if(isAggressif()){
             for (Personnage p : personnages){
                 monde.kill(p);
-                monde.increaseScore(p.getScore());
             }
-        } else if(personnages.size() > 0){
-            monde.kill(this);
         }
     }
 
@@ -136,6 +133,12 @@ public class Pacman extends Personnage {
         Position posInit = monde.getPosInitPacman();
         position.setX(posInit.getX());
         position.setY(posInit.getY());
+    }
+
+    @Override
+    public void die() {
+        monde.decreasedVie();
+        resetPosition();
     }
 
     /**
