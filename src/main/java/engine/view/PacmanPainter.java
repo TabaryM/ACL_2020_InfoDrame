@@ -63,7 +63,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		drawFont(graphics2D);
 		drawIcon(graphics2D);
 		drawPiece(monde, graphics2D);
-		drawPacman(monde,graphics2D);
+		drawPersonnage(monde,graphics2D);
 		graphics2D.dispose();
 	}
 
@@ -75,6 +75,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		int height = HEIGHT/10;
 		int width = WIDTH - WIDTH/5;
 		Color font = new Color(255, 255, 255);
+
 		graphics2D.setColor(font);
 		graphics2D.setFont(graphics2D.getFont().deriveFont(25f));
 		graphics2D.drawString("Score: " + score, width, height);
@@ -102,6 +103,10 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		}
 	}
 
+	/**
+	 * Dessine le labyrinthe
+	 * @param monde de type Monde
+	 */
 	public void drawLaby (Monde monde) {
 		Labyrinthe laby = monde.getLabyrinthe();
 		Graphics2D graphics2D = this.laby.createGraphics();
@@ -113,26 +118,39 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		}
 	}
 
-	public BufferedImage drawWallCoin(Monde monde, Case[] voisin) {
+	/**
+	 * Récupère l'image correspondant à un coin
+	 * @param monde de type Monde
+	 * @param voisin de type Case[]
+	 * @return un BufferedImage
+	 */
+	private BufferedImage drawWallCoin(Monde monde, Case[] voisin) {
 		BufferedImage wall = null;
 		Case[] voisinGauche = monde.getVoisins(new Position(voisin[0].getX(), voisin[0].getY()));
 		Case[] voisinDroite = monde.getVoisins(new Position(voisin[2].getX(), voisin[2].getY()));
 
+
+		//Regarde si les diagonales droites et la case en dessous ne sont pas des murs
 		if (!voisinDroite[3].isMur() && !voisinDroite[1].isMur() && !voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasGauche();
 
+		//Regarde si les diagonales gauches et la case en dessous ne sont pas des murs
 		} else if (!voisinGauche[3].isMur() && !voisinGauche[1].isMur() && !voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasDroit();
 
+		//Regarde si la diagonales bas gauche n'est pas un mur
 		} else if (!voisinGauche[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinHautDroit();
 
+		//Regarde si la diagonal haut gauche n'est pas un mur
 		} else if (!voisinGauche[1].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasDroit();
 
+		//Regarde si la diagonal bas droite n'est pas un mur
 		} else if (!voisinDroite[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinHautGauche();
 
+		//Regarde si la diagonal haut droite n'est pas un mur
 		} else if (!voisinDroite[1].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasGauche();
 
@@ -141,17 +159,27 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		return wall;
 	}
 
-	public BufferedImage drawWallSpecial(Case[] voisin) {
+	/**
+	 * Recupère l'image correspondant à un mur spécial
+	 * @param voisin de type Case[]
+	 * @return un BufferedImage
+	 */
+	private BufferedImage drawWallSpecial(Case[] voisin) {
 		BufferedImage wall = null;
+
+		//Regarde si il y a un mur à droite et en bas
 		if (voisin[2].isMur() && voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinHautGauche();
 
+		//Regarde si il y a un mur à droite et en haut
 		} else if ( voisin[1].isMur() && voisin[2].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasGauche();
 
+		//Regarde si il y a un mur à gauche et en bas
 		} else if ( voisin[0].isMur() && voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getCoinHautDroit();
 
+		//Regarde si il y a un mur à gauche et en haut
 		} else if ( voisin[0].isMur() && voisin[1].isMur()) {
 			wall = ImageFactory.getInstance().getCoinBasDroit();
 
@@ -159,11 +187,19 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		return wall;
 	}
 
-	public BufferedImage drawWallBord(Case[] voisin) {
+	/**
+	 * Récupère l'image correspondant à un bord
+	 * @param voisin de type Case[]
+	 * @return BufferedImage
+	 */
+	private BufferedImage drawWallBord(Case[] voisin) {
 		BufferedImage wall = null;
+
+		//Regarde si il y a pas de mur à gauche ou de mur à droite
 		if (!voisin[0].isMur() || !voisin[2].isMur()) {
 			wall = ImageFactory.getInstance().getMurVertical();
 
+		//Regarde si il y pas de mur en haut ou en bas
 		} else if (!voisin[1].isMur() || !voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getMurHorizontal();
 		}
@@ -171,11 +207,19 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		return wall;
 	}
 
-	public BufferedImage drawWallBasic(Case[] voisin) {
+	/**
+	 * Récupère l'image correspondant à un mur basique
+	 * @param voisin de type Case[]
+	 * @return BufferedImage
+	 */
+	private BufferedImage drawWallBasic(Case[] voisin) {
 		BufferedImage wall = null;
+
+		//Regarde si il y a un mur à gauche et à droite
 		if (voisin[2].isMur() && voisin[0].isMur()) {
 			wall = ImageFactory.getInstance().getMurHorizontal();
 
+		//Regarde si il y a un mur en haut et en bas
 		} else if (voisin[1].isMur() && voisin[3].isMur()) {
 			wall = ImageFactory.getInstance().getMurVertical();
 
@@ -184,9 +228,19 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		return wall;
 	}
 
-	public void drawWall (int ligne, int colonne , Monde monde, Graphics2D graphics2D) {
+	/**
+	 * Dessine les mur du labyrinthe
+	 * @param ligne de type int
+	 * @param colonne de type int
+	 * @param monde de type Monde
+	 * @param graphics2D de type Graphics2D
+	 */
+	private void drawWall (int ligne, int colonne , Monde monde, Graphics2D graphics2D) {
 		BufferedImage wall = null;
+
+		//Regarde si la case est un mur
 		if (monde.getLabyrinthe().getCasePlateau(colonne, ligne).isMur()) {
+
 			Case[] voisin = monde.getVoisins(new Position(colonne, ligne));
 			boolean voisinHaut, voisinBas, voisinDroite, voisinGauche;
 			voisinHaut = voisin[1].isMur();
@@ -194,11 +248,14 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			voisinDroite = voisin[2].isMur();
 			voisinGauche = voisin[0].isMur();
 
+			//Regarde si tous les voisins de la case sont des murs
 			if (voisinHaut && voisinBas && voisinGauche && voisinDroite) {
 				wall = drawWallCoin(monde, voisin);
 
-			} else if (voisinDroite && voisinGauche && voisinHaut || voisinDroite && voisinGauche && voisinBas) {
+			//Regarde si il y a un mur à gauche et à droite et si il y a un mur en haut ou en bas
+			} else if (voisinDroite && voisinGauche && (voisinHaut || voisinBas)) {
 
+				//Cas spécial ou on ce trouve sur le bord
 				if (colonne == 0 || colonne == monde.getLabyrinthe().getPlateau()[ligne].length -1) {
 					wall = drawWallCoin(monde, voisin);
 
@@ -206,12 +263,16 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 					wall = drawWallBord(voisin);
 				}
 
-			} else if (voisinHaut && voisinBas && voisinGauche || voisinHaut && voisinBas && voisinDroite ) {
+			//Regarde si il y a un mur en haut et en bas et si il y a un mur à gauche ou à droite
+			} else if (voisinHaut && voisinBas && (voisinGauche || voisinDroite) ) {
 				wall = drawWallBord(voisin);
 
+			//Regarde si il y a un mur à gauche et à droite ou un mur en haut et en bas
 			} else if (voisinGauche && voisinDroite || voisinHaut && voisinBas) {
 				wall = drawWallBasic(voisin);
 
+			/* Regarde si il y a un mur en bas et à droite ou un mur en haut et à droite ou
+				un mur en bas et à gauche ou un mur en haut et à gauche */
 			} else if (voisinBas && voisinDroite || voisinHaut && voisinDroite
 						|| voisinBas && voisinGauche || voisinHaut && voisinGauche) {
 				wall = drawWallSpecial(voisin);
@@ -221,21 +282,33 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			graphics2D.drawImage(wall,   colonne * 24,     ligne * 24, null);
 	}
 
-	public void drawPacman(Monde monde, Graphics2D graphics2D) {
-		BufferedImage sprite = monde.getPacman().getImage();
-		BufferedImage imScale = resize(sprite, 20, 20);
+	/**
+	 * Dessine les différents personnage
+	 * @param monde de type Monde
+	 * @param graphics2D de type graphics2D
+	 */
+	private void drawPersonnage(Monde monde, Graphics2D graphics2D) {
+		BufferedImage spritePacman = monde.getPacman().getImage();
+		BufferedImage pacmanScale = resize(spritePacman, 20, 20);
 		Pacman pacman = monde.getPacman();
-		int decalage = (24 - imScale.getWidth())/2;
+
+		int decalage = (24 - pacmanScale.getWidth())/2;
 		int posx = (pacman.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
 		int posy = (pacman.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
-		graphics2D.drawImage(imScale, posx, posy, null);
+		graphics2D.drawImage(pacmanScale, posx, posy, null);
 
 	}
 
-	public void drawPiece(Monde monde, Graphics2D graphics2D) {
+	/**
+	 * Dessine les diffèrentes pièces
+	 * @param monde de type Monde
+	 * @param graphics2D de type Graphics2D
+	 */
+	private void drawPiece(Monde monde, Graphics2D graphics2D) {
 		Map<Position, Piece> pieces = monde.getLabyrinthe().getPieces();
 		BufferedImage sprite;
 		int decalage, posx, posy;
+
 		for (Position position : pieces.keySet()) {
 			Piece piece = pieces.get(position);
 			sprite = piece.getImage();
@@ -244,6 +317,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			posy = (position.getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
 			graphics2D.drawImage(piece.getImage(), posx, posy, null);
 		}
+
 	}
 
 	/**
