@@ -85,10 +85,10 @@ public class Monde {
         fantomePisteur.ia();
         for (Personnage p : personnages){
             p.live();
-            System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
+            //System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
         //System.out.println(labyrinthe);
-        System.out.println(score);
+        //System.out.println(score);
     }
 
     /**

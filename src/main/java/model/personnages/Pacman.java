@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 
 import java.util.Collection;
 
+import static engine.GameEngineGraphical.TIMESTEP;
+
 /**
  * @author Tabary
  */
@@ -35,6 +37,20 @@ public class Pacman extends Personnage {
         attack();
         // Test collision avec pièce
         grabCoin();
+        // Mise a jour des effets
+        updateEffects();
+    }
+
+    private void updateEffects() {
+        reduceTimeToKill();
+    }
+
+    private void reduceTimeToKill() {
+        if(isAggressif()) {
+            timeToKill -= TIMESTEP/1000.0;
+        } else {
+            timeToKill = 0;
+        }
     }
 
     /**
@@ -159,6 +175,6 @@ public class Pacman extends Personnage {
      *         faux sinon.
      */
     public boolean isAggressif(){
-        return timeToKill > 0;
+        return timeToKill > 0.000001;
     }
 }
