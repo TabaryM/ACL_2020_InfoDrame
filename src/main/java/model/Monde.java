@@ -141,7 +141,6 @@ public class Monde {
     public Collection<Personnage> getPersonnagesAt(Position position){
         Collection<Personnage> res = new ArrayList<>();
         for (Personnage p : personnages){
-            System.out.println(p.getPosition());
             if (p.getPosition().equals(position)){
                 res.add(p);
             }
