@@ -17,8 +17,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import static engine.GameEngineGraphical.TIMESTEP;
-
 /**
  * @author Tabary
  */
@@ -57,13 +55,13 @@ public class Monde {
     public Case[] getVoisins(Position position) {
         Case[] res = new Case[4];
 
-            res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
+        res[0] = labyrinthe.getCasePlateau(position.getX()-1, position.getY());     // à gauche
 
-            res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
+        res[2] = labyrinthe.getCasePlateau(position.getX()+1, position.getY());     // à droite
 
-            res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
+        res[1] = labyrinthe.getCasePlateau(position.getX(), position.getY()-1);     // en haut
 
-            res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
+        res[3] = labyrinthe.getCasePlateau(position.getX(), position.getY()+1);     // en bas
 
         return res;
     }
@@ -85,10 +83,7 @@ public class Monde {
         fantomePisteur.ia();
         for (Personnage p : personnages){
             p.live();
-            //System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
-        //System.out.println(labyrinthe);
-        //System.out.println(score);
     }
 
     /**
@@ -110,8 +105,12 @@ public class Monde {
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
-    public int getCote() {
-        return labyrinthe.getCote();
+    public int getLargeur() {
+        return labyrinthe.getLargeur();
+    }
+
+    public int getHauteur() {
+        return labyrinthe.getHauteur();
     }
 
     public Case getCaseAt(Position position){
@@ -141,6 +140,7 @@ public class Monde {
     public Collection<Personnage> getPersonnagesAt(Position position){
         Collection<Personnage> res = new ArrayList<>();
         for (Personnage p : personnages){
+            //System.out.println(p.getPosition());
             if (p.getPosition().equals(position)){
                 res.add(p);
             }
