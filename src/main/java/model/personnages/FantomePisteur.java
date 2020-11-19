@@ -23,18 +23,13 @@ public class FantomePisteur extends Fantome {
     @Override
     public void ia() {
         aEtoile = new AEtoile(monde, pacmanPosition, this.position);
-        aEtoile.initResoudreLabyByStep();
+        //aEtoile.initResoudreLabyByStep();
     }
 
     @Override
     public void moveConcret() {
         aEtoile.resoudreLaby();
-        /*for (Position p : chemin){
-            System.out.println(p.getX() + " - " + p.getY());
-        }*/
-        //System.out.println("\n====================\n");
         Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-        //System.out.println(aCase.getX() + " - " + aCase.getY());
         if (aCase.getX() < position.getX()){
             currentDirection = Cmd.LEFT;
             position.moveLeft();
