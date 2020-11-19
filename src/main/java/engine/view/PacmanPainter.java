@@ -232,6 +232,34 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	}
 
 	/**
+	 * Recupère l'image correspondant à un bout de lur
+	 * @param voisin de type Case[]
+	 * @return un BufferedImage
+	 */
+	public BufferedImage drawWallBout(Case[] voisin) {
+		BufferedImage wall = null;
+
+		//Regarde si il y a un mur à gauche
+		if (voisin[0].isMur()) {
+			wall = ImageFactory.getInstance().getBoutDroite();
+
+		//Regarde si il y a un mur à droite
+		} else if (voisin[2].isMur()) {
+			wall = ImageFactory.getInstance().getBoutGauche();
+
+		//Regarde si il y a un mur en haut
+		} else if (voisin[1].isMur()) {
+			wall = ImageFactory.getInstance().getBoutBas();
+
+		//Regarde si il y a un mur en bas
+		} else if (voisin[3].isMur()) {
+			wall = ImageFactory.getInstance().getBoutHaut();
+		}
+
+		return wall;
+	}
+
+	/**
 	 * Dessine les mur du labyrinthe
 	 * @param ligne de type int
 	 * @param colonne de type int
@@ -279,6 +307,9 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			} else if (voisinBas && voisinDroite || voisinHaut && voisinDroite
 						|| voisinBas && voisinGauche || voisinHaut && voisinGauche) {
 				wall = drawWallSpecial(voisin);
+
+			} else if (voisinGauche || voisinDroite || voisinHaut || voisinBas) {
+				wall = drawWallBout(voisin);
 			}
 		}
 
