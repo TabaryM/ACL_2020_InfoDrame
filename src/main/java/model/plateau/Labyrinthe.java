@@ -110,7 +110,7 @@ public class Labyrinthe {
     }
 
     public Case getCasePlateau(Position position){
-        if(position.getX() <= plateau.length && position.getY() <= plateau[0].length){
+        if(position.getY() < plateau.length && position.getX() < plateau[0].length){
             return plateau[position.getY()][position.getX()];
         }
         return plateau[0][0];
@@ -149,8 +149,12 @@ public class Labyrinthe {
         pieces.remove(pos);
     }
 
-    public int getCote() {
+    public int getLargeur() {
         return plateau.length;
+    }
+
+    public int getHauteur() {
+        return plateau[0].length;
     }
 
     public Case[][] getPlateau() {
