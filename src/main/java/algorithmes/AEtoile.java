@@ -7,6 +7,7 @@ import model.plateau.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Random;
 
 public class AEtoile {
 
@@ -17,7 +18,8 @@ public class AEtoile {
     private ArrayList<Position> chemin;
     private Position pacmanPosition;
     private Position fantomePosition;
-
+    private Position courant;
+    private Case caseCourante;
     private ArrayList<Position> caseOuverte;
 
 
@@ -27,12 +29,11 @@ public class AEtoile {
         this.fantomePosition = fantomePosition;
     }
 
-    public void resoudreLaby(){
+    public void initAEtoile(){
         caseOuverte = new ArrayList<Position>();
         predecesseur = new HashMap<Position, Position>();
         coutChemin = new ArrayList<ArrayList<Integer>>();
         meilleurChemin = new ArrayList<ArrayList<Integer>>();
-        Position courant;
         Case temp;
         //set the columns
         for(int i = 0; i < monde.getHauteur(); i++){
@@ -46,8 +47,29 @@ public class AEtoile {
                 meilleurChemin.get(i).add(Integer.MAX_VALUE-1);
             }
         }
+    }
+
+    public void resoudreLabyAttaque(){
+        initAEtoile();
+        resoudreAEtoile(pacmanPosition);
+    }
+
+    public void resoudreLabyFuite(){
+        initAEtoile();
+
+        Position opposePacman = new Position(monde.getLargeur() - pacmanPosition.getX(), monde.getHauteur() - pacmanPosition.getY());
+        Random rand = new Random();
+        while(monde.getCaseAt(opposePacman).isMur() || getBirdFlyDist(pacmanPosition, opposePacman) < (0.3*(Math.sqrt(Math.pow(monde.getLargeur(), 2)+Math.pow(monde.getHauteur(), 2)))) ){
+            opposePacman.setX(rand.nextInt(monde.getLargeur()));
+            opposePacman.setY(rand.nextInt(monde.getHauteur()));
+        }
+
+        resoudreAEtoile(opposePacman);
+    }
+
+    public void resoudreAEtoile(Position but) {
         coutChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),0);
-        meilleurChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),getBirdFlyDist(fantomePosition));
+        meilleurChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),getBirdFlyDist(fantomePosition, but));
 
         caseOuverte.add(fantomePosition);
         Position tmp = fantomePosition;
@@ -62,24 +84,20 @@ public class AEtoile {
                 }
             }
             courant = tmp;
-            if(pacmanPosition.getX().equals(courant.getX()) && pacmanPosition.getY().equals(courant.getY())){
+            if(but.getX().equals(courant.getX()) && but.getY().equals(courant.getY())){
                 caseOuverte.clear();
                 reconstruireChemin(courant);
             }else {
                 caseOuverte.remove(courant);
                 voisins.addAll(Arrays.asList(monde.getVoisins(courant)));
-                temp = monde.getCaseAt(courant);
-                calcScore = coutChemin.get(courant.getX()).get(courant.getY()) + temp.getCoutAcces();
+                caseCourante = monde.getCaseAt(courant);
+                calcScore = coutChemin.get(courant.getX()).get(courant.getY()) + caseCourante.getCoutAcces();
                 for (Position voisin : voisins) {
                     if (!voisin.getClass().getSimpleName().equals("Mur")) {
                         if (calcScore < coutChemin.get(voisin.getX()).get(voisin.getY())) {
-                            if(!voisin.getX().equals(courant.getX()) &&!voisin.getY().equals(courant.getY())){
-                                System.out.println("Aetoile :");
-                                System.out.println(courant.getX()+" "+courant.getY()+" ; "+voisin.getX()+" "+voisin.getY());
-                            }
                             predecesseur.put(voisin, courant);
                             coutChemin.get(voisin.getX()).set(voisin.getY(), calcScore);
-                            meilleurChemin.get(voisin.getX()).set(voisin.getY(), calcScore + getBirdFlyDist(voisin));
+                            meilleurChemin.get(voisin.getX()).set(voisin.getY(), calcScore + getBirdFlyDist(voisin, but));
                             if (!caseOuverte.contains(voisin)) {
                                 caseOuverte.add(voisin);
                             }
@@ -90,8 +108,8 @@ public class AEtoile {
         }
     }
 
-    public Integer getBirdFlyDist(Position a){
-        return (int) Math.sqrt((Math.pow(Math.abs(a.getX()-pacmanPosition.getX()),2)+Math.pow(Math.abs(a.getY()-pacmanPosition.getY()),2)));
+    public Integer getBirdFlyDist(Position a, Position b){
+        return (int) Math.sqrt((Math.pow(Math.abs(a.getX()-b.getX()),2)+Math.pow(Math.abs(a.getY()-b.getY()),2)));
     }
 
     public void reconstruireChemin(Position courant){
@@ -101,7 +119,6 @@ public class AEtoile {
             courant = predecesseur.get(courant);
             chemin.add(courant);
         }
-        //System.out.println(chemin);
     }
 
     public Position getProchaineCaseDuChemin(){
