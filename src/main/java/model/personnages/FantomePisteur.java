@@ -4,13 +4,10 @@ import algorithmes.AEtoile;
 import dataFactories.ImageFactory;
 import engine.controller.Cmd;
 import model.Monde;
-import model.personnages.Fantome;
 import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class FantomePisteur extends Fantome {
 
@@ -23,12 +20,17 @@ public class FantomePisteur extends Fantome {
     @Override
     public void ia() {
         aEtoile = new AEtoile(monde, pacmanPosition, this.position);
-        //aEtoile.initResoudreLabyByStep();
     }
 
     @Override
     public void move() {
-        aEtoile.resoudreLaby();
+        if(monde.getPacman().isAggressif()){
+            aEtoile.resoudreLabyFuite();
+        }
+        else{
+            aEtoile.resoudreLabyAttaque();
+        }
+
         Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
         if (aCase.getX() < position.getX()){
             currentDirection = Cmd.LEFT;
