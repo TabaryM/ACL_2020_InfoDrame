@@ -27,7 +27,7 @@ public class FantomePisteur extends Fantome {
     }
 
     @Override
-    public void move() {
+    public void moveConcret() {
         aEtoile.resoudreLaby();
         /*for (Position p : chemin){
             System.out.println(p.getX() + " - " + p.getY());

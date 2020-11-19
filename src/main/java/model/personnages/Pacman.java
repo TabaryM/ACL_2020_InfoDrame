@@ -32,9 +32,6 @@ public class Pacman extends Personnage {
      */
     @Override
     public void live(){
-        move();
-        // Test collision avec fantôme.
-        attack();
         // Test collision avec pièce
         grabCoin();
         // Mise a jour des effets
@@ -47,7 +44,7 @@ public class Pacman extends Personnage {
 
     private void reduceTimeToKill() {
         if(isAggressif()) {
-            timeToKill -= TIMESTEP/1000.0;
+            timeToKill -= TIMESTEP;
         } else {
             timeToKill = 0;
         }
@@ -80,7 +77,7 @@ public class Pacman extends Personnage {
         if (timeToKill + val < 0){
             throw new PacmanException("Temps d'attaque négatif");
         }
-        timeToKill += val;
+        timeToKill += val * 1000;
     }
 
     /**

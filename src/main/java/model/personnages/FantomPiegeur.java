@@ -18,8 +18,7 @@ public class FantomPiegeur extends Fantome {
     }
 
     @Override
-    public void move() {
-
+    public void moveConcret() {
     }
 
     @Override

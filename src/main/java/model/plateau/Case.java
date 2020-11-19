@@ -18,4 +18,8 @@ public abstract class Case extends Position{
     public abstract int getCoutAcces();
 
     public abstract boolean isMur();
+
+    public String toSring(){
+        return super.toString();
+    }
 }

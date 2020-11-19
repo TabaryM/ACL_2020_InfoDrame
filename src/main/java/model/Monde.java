@@ -12,10 +12,7 @@ import model.plateau.Labyrinthe;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static engine.GameEngineGraphical.TIMESTEP;
 
@@ -27,7 +24,7 @@ public class Monde {
     private final Fantome fantomePisteur;
     private int score;
     private final Labyrinthe labyrinthe;
-    private final Collection<Personnage> personnages;
+    private final List<Personnage> personnages;
     private final PropertyChangeSupport pcs;
 
     /**
@@ -83,12 +80,39 @@ public class Monde {
      */
     public void nextStep(){
         fantomePisteur.ia();
+        // Déplace tous les personnages
         for (Personnage p : personnages){
-            p.live();
+            p.move();
             //System.out.println(p.getPosition() + " status : "+p.getCurrentDirection());
         }
+        // Résout les conflits de positions entre les personnages
+        for (Personnage p : personnages){
+            p.attack();
+        }
+        // Réduits les cooldowns des personnages
+        for (Personnage p : personnages){
+            p.live();
+        }
+        // Une fois que tous les personnages ont bougés, on vérifie qu'il n'y a pas eu de collision non résolue
+/*
+        verifieCollisions();
+*/
         //System.out.println(labyrinthe);
         //System.out.println(score);
+    }
+
+    private void verifieCollisions() {
+        Personnage current;
+        Personnage p;
+        for(int i = 0; i < personnages.size(); i++){
+            current = personnages.get(i);
+            for(int j = i+1; j < personnages.size(); j++){
+                p = personnages.get(j);
+                if(current.getPosition().equals(p.getPosition())){
+                    System.out.println("COLLISION ENTRE DEUX ENTITEES : " + current.getClass().getSimpleName() + " ET " + p.getClass().getSimpleName());
+                }
+            }
+        }
     }
 
     /**

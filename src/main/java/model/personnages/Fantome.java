@@ -10,6 +10,8 @@ import model.plateau.Position;
 import java.util.Collection;
 import java.util.List;
 
+import static engine.GameEngineGraphical.TIMESTEP;
+
 public abstract class Fantome extends Personnage {
 
     protected Position pacmanPosition;
@@ -33,23 +35,30 @@ public abstract class Fantome extends Personnage {
 
     /**
      * Décrémente le temps durant lequel le fantôme dors (pour qu'il se réveille un jour).
-     * Décrémente avec le temps de pas de jeu entre deux appels de la fonction nextStep()/
+     * Décrémente avec le temps de pas de jeu entre deux appels de la fonction nextStep()
      * Ce temps est accessible à GameEngineGraphical.
-     * @param time double positif qui sera soustrait à sleepingTime.
-     * @throws PacmanException si le temps de jeu est négatif ou supérieur à sleepingTime
      */
-    public void decreaseSleepingTime(double time) throws PacmanException {
-        if(time < 0 || sleepingTime - time < 0){
-            throw new PacmanException("Pas de temps de jeu incorrect");
+    public void decreaseSleepingTime() {
+        if(isSleeping()){
+            sleepingTime -= TIMESTEP;
+        } else {
+            sleepingTime = 0;
         }
-        sleepingTime -= time;
     }
 
     @Override
     public void live() {
-        move();
-        attack();
+        decreaseSleepingTime();
     }
+
+    @Override
+    public void move() {
+        if(!isSleeping()){
+            moveConcret();
+        }
+    }
+
+    protected abstract void moveConcret();
 
     @Override
     public void attack() {
@@ -57,25 +66,31 @@ public abstract class Fantome extends Personnage {
         personnages.remove(this);
         for (Personnage p : personnages){
             if(p.isPacman()) {
-                monde.kill(p);
+                if(!((Pacman)p).isAggressif()) {
+                    monde.kill(p);
+                }
             }
         }
     }
 
     @Override
     public void die() {
-        resetPosition();
         monde.increaseScore(getScore());
+        resetPosition();
+        setSleepingTime(6);
     }
 
     @Override
     public void resetPosition() {
         setPosition(monde.getPosSpawnFantome());
-        setSleepingTime(15);
     }
 
     @Override
     protected int getScore() {
         return 300;
+    }
+
+    protected boolean isSleeping(){
+        return sleepingTime > 0.000001;
     }
 }
