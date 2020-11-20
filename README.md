@@ -30,35 +30,34 @@ Paul-Emile Watelot
     l'autre dans le sens anti-horaire.
     - 1.2 Fantôme peureux maintient une distance constante entre lui et Pacman,
     et fonce (accélération) sur Pacman quand il s'approche d'une pièce d'attaque.
-- 2 Portails entres deux extrémités de la carte. 
+- 2 Portails entres deux extrémités de la carte.
 - 3 Bonus de score
     - 3.1 Serial Killing de Fantômes.
 - 4 Animations
     - 4.1 Orientation des personnages.
-    - 4.2 Animation de Pacman vivant (à l'arêt Pacman ne bouge pas,
+    - 4.2 Animation de Pacman vivant (à l'arrêt Pacman ne bouge pas,
     en déplacement il ouvre et ferme sa bouche à répétition).
+    - 4.3 Animation de mort
 - 5 Game design basique
     - Game over quand Pacman perd toutes ses vies.
     - Gain de vie tout les 5000 points.
     - Quand pacman a mangé toutes les pièces, le niveau se recharge.
+    - Quand Pacman meurt, les fantômes retournent dans l'enclos (pas de spawn kill svp).
 
+- Fonctionnalités optionnelles :
+    - Ajouter de la musique
+    - Ajouter des fruits pour augmenter le score
+    - Empêcher les échanges de places entre un fantôme et Pacman <!-- Mémoire de la position avant déplacement-->
+
+<!--
+Idée : augmenter la difficulté
+-->
 ### Répartition des responsabilité
 Corentin et Paul-Emile : 1
 
 Jordan : 4
 
 Mathieu : 3 et 5
-
-<!--
-Idées des fonctionnalités à implémenter pour le prochain sprint : 
-Faire des tests
-Vérifier si pacman doit s'arrêter contre un mur
-Faire des screens shots
-Finir les I.A.
-Faire les portails
-Mettre des portails
-Trouver des bons bonus
--->
 
 ## Sprint 2
 ### Objectifs
@@ -96,6 +95,8 @@ Cas de déplacement avec attaque possible :
 ![ClassDiag](conception/diagrammes/sequence/UserPlayingAttaque.svg)
 
 ## Backlog Sprint 2 : 
+<!-- TODO ajouter des images 
+-->
 ### Fonctionnalités implémentées
 - Les fantômes apparaissent dans l'enclos de départ. (1.1)
 - Le fantôme pisteur va vers Pacman en suivant un des plus court chemin. (1.2.1)
