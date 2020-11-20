@@ -22,24 +22,32 @@ import java.util.Random;
  */
 public class Monde {
     private final Pacman pacman;
-    private final Fantome fantomePisteur;
+    private final Fantome fantomePisteur1;
+    private final Fantome fantomePisteur2;
+    private final Fantome fantomePisteur3;
     private int score;
     private final Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
+    private final Random random;
 
     /**
      * Initialisation du monde à partir d'un labyrinthe
      * @param labyrinthe le plateau de jeu initial
      */
     Monde(Labyrinthe labyrinthe){
+        random = new Random();
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
-        fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
+        fantomePisteur1 = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
+        fantomePisteur2 = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
+        fantomePisteur3 = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         score = 0;
         personnages = new ArrayList<>();
         personnages.add(pacman);
-        personnages.add(fantomePisteur);
+        personnages.add(fantomePisteur1);
+        personnages.add(fantomePisteur2);
+        personnages.add(fantomePisteur3);
         this.pcs = new PropertyChangeSupport(this);
     }
 
@@ -80,7 +88,6 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
-        fantomePisteur.ia();
         // Déplace tous les personnages
         for (Personnage p : personnages){
             p.move();
@@ -171,8 +178,7 @@ public class Monde {
      */
     public Position getPosSpawnFantome() throws PacmanException {
         List<Position> positions = labyrinthe.getPosInitFantome();
-        Random random = new Random(System.currentTimeMillis());
-        return positions.get(random.nextInt(positions.size()));
+        return new Position(positions.get(random.nextInt(positions.size())));
     }
 
     public Position getPosInitPacman() {

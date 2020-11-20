@@ -53,6 +53,7 @@ public abstract class Fantome extends Personnage {
 
     @Override
     public void move() {
+        ia();
         if(!isSleeping()){
             moveConcret();
         }
