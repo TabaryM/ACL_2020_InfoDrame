@@ -23,6 +23,43 @@ Paul-Emile Watelot
 
 # Fonctionalitées prévues et découpage par sprint
 
+## Sprint 3
+### Objectifs
+- 1 Fantomes
+    - 1.1 Fantômes piégeurs, un des fantôme tourne dans le sens horaire pour s'approcher de Pacman,
+    l'autre dans le sens anti-horaire.
+    - 1.2 Fantôme peureux maintient une distance constante entre lui et Pacman,
+    et fonce (accélération) sur Pacman quand il s'approche d'une pièce d'attaque.
+- 2 Portails entres deux extrémités de la carte. 
+- 3 Bonus de score
+    - 3.1 Serial Killing de Fantômes.
+- 4 Animations
+    - 4.1 Orientation des personnages.
+    - 4.2 Animation de Pacman vivant (à l'arêt Pacman ne bouge pas,
+    en déplacement il ouvre et ferme sa bouche à répétition).
+- 5 Game design basique
+    - Game over quand Pacman perd toutes ses vies.
+    - Gain de vie tout les 5000 points.
+    - Quand pacman a mangé toutes les pièces, le niveau se recharge.
+
+### Répartition des responsabilité
+Corentin et Paul-Emile : 1
+
+Jordan : 4
+
+Mathieu : 3 et 5
+
+<!--
+Idées des fonctionnalités à implémenter pour le prochain sprint : 
+Faire des tests
+Vérifier si pacman doit s'arrêter contre un mur
+Faire des screens shots
+Finir les I.A.
+Faire les portails
+Mettre des portails
+Trouver des bons bonus
+-->
+
 ## Sprint 2
 ### Objectifs
 - 1 Fantômes
@@ -30,11 +67,13 @@ Paul-Emile Watelot
     - 1.2 Les monstres se déplacent en essayant d’attraper Pac-Man
         - 1.2.1 A* (plus court chemin) entre le fantôme et Pac-Man
         - 1.2.2 Deux fantômes "piégeurs" qui essaient d'encercler Pac-Man
-        - 1.2.3 Fantôme qui maintient une distance constante avec Pac-Man, mais à un élan de courage trop tard (quand Pac-Man va manger la Pièce-Attaque) 
+        - 1.2.3 Fantôme qui maintient une distance constante avec Pac-Man,
+        mais à un élan de courage trop tard (quand Pac-Man va manger la Pièce-Attaque).
     - 1.3 Les fantômes fuient Pac-Man lorsqu’il a mangé l’objet pour les tuer
 - 2 Attaques
     - 2.1 Pac-Man est tué au contact d’un fantôme
-    - 2.2 Pac-Man peut attaquer les fantômes avec lesquels il est en contact lorsqu’il a mangé l’objet permettant de les tuer. Ceux-ci sont tués à son contact
+    - 2.2 Pac-Man peut attaquer les fantômes avec lesquels il est en contact
+    lorsqu’il a mangé l’objet permettant de les tuer. Ceux-ci sont tués à son contact
 - 3 Interface graphique : Dessin du monde et des personnages
 
 ### Répartition des responsabilité
@@ -56,17 +95,28 @@ Cas de déplacement avec attaque possible :
 
 ![ClassDiag](conception/diagrammes/sequence/UserPlayingAttaque.svg)
 
-
-<!---
 ## Backlog Sprint 2 : 
-### Fonctionnalitées implémentées
+### Fonctionnalités implémentées
+- Les fantômes apparaissent dans l'enclos de départ. (1.1)
+- Le fantôme pisteur va vers Pacman en suivant un des plus court chemin. (1.2.1)
+- Les fantômes fuient Pacman quand il a mangé une pièce d'attaque. (1.3)
+- Les fantômes tuent Pacman quand ils sont sur la même case que lui. (2.1)
+- Si Pacman a mangé la pièce d'attaque,
+il tue les fantômes s'ils sont sur la même case que lui. (2.2)
+- Les personnages et le labyrinthe sont affiché en temps réel sur l'interface graphique. (3)
 
 ### Points positifs
+- Bonne répartition des taches (équitable en temps de travail) (très peu de conflits lors de merges)
+- Bonne gestion des branches (toujours aucune perte de données)
 
 ### Point Négatifs
+- Mauvaise préparation du sprint
+    - Diagramme de classe incomplet (Factory, Cases)
+    - Classes définies au sprint précédent inappropriées
+    à l'implémentation des fonctionnalités de ce sprint
 
 ### Nouveau diagramme de classe
--->
+
 
 ## Sprint 1
 ### Objectifs
