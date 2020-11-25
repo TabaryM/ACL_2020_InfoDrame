@@ -85,6 +85,8 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
+        // TODO : tester la condition de victoire (plus de pièces sur le plateau)
+        // TODO : tester la condition de défaite (plus de vie disponible)
         // Déplace tous les personnages
         for (Personnage p : personnages) p.move();
         // Résout les conflits de positions entre les personnages
