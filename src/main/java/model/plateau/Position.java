@@ -87,6 +87,11 @@ public class Position {
         y++;
     }
 
+    public void setCoord(Position position){
+        setX(position.getX());
+        setY(position.getY());
+    }
+
     /**
      * Retourne une représentation numérique de la position
      * @return (x, y)

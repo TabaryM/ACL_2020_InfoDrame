@@ -12,10 +12,7 @@ import model.plateau.Labyrinthe;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Tabary
@@ -194,6 +191,6 @@ public class Monde {
     }
 
     public Collection<Personnage> getPersonnages() {
-        return personnages;
+        return new ArrayList<>(personnages);
     }
 }

@@ -2,7 +2,6 @@ package model.personnages;
 
 import dataFactories.ImageFactory;
 import engine.controller.Cmd;
-import model.Drawable;
 import exception.PacmanException;
 import model.Monde;
 import model.Piece;
@@ -84,11 +83,21 @@ public class Pacman extends Personnage {
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
     public void attack() {
-        Collection<Personnage> personnages = monde.getPersonnagesAt(position);
-        personnages.remove(this);
         if(isAggressif()){
+            // Test si il y a un fantôme sur la case où est Pacman
+            Collection<Personnage> personnages = monde.getPersonnagesAt(position);
+            personnages.remove(this);
             for (Personnage p : personnages){
                 monde.kill(p);
+            }
+
+            // Test si Pacman et un fantôme ont échangé de position
+            personnages = monde.getPersonnages();
+            personnages.remove(this);
+            for(Personnage p : personnages){
+                if(p.getPosition().equals(anciennePosition)){
+                    monde.kill(p);
+                }
             }
         }
     }
@@ -100,6 +109,7 @@ public class Pacman extends Personnage {
      */
     @Override
     public void move() {
+        anciennePosition.setCoord(position);
         Case[] voisins = monde.getVoisins(position);
         switch (currentDirection){
             case LEFT:

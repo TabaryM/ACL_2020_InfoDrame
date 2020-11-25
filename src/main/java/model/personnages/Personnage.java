@@ -12,6 +12,7 @@ public abstract class Personnage implements Drawable {
     protected final Monde monde;
     protected Cmd currentDirection;
     protected final Position position;
+    protected final Position anciennePosition;
 
     /**
      * Initialise un personnage à la position donnée en paramètre
@@ -20,6 +21,7 @@ public abstract class Personnage implements Drawable {
     public Personnage(Monde monde, Position position) {
         this.monde = monde;
         this.position = position;
+        anciennePosition = new Position(0, 0);
     }
 
     public abstract void live();

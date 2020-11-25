@@ -1,14 +1,10 @@
 package model.personnages;
 
 import engine.controller.Cmd;
-import exception.PacmanException;
 import model.Monde;
-import model.personnages.Personnage;
-import model.plateau.Labyrinthe;
 import model.plateau.Position;
 
 import java.util.Collection;
-import java.util.List;
 
 import static engine.GameEngineGraphical.TIMESTEP;
 
@@ -53,6 +49,7 @@ public abstract class Fantome extends Personnage {
 
     @Override
     public void move() {
+        anciennePosition.setCoord(position);
         ia();
         if(!isSleeping()){
             moveConcret();
@@ -69,6 +66,19 @@ public abstract class Fantome extends Personnage {
             if(p.isPacman()) {
                 if(!((Pacman)p).isAggressif()) {
                     monde.kill(p);
+                }
+            }
+        }
+
+        // Test si le fanôme a échangé de position avec Pacman
+        personnages = monde.getPersonnages();
+        personnages.remove(this);
+        for(Personnage p : personnages){
+            if(p.isPacman()) {
+                if(!((Pacman)p).isAggressif()) {
+                    if (p.getPosition().equals(anciennePosition)) {
+                        monde.kill(p);
+                    }
                 }
             }
         }
