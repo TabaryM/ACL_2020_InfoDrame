@@ -95,7 +95,7 @@ public class Pacman extends Personnage {
             personnages.remove(this);
             for (Personnage p : personnages){
                 monde.kill(p);
-                streak++;
+                increaseStreak();
             }
 
             // Test si Pacman et un fantôme ont échangé de position
@@ -104,10 +104,14 @@ public class Pacman extends Personnage {
             for(Personnage p : personnages){
                 if(p.getPosition().equals(anciennePosition)){
                     monde.kill(p);
-                    streak++;
+                    increaseStreak();
                 }
             }
         }
+    }
+
+    private void increaseStreak() {
+        streak *= 2;
     }
 
     /**
@@ -176,6 +180,10 @@ public class Pacman extends Personnage {
      */
     public void setVie(int vie) {
         this.vie = vie;
+    }
+
+    public void increaseVie(){
+        vie++;
     }
 
     public void setDir(Cmd commande) {

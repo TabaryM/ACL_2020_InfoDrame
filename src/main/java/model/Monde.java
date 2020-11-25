@@ -100,6 +100,11 @@ public class Monde {
     public void increaseScore(int i) {
         int scoreOld = this.score;
         score += i;
+        if(score%10000 == 0) {
+            int oldVie = pacman.getVie();
+            pacman.increaseVie();
+            pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+        }
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
 
