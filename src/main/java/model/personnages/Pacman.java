@@ -20,10 +20,15 @@ import static engine.GameEngineGraphical.TIMESTEP;
 public class Pacman extends Personnage {
     private int vie = 3 ;
     private double timeToKill = 0.0;
+    private int streak = 1;
 
     public Pacman(Monde monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
+    }
+
+    public int getStreak() {
+        return streak;
     }
 
     /**
@@ -46,6 +51,7 @@ public class Pacman extends Personnage {
             timeToKill -= TIMESTEP;
         } else {
             timeToKill = 0;
+            streak = 1;
         }
     }
 
@@ -89,6 +95,7 @@ public class Pacman extends Personnage {
             personnages.remove(this);
             for (Personnage p : personnages){
                 monde.kill(p);
+                streak++;
             }
 
             // Test si Pacman et un fantôme ont échangé de position
@@ -97,6 +104,7 @@ public class Pacman extends Personnage {
             for(Personnage p : personnages){
                 if(p.getPosition().equals(anciennePosition)){
                     monde.kill(p);
+                    streak++;
                 }
             }
         }
@@ -145,7 +153,6 @@ public class Pacman extends Personnage {
     @Override
     public void die() {
         monde.decreasedVie();
-        resetPosition();
     }
 
     /**

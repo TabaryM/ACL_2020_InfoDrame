@@ -86,17 +86,11 @@ public class Monde {
      */
     public void nextStep(){
         // Déplace tous les personnages
-        for (Personnage p : personnages){
-            p.move();
-        }
+        for (Personnage p : personnages) p.move();
         // Résout les conflits de positions entre les personnages
-        for (Personnage p : personnages){
-            p.attack();
-        }
+        for (Personnage p : personnages) p.attack();
         // Réduits les cooldowns des personnages
-        for (Personnage p : personnages){
-            p.live();
-        }
+        for (Personnage p : personnages) p.live();
     }
 
     /**
@@ -113,6 +107,7 @@ public class Monde {
      * Méthode qui enlève une vie au joueur (pacman)
      */
     public void decreasedVie() {
+        for(Personnage p : personnages) p.resetPosition();
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
@@ -188,6 +183,10 @@ public class Monde {
 
     public Pacman getPacman() {
         return pacman;
+    }
+
+    public int getPacmanStreak(){
+        return pacman.getStreak();
     }
 
     public Collection<Personnage> getPersonnages() {
