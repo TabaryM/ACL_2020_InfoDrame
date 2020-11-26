@@ -23,6 +23,25 @@ public class FantomPiegeur extends Fantome {
 
     @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getFantomePiegeur();
+        BufferedImage img;
+
+        switch (this.currentDirection) {
+
+            case UP: img = ImageFactory.getInstance().getFantomePiegeurHaut();
+            break;
+
+            case DOWN: img = ImageFactory.getInstance().getFantomePiegeurBas();
+            break;
+
+            case LEFT: img = ImageFactory.getInstance().getFantomePiegeurGauche();
+            break;
+
+            default: img = ImageFactory.getInstance().getFantomePiegeurDroite();
+            break;
+
+        }
+
+
+        return img;
     }
 }
