@@ -169,8 +169,15 @@ public class Pacman extends Personnage {
 
     @Override
     public BufferedImage getImage() {
-        BufferedImage img = ImageFactory.getInstance().getPacman();
+        BufferedImage img;
         BufferedImage imgRotate;
+
+        if (this.currentDirection.equals(Cmd.IDLE)) {
+            img = ImageFactory.getInstance().getPacman();
+
+        } else {
+            img = ImageFactory.getInstance().getPacmanAnim();
+        }
 
         switch (this.currentDirection) {
 
@@ -181,6 +188,7 @@ public class Pacman extends Personnage {
 
             case DOWN: {
                 imgRotate = rotateImageByDegrees(img, 90);
+                System.out.println(imgRotate.getWidth());
             }
             break;
 
@@ -189,7 +197,7 @@ public class Pacman extends Personnage {
             }
             break;
 
-            default: imgRotate = img;
+            default: imgRotate = ImageFactory.getInstance().getPacmanAnim();
             break;
 
 

@@ -1,9 +1,12 @@
 package dataFactories;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class ImageFactory {
     private static final ImageFactory instance = new ImageFactory();
@@ -34,6 +37,7 @@ public class ImageFactory {
     private static BufferedImage fantomePiegeurBas;
     private static BufferedImage fantomePiegeurGauche;
     private static BufferedImage fantomeFaible;
+    private static Image pacmanAnim;
 
 
     public ImageFactory() {
@@ -65,7 +69,12 @@ public class ImageFactory {
             fantomePiegeurDroite = ghostSprite.getSubimage(400, 380, 160, 160);
             fantomePiegeurHaut = ghostSprite.getSubimage(590, 380, 160, 160);
             fantomePiegeurBas = ghostSprite.getSubimage(400, 570, 160, 160);
+            fantomePiegeurGauche = ghostSprite.getSubimage(590, 570, 160, 160);
             fantomeFaible = spriteAll.getSubimage(946, 0, 210, 210);
+
+            pacmanAnim = new ImageIcon("src/main/resources/images/pacman-eating.gif").getImage();
+
+
 
 
 
@@ -179,7 +188,21 @@ public class ImageFactory {
         return fantomeFaible;
     }
 
+    public BufferedImage getPacmanAnim() {
+        BufferedImage image = new BufferedImage(
+                pacmanAnim.getWidth(null),
+                pacmanAnim.getHeight(null),
+                BufferedImage.TYPE_INT_ARGB);
+
+        Graphics g = image.getGraphics();
+        g.drawImage(pacmanAnim, 0, 0, null);
+
+        return image;
+    }
+
     public static ImageFactory getInstance() {
         return instance;
     }
+
+
 }
