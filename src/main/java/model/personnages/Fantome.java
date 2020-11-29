@@ -1,7 +1,9 @@
 package model.personnages;
 
+import algorithmes.AEtoile;
 import engine.controller.Cmd;
 import model.Monde;
+import model.plateau.Case;
 import model.plateau.Position;
 
 import java.util.Collection;
@@ -12,6 +14,7 @@ public abstract class Fantome extends Personnage {
 
     protected Position pacmanPosition;
     private double sleepingTime = 0.0;
+    protected AEtoile aEtoile;
 
     public Fantome(Monde monde, Position position, Position pacmanPosition){
         super(monde, position);
@@ -56,7 +59,33 @@ public abstract class Fantome extends Personnage {
         }
     }
 
-    protected abstract void moveConcret();
+    protected void moveConcret(){
+        if(monde.getPacman().isAggressif()){
+            aEtoile.resoudreLabyFuite();
+        }
+        else{
+            aEtoile.resoudreLabyAttaque();
+        }
+
+        Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
+        move(aCase);
+    }
+
+    public void move(Case aCase) {
+        if (aCase.getX() < position.getX()) {
+            currentDirection = Cmd.LEFT;
+            position.moveLeft();
+        } else if (aCase.getX() > position.getX()) {
+            currentDirection = Cmd.RIGHT;
+            position.moveRight();
+        } else if (aCase.getY() < position.getY()) {
+            currentDirection = Cmd.UP;
+            position.moveUp();
+        } else if (aCase.getY() > position.getY()) {
+            currentDirection = Cmd.DOWN;
+            position.moveDown();
+        }
+    }
 
     @Override
     public void attack() {

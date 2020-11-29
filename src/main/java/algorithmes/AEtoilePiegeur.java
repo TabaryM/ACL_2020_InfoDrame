@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class AEtoilePiegeur extends AEtoile {
 
-    private String direction;
+    private final String direction;
 
     public AEtoilePiegeur(Monde monde, Position pacmanPosition, Position fantomePosition, String direction) {
         super(monde, pacmanPosition, fantomePosition);
@@ -47,6 +47,9 @@ public class AEtoilePiegeur extends AEtoile {
                     if (!voisin.getClass().getSimpleName().equals("Mur")) {
 
                         if(direction.equals("droite") && voisin.getX() < fantomePosition.getX()){ // si il va a droite et que le voisin est a sa gauche
+                            calcScore+= 5;
+                        }
+                        else if(!direction.equals("droite") && voisin.getX() > fantomePosition.getX()){
                             calcScore+= 5;
                         }
 

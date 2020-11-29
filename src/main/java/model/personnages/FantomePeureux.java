@@ -1,19 +1,14 @@
 package model.personnages;
 
-import algorithmes.AEtoile;
 import algorithmes.AEtoilePeureux;
 import dataFactories.ImageFactory;
-import engine.controller.Cmd;
 import model.Monde;
-import model.personnages.Fantome;
 import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
 public class FantomePeureux extends Fantome {
-
-    private AEtoile aEtoile;
 
     public FantomePeureux(Monde monde, Position position, Position pacmanPosition) {
         super(monde, position, pacmanPosition);
@@ -27,25 +22,22 @@ public class FantomePeureux extends Fantome {
     @Override
     public void moveConcret() {
         if(monde.getPacman().isAggressif()){
-            aEtoile.resoudreLabyFuite();
-        }
-        else{
             aEtoile.resoudreLabyAttaque();
+            Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
+            move(aCase);
         }
+        else {
+            aEtoile.resoudreLabyAttaque();
+            Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
 
-        Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-        if (aCase.getX() < position.getX()){
-            currentDirection = Cmd.LEFT;
-            position.moveLeft();
-        } else if (aCase.getX() > position.getX()){
-            currentDirection = Cmd.RIGHT;
-            position.moveRight();
-        } else if (aCase.getY() < position.getY()){
-            currentDirection = Cmd.UP;
-            position.moveUp();
-        } else if (aCase.getY() > position.getY()){
-            currentDirection = Cmd.DOWN;
-            position.moveDown();
+            if(aEtoile.getBirdFlyDist(aCase, pacmanPosition) > 4) {
+                move(aCase);
+            }
+            else if(aEtoile.getBirdFlyDist(aCase, pacmanPosition) < 4 ){
+                aEtoile.resoudreLabyFuite();
+                aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
+                move(aCase);
+            }
         }
     }
 

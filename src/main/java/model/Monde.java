@@ -18,6 +18,8 @@ public class Monde {
     private final Pacman pacman;
     private final Fantome fantomePisteur;
     private final Fantome fantomePiegeurD;
+    private final Fantome fantomePiegeurG;
+    private final Fantome fantomePeureux;
     private int score;
     private final Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
@@ -34,11 +36,15 @@ public class Monde {
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
         fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         fantomePiegeurD = new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "droite");
+        fantomePiegeurG = new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "gauche");
+        fantomePeureux = new FantomePeureux(this, getPosSpawnFantome(), pacman.getPosition());
         score = 0;
         personnages = new ArrayList<>();
         personnages.add(pacman);
         personnages.add(fantomePisteur);
         personnages.add(fantomePiegeurD);
+        personnages.add(fantomePiegeurG);
+        personnages.add(fantomePeureux);
         this.pcs = new PropertyChangeSupport(this);
     }
 

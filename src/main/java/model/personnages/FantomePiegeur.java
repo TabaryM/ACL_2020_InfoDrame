@@ -1,20 +1,15 @@
 package model.personnages;
 
-import algorithmes.AEtoile;
 import algorithmes.AEtoilePiegeur;
 import dataFactories.ImageFactory;
-import engine.controller.Cmd;
 import model.Monde;
-import model.personnages.Fantome;
-import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
 public class FantomePiegeur extends Fantome {
 
-    private AEtoile aEtoile;
-    private String direction;
+    private final String direction;
 
     public FantomePiegeur(Monde monde, Position position, Position pacmanPosition, String direction) {
         super(monde, position, pacmanPosition);
@@ -26,29 +21,8 @@ public class FantomePiegeur extends Fantome {
         aEtoile = new AEtoilePiegeur(monde, pacmanPosition, this.position, direction);
     }
 
-    @Override
-    protected void moveConcret() {
-        if(monde.getPacman().isAggressif()){
-            aEtoile.resoudreLabyFuite();
-        }
-        else{
-            aEtoile.resoudreLabyAttaque();
-        }
-
-        Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-        if (aCase.getX() < position.getX()){
-            currentDirection = Cmd.LEFT;
-            position.moveLeft();
-        } else if (aCase.getX() > position.getX()){
-            currentDirection = Cmd.RIGHT;
-            position.moveRight();
-        } else if (aCase.getY() < position.getY()){
-            currentDirection = Cmd.UP;
-            position.moveUp();
-        } else if (aCase.getY() > position.getY()){
-            currentDirection = Cmd.DOWN;
-            position.moveDown();
-        }
+    public String getDirection() {
+        return direction;
     }
 
     public BufferedImage getImage() {
