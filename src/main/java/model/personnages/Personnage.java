@@ -73,7 +73,7 @@ public abstract class Personnage implements Drawable {
      * @return 300 Si c'est un Fantôme.
      *         0 sinon.
      */
-    protected int getScore() {
+    public int getScore() {
         return 0;
     }
 

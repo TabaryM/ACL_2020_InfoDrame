@@ -99,7 +99,7 @@ public abstract class Fantome extends Personnage {
     }
 
     @Override
-    protected int getScore() {
+    public int getScore() {
         return 200;
     }
 

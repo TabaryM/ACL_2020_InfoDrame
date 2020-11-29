@@ -17,7 +17,7 @@ import static engine.GameEngineGraphical.TIMESTEP;
 /**
  * @author Tabary
  */
-public class Pacman extends Personnage {
+public class Pacman extends Personnage implements PacmanInterface {
     private int vie = 3 ;
     private double timeToKill = 0.0;
     private int streak = 1;
