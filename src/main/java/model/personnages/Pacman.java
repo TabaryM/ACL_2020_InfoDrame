@@ -2,7 +2,6 @@ package model.personnages;
 
 import dataFactories.ImageFactory;
 import engine.controller.Cmd;
-import model.Drawable;
 import exception.PacmanException;
 import model.Monde;
 import model.Piece;
@@ -21,10 +20,15 @@ import static engine.GameEngineGraphical.TIMESTEP;
 public class Pacman extends Personnage {
     private int vie = 3 ;
     private double timeToKill = 0.0;
+    private int streak = 1;
 
     public Pacman(Monde monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
+    }
+
+    public int getStreak() {
+        return streak;
     }
 
     /**
@@ -47,6 +51,7 @@ public class Pacman extends Personnage {
             timeToKill -= TIMESTEP;
         } else {
             timeToKill = 0;
+            streak = 1;
         }
     }
 
@@ -84,13 +89,29 @@ public class Pacman extends Personnage {
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
     public void attack() {
-        Collection<Personnage> personnages = monde.getPersonnagesAt(position);
-        personnages.remove(this);
         if(isAggressif()){
+            // Test si il y a un fantôme sur la case où est Pacman
+            Collection<Personnage> personnages = monde.getPersonnagesAt(position);
+            personnages.remove(this);
             for (Personnage p : personnages){
                 monde.kill(p);
+                increaseStreak();
+            }
+
+            // Test si Pacman et un fantôme ont échangé de position
+            personnages = monde.getPersonnages();
+            personnages.remove(this);
+            for(Personnage p : personnages){
+                if(p.getPosition().equals(anciennePosition)){
+                    monde.kill(p);
+                    increaseStreak();
+                }
             }
         }
+    }
+
+    private void increaseStreak() {
+        streak *= 2;
     }
 
     /**
@@ -100,6 +121,7 @@ public class Pacman extends Personnage {
      */
     @Override
     public void move() {
+        anciennePosition.setCoord(position);
         Case[] voisins = monde.getVoisins(position);
         switch (currentDirection){
             case LEFT:
@@ -135,7 +157,6 @@ public class Pacman extends Personnage {
     @Override
     public void die() {
         monde.decreasedVie();
-        resetPosition();
     }
 
     /**
@@ -159,6 +180,10 @@ public class Pacman extends Personnage {
      */
     public void setVie(int vie) {
         this.vie = vie;
+    }
+
+    public void increaseVie(){
+        vie++;
     }
 
     public void setDir(Cmd commande) {

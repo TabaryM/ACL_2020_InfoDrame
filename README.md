@@ -118,6 +118,12 @@ il tue les fantômes s'ils sont sur la même case que lui. (2.2)
 
 ### Nouveau diagramme de classe
 
+### Screenshots
+Apparition des fantômes dans l'enclos de départ
+![ClassDiag](conception/images/jeu.png)
+
+Les fantômes ont peur de Pacman quand il a mangé la pièce d'attaque
+![ClassDiag](conception/images/fuite_fantome.png)
 
 ## Sprint 1
 ### Objectifs

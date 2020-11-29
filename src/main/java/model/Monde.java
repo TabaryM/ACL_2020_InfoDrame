@@ -9,10 +9,7 @@ import model.plateau.Labyrinthe;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Tabary
@@ -25,12 +22,14 @@ public class Monde {
     private final Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
+    private final Random random;
 
     /**
      * Initialisation du monde à partir d'un labyrinthe
      * @param labyrinthe le plateau de jeu initial
      */
     Monde(Labyrinthe labyrinthe){
+        random = new Random();
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
         fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
@@ -80,19 +79,14 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
-        fantomePisteur.ia();
+        // TODO : tester la condition de victoire (plus de pièces sur le plateau)
+        // TODO : tester la condition de défaite (plus de vie disponible)
         // Déplace tous les personnages
-        for (Personnage p : personnages){
-            p.move();
-        }
+        for (Personnage p : personnages) p.move();
         // Résout les conflits de positions entre les personnages
-        for (Personnage p : personnages){
-            p.attack();
-        }
+        for (Personnage p : personnages) p.attack();
         // Réduits les cooldowns des personnages
-        for (Personnage p : personnages){
-            p.live();
-        }
+        for (Personnage p : personnages) p.live();
     }
 
     /**
@@ -102,6 +96,11 @@ public class Monde {
     public void increaseScore(int i) {
         int scoreOld = this.score;
         score += i;
+        if(score%10000 == 0) {
+            int oldVie = pacman.getVie();
+            pacman.increaseVie();
+            pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+        }
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
 
@@ -109,6 +108,7 @@ public class Monde {
      * Méthode qui enlève une vie au joueur (pacman)
      */
     public void decreasedVie() {
+        for(Personnage p : personnages) p.resetPosition();
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
@@ -171,8 +171,7 @@ public class Monde {
      */
     public Position getPosSpawnFantome() throws PacmanException {
         List<Position> positions = labyrinthe.getPosInitFantome();
-        Random random = new Random(System.currentTimeMillis());
-        return positions.get(random.nextInt(positions.size()));
+        return new Position(positions.get(random.nextInt(positions.size())));
     }
 
     public Position getPosInitPacman() {
@@ -187,7 +186,11 @@ public class Monde {
         return pacman;
     }
 
+    public int getPacmanStreak(){
+        return pacman.getStreak();
+    }
+
     public Collection<Personnage> getPersonnages() {
-        return personnages;
+        return new ArrayList<>(personnages);
     }
 }
