@@ -1,30 +1,31 @@
 package model.personnages;
 
 import algorithmes.AEtoile;
-import algorithmes.AEtoilePisteur;
+import algorithmes.AEtoilePiegeur;
 import dataFactories.ImageFactory;
 import engine.controller.Cmd;
 import model.Monde;
+import model.personnages.Fantome;
 import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
-public class FantomePisteur extends Fantome {
+public class FantomePiegeur extends Fantome {
 
     private AEtoile aEtoile;
 
-    public FantomePisteur(Monde monde, Position position, Position pacmanPosition) {
+    public FantomePiegeur(Monde monde, Position position, Position pacmanPosition) {
         super(monde, position, pacmanPosition);
     }
 
     @Override
     public void ia() {
-        aEtoile = new AEtoilePisteur(monde, pacmanPosition, this.position);
+        aEtoile = new AEtoilePiegeur(monde, pacmanPosition, this.position);
     }
 
     @Override
-    public void moveConcret() {
+    protected void moveConcret() {
         if(monde.getPacman().isAggressif()){
             aEtoile.resoudreLabyFuite();
         }
@@ -48,8 +49,7 @@ public class FantomePisteur extends Fantome {
         }
     }
 
-    @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getFantomePisteur();
+        return ImageFactory.getInstance().getFantomePiegeur();
     }
 }

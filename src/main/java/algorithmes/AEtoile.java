@@ -9,18 +9,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
-public class AEtoile {
+public abstract class AEtoile implements IA {
 
-    private Monde monde;
-    private HashMap<Position,Position> predecesseur;
-    private ArrayList<ArrayList<Integer>> coutChemin;
-    private ArrayList<ArrayList<Integer>> meilleurChemin;
-    private ArrayList<Position> chemin;
-    private Position pacmanPosition;
-    private Position fantomePosition;
-    private Position courant;
-    private Case caseCourante;
-    private ArrayList<Position> caseOuverte;
+    protected Monde monde;
+    protected HashMap<Position,Position> predecesseur;
+    protected ArrayList<ArrayList<Integer>> coutChemin;
+    protected ArrayList<ArrayList<Integer>> meilleurChemin;
+    protected ArrayList<Position> chemin;
+    protected Position pacmanPosition;
+    protected Position fantomePosition;
+    protected Position courant;
+    protected Case caseCourante;
+    protected ArrayList<Position> caseOuverte;
 
 
     public AEtoile(Monde monde, Position pacmanPosition, Position fantomePosition){
@@ -65,47 +65,6 @@ public class AEtoile {
         }
 
         resoudreAEtoile(opposePacman);
-    }
-
-    public void resoudreAEtoile(Position but) {
-        coutChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),0);
-        meilleurChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),getBirdFlyDist(fantomePosition, but));
-
-        caseOuverte.add(fantomePosition);
-        Position tmp = fantomePosition;
-        int calcScore;
-        while(!caseOuverte.isEmpty()){
-            ArrayList<Case> voisins = new ArrayList<>();
-            int minValue = Integer.MAX_VALUE;
-            for(Position p :caseOuverte){
-                if(meilleurChemin.get(p.getX()).get(p.getY()) < minValue){
-                    minValue = meilleurChemin.get(p.getX()).get(p.getY());
-                    tmp = p;
-                }
-            }
-            courant = tmp;
-            if(but.getX().equals(courant.getX()) && but.getY().equals(courant.getY())){
-                caseOuverte.clear();
-                reconstruireChemin(courant);
-            }else {
-                caseOuverte.remove(courant);
-                voisins.addAll(Arrays.asList(monde.getVoisins(courant)));
-                caseCourante = monde.getCaseAt(courant);
-                calcScore = coutChemin.get(courant.getX()).get(courant.getY()) + caseCourante.getCoutAcces();
-                for (Position voisin : voisins) {
-                    if (!voisin.getClass().getSimpleName().equals("Mur")) {
-                        if (calcScore < coutChemin.get(voisin.getX()).get(voisin.getY())) {
-                            predecesseur.put(voisin, courant);
-                            coutChemin.get(voisin.getX()).set(voisin.getY(), calcScore);
-                            meilleurChemin.get(voisin.getX()).set(voisin.getY(), calcScore + getBirdFlyDist(voisin, but));
-                            if (!caseOuverte.contains(voisin)) {
-                                caseOuverte.add(voisin);
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     public Integer getBirdFlyDist(Position a, Position b){
