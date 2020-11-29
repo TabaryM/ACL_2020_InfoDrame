@@ -2,12 +2,9 @@ package model;
 
 import engine.controller.Cmd;
 import exception.PacmanException;
-import model.personnages.Fantome;
-import model.personnages.FantomePisteur;
+import model.personnages.*;
 import model.plateau.Case;
 import model.plateau.Position;
-import model.personnages.Pacman;
-import model.personnages.Personnage;
 import model.plateau.Labyrinthe;
 
 import java.beans.PropertyChangeListener;
@@ -23,6 +20,7 @@ import java.util.Random;
 public class Monde {
     private final Pacman pacman;
     private final Fantome fantomePisteur;
+    private final Fantome fantomePiegeurD;
     private int score;
     private final Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
@@ -36,10 +34,12 @@ public class Monde {
         this.labyrinthe = labyrinthe;
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
         fantomePisteur = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
+        fantomePiegeurD = new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "droite");
         score = 0;
         personnages = new ArrayList<>();
         personnages.add(pacman);
         personnages.add(fantomePisteur);
+        personnages.add(fantomePiegeurD);
         this.pcs = new PropertyChangeSupport(this);
     }
 

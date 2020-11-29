@@ -14,14 +14,16 @@ import java.awt.image.BufferedImage;
 public class FantomePiegeur extends Fantome {
 
     private AEtoile aEtoile;
+    private String direction;
 
-    public FantomePiegeur(Monde monde, Position position, Position pacmanPosition) {
+    public FantomePiegeur(Monde monde, Position position, Position pacmanPosition, String direction) {
         super(monde, position, pacmanPosition);
+        this.direction = direction;
     }
 
     @Override
     public void ia() {
-        aEtoile = new AEtoilePiegeur(monde, pacmanPosition, this.position);
+        aEtoile = new AEtoilePiegeur(monde, pacmanPosition, this.position, direction);
     }
 
     @Override

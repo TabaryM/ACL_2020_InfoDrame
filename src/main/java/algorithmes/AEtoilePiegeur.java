@@ -1,5 +1,6 @@
 package algorithmes;
 
+import engine.controller.Cmd;
 import model.Monde;
 import model.plateau.Case;
 import model.plateau.Position;
@@ -8,8 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AEtoilePiegeur extends AEtoile {
-    public AEtoilePiegeur(Monde monde, Position pacmanPosition, Position fantomePosition) {
+
+    private String direction;
+
+    public AEtoilePiegeur(Monde monde, Position pacmanPosition, Position fantomePosition, String direction) {
         super(monde, pacmanPosition, fantomePosition);
+        this.direction = direction;
     }
 
     @Override
@@ -40,6 +45,11 @@ public class AEtoilePiegeur extends AEtoile {
                 calcScore = coutChemin.get(courant.getX()).get(courant.getY()) + caseCourante.getCoutAcces();
                 for (Position voisin : voisins) {
                     if (!voisin.getClass().getSimpleName().equals("Mur")) {
+
+                        if(direction.equals("droite") && voisin.getX() < fantomePosition.getX()){ // si il va a droite et que le voisin est a sa gauche
+                            calcScore+= 5;
+                        }
+
                         if (calcScore < coutChemin.get(voisin.getX()).get(voisin.getY())) {
                             predecesseur.put(voisin, courant);
                             coutChemin.get(voisin.getX()).set(voisin.getY(), calcScore);
