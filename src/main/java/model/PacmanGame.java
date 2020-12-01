@@ -8,6 +8,8 @@ import engine.controller.Cmd;
 import engine.controller.Game;
 import model.plateau.Labyrinthe;
 
+import static engine.GameEngineGraphical.TIMESTEP;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -17,6 +19,7 @@ import model.plateau.Labyrinthe;
  */
 public class PacmanGame implements Game {
 	private final Monde monde;
+	private int waiting;
 
 	/**
 	 * constructeur avec fichier source pour le help
@@ -41,6 +44,7 @@ public class PacmanGame implements Game {
 	 */
 	public PacmanGame(){
 		monde = new Monde(new Labyrinthe("src/main/resources/labyClassic.txt"));
+		waiting = 0;
 	}
 
 	/**
@@ -51,8 +55,23 @@ public class PacmanGame implements Game {
 	@Override
 	public void evolve(Cmd commande) {
 		// System.out.println("Execute "+commande);
-		monde.setJoueurDir(commande);
-		monde.nextStep();
+		if(waiting > 0){
+			waiting -= TIMESTEP;
+		} else {
+			if (monde.pacmanWon()) {
+				System.out.println("VICTOIRE !");
+				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
+				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
+			} else if (monde.pacmanLost()) {
+				System.out.println("DEFAITE !");
+				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
+				monde.resetPacmanVie();
+				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
+			} else {
+				monde.setJoueurDir(commande);
+				monde.nextStep();
+			}
+		}
 	}
 
 	/**

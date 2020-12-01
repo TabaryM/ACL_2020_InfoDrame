@@ -161,4 +161,13 @@ public class Labyrinthe {
     public Map<Position, Piece> getPieces() {
         return pieces;
     }
+
+    /**
+     * Test si le labyrinthe contient toujours des pièces
+     * @return true si le labyrinthe a 0 pièces,
+     *         false sinon.
+     */
+    public boolean noPiecesLefts(){
+        return pieces.size() == 0;
+    }
 }

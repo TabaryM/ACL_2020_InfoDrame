@@ -13,6 +13,7 @@ import engine.view.MenuUI;
  */
 public class GameEngineGraphical {
 
+	// TODO : gérer dynamiquement le timstep
 	public static final int TIMESTEP = 100;
 
 	/**

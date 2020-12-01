@@ -23,7 +23,7 @@ public class Monde {
     private final Fantome fantomePisteur2;
     private final Fantome fantomePisteur3;
     private int score;
-    private final Labyrinthe labyrinthe;
+    private Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
     private final Random random;
@@ -46,6 +46,17 @@ public class Monde {
         personnages.add(fantomePisteur2);
         personnages.add(fantomePisteur3);
         this.pcs = new PropertyChangeSupport(this);
+    }
+
+    /**
+     * Change le labyrinthe du monde
+     * @param labyrinthe le nouveau labyrinthe du monde
+     */
+    public void setLabyrinthe(Labyrinthe labyrinthe){
+        this.labyrinthe = labyrinthe;
+        for(Personnage personnage : personnages){
+            personnage.resetPosition();
+        }
     }
 
     /**
@@ -117,6 +128,24 @@ public class Monde {
         for(Personnage p : personnages) p.resetPosition();
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
+        pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    /**
+     * Méthode qui ajoute une vie au joueur (pacman)
+     */
+    public void increaseVie() {
+        int oldVie = pacman.getVie();
+        pacman.increaseVie();
+        pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    /**
+     * Réinitialise le nombre de vie de Pacman
+     */
+    public void resetPacmanVie() {
+        int oldVie = pacman.getVie();
+        pacman.setVie(3);
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -199,4 +228,13 @@ public class Monde {
     public Collection<Personnage> getPersonnages() {
         return new ArrayList<>(personnages);
     }
+
+    public boolean pacmanWon(){
+        return labyrinthe.noPiecesLefts();
+    }
+
+    public boolean pacmanLost(){
+        return pacman.getVie() < 0;
+    }
+
 }

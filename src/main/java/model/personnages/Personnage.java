@@ -70,7 +70,7 @@ public abstract class Personnage implements Drawable {
 
     /**
      * Retourne le score procuré par le meurtre du personnage
-     * @return 300 Si c'est un Fantôme.
+     * @return 200 Si c'est un Fantôme.
      *         0 sinon.
      */
     protected int getScore() {
