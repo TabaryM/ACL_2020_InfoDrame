@@ -117,7 +117,7 @@ public class GameEngineGraphical {
 				// met en attente
 				Thread.sleep(getTimestep());
 			}
-			multiplier *= 0.1;
+			multiplier -= multiplier * 0.1;
 			game.setFinished(false);
 			System.out.println("ON ACCELERE !!!");
 		}

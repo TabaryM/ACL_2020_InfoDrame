@@ -100,8 +100,6 @@ public class Monde {
      */
     public void nextStep(){
         if (play) {
-            // TODO : tester la condition de victoire (plus de pièces sur le plateau)
-            // TODO : tester la condition de défaite (plus de vie disponible)
             // Déplace tous les personnages
             for (Personnage p : personnages) p.move();
             // Résout les conflits de positions entre les personnages
@@ -123,7 +121,6 @@ public class Monde {
             increaseVie();
             scoreVie -= 10000;
         }
-        System.out.println(score);
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
 
@@ -134,7 +131,6 @@ public class Monde {
         int oldVie = pacman.getVie();
         pacman.decreaseVie();
         // TODO : gérer les attaques de deux fantômes en même temps (pour pas que Pacman perde deux vie au lieu d'une)
-        System.out.println("Anciennes vies : "+oldVie+"\tmaintenant : "+pacman.getVie());
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -148,7 +144,6 @@ public class Monde {
     public void increaseVie() {
         int oldVie = pacman.getVie();
         pacman.increaseVie();
-        System.out.println("Anciennes vies : "+oldVie+"\tmaintenant : "+pacman.getVie());
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -253,6 +248,8 @@ public class Monde {
     }
 
     public void resetScore() {
+        int scoreOld = this.score;
         scoreVie = score = 0;
+        pcs.firePropertyChange("score", scoreOld, this.score);
     }
 }

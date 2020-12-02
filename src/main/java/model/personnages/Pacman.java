@@ -161,6 +161,7 @@ public class Pacman extends Personnage {
     @Override
     public void die() {
         monde.decreasedVie();
+        setDir(Cmd.IDLE);
     }
 
     /**

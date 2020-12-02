@@ -67,7 +67,10 @@ public class PacmanGame implements Game {
 			}
 
 		} else {
-			if (monde.pacmanWon() || monde.pacmanLost()   ) {
+			if (monde.pacmanWon()) {
+				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
+				setFinished(true);
+			} else if (monde.pacmanLost()) {
 				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
 			} else {
 				monde.setJoueurDir(commande);
