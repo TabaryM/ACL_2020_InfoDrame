@@ -82,7 +82,8 @@ public abstract class AEtoile {
 
         Position opposePacman = new Position(monde.getLargeur() - pacmanPosition.getX(), monde.getHauteur() - pacmanPosition.getY());
         Random rand = new Random();
-        while(monde.getCaseAt(opposePacman).isMur() || getBirdFlyDist(pacmanPosition, opposePacman) < (0.3*(Math.sqrt(Math.pow(monde.getLargeur(), 2)+Math.pow(monde.getHauteur(), 2)))) ){
+        while(monde.getCaseAt(opposePacman).isMur() || getBirdFlyDist(pacmanPosition, opposePacman) < (0.3*(Math.sqrt(Math.pow(monde.getLargeur(), 2)+Math.pow(monde.getHauteur(), 2))))
+         || opposePacman.getX() < 0 || opposePacman.getX() > monde.getHauteur()-1 || opposePacman.getY() < 0 ||opposePacman.getY() > monde.getLargeur()-1){
             opposePacman.setX(rand.nextInt(monde.getLargeur()));
             opposePacman.setY(rand.nextInt(monde.getHauteur()));
         }

@@ -68,9 +68,31 @@ public class FileReader {
                 }
             }
 
+            //verifie que les portails sont valides (que l'opposé est aussi pas un mur )
+            for(int ligne = 0; ligne < nbLignes; ligne++){
+                for(int colonne = 0 ; colonne < nbColonnes; colonne++){
+                    if(plateau[ligne][colonne] =='0'){
+                        if(ligne==0 && plateau[nbLignes-1][colonne] =='1'){
+                            throw new PlateauException("Erreur plateau invalide (portail): ligne:"+(ligne+commentCount+1)+" colonne:"+colonne);
+                        }
+                        else if(ligne==nbLignes-1 && plateau[0][colonne] =='1'){
+                            throw new PlateauException("Erreur plateau invalide (portail): ligne:"+(ligne+commentCount+1)+" colonne:"+colonne);
+                        }
+                        else if(colonne==0 && plateau[ligne][nbColonnes-1] =='1'){
+                            throw new PlateauException("Erreur plateau invalide (portail): ligne:"+(ligne+commentCount+1)+" colonne:"+colonne);
+                        }
+                        else if(colonne==nbColonnes-1 && plateau[ligne][0] =='1'){
+                            throw new PlateauException("Erreur plateau invalide (portail): ligne:"+(ligne+commentCount+1)+" colonne:"+colonne);
+                        }
+                    }
+                }
+            }
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         return plateau;
     }
