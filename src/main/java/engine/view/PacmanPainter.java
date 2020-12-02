@@ -376,7 +376,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		if (animMort == ImageFactory.getInstance().getPacmanMort().size()) {
 			mort = false;
 			animMort = 0;
-			monde.getPacman().resetPosition();
+			monde.resetAllPosition();
 			monde.setPlay(true);
 
 		}

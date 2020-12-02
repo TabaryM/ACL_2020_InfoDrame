@@ -128,10 +128,13 @@ public class Monde {
      * Méthode qui enlève une vie au joueur (pacman)
      */
     public void decreasedVie() {
-        for(Personnage p : personnages) p.resetPosition();
         int oldVie = pacman.getVie();
         pacman.decreasedVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+    }
+
+    public void resetAllPosition(){
+        for(Personnage p : personnages) p.resetPosition();
     }
 
     /**
