@@ -10,33 +10,45 @@ import java.awt.image.BufferedImage;
 
 public class FantomePeureux extends Fantome {
 
+    /**
+     * Constructeur de la classe fille du fantôme peureux
+     * @param monde le monde dans lequel le fantôme évolue
+     * @param position la position du fantôme
+     * @param pacmanPosition la position de Pacman
+     */
     public FantomePeureux(Monde monde, Position position, Position pacmanPosition) {
         super(monde, position, pacmanPosition);
     }
 
+    /**
+     * Métode permettant le lancement de l'IA A*
+     */
     @Override
     public void ia() {
         aEtoile = new AEtoilePeureux(monde, pacmanPosition, this.position);
     }
 
+    /**
+     * Méthode permettant de faire bouger les fantômes
+     */
     @Override
     public void moveConcret() {
         if(monde.getPacman().isAggressif()){
             aEtoile.resoudreLabyAttaque();
             Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-            move(aCase);
+            nextCase(aCase);
         }
         else {
             aEtoile.resoudreLabyAttaque();
             Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
 
             if(aEtoile.getBirdFlyDist(aCase, pacmanPosition) > 4) {
-                move(aCase);
+                nextCase(aCase);
             }
             else if(aEtoile.getBirdFlyDist(aCase, pacmanPosition) < 4 ){
                 aEtoile.resoudreLabyFuite();
                 aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-                move(aCase);
+                nextCase(aCase);
             }
         }
     }

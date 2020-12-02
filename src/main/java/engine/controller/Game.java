@@ -23,6 +23,10 @@ public interface Game {
 	 */
 	public boolean isFinished();
 
+	/**
+	 * Méthode permettant de récupérer le monde dans lequel on évolue.
+	 * @return
+	 */
 	public Monde getMonde();
 
 }

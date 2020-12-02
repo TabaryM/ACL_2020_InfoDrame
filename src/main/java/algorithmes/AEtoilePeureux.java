@@ -7,11 +7,26 @@ import model.plateau.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Roberge-Mentec Corentin
+ */
+
 public class AEtoilePeureux extends AEtoile {
+
+    /**
+     * Constructeur de la classe fille de AEtoile permettant d'implémenter le fantôme peureux.
+     * @param monde le monde dans lequel on évolue.
+     * @param pacmanPosition la position du Pacman à atteindre.
+     * @param fantomePosition la position actuelle du fantôme.
+     */
     public AEtoilePeureux(Monde monde, Position pacmanPosition, Position fantomePosition) {
         super(monde, pacmanPosition, fantomePosition);
     }
 
+    /**
+     * Résolution de la recherche de chemin par l'algorithme de A*.
+     * @param but le but à atteindre (ici Pacman).
+     */
     @Override
     public void resoudreAEtoile(Position but) {
         coutChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),0);

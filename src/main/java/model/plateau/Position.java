@@ -19,6 +19,10 @@ public class Position {
         this.y = y;
     }
 
+    /**
+     * Initialisation d'une position en 2D
+     * @param position la position permettant l'initialisation des coordonnées en x et y
+     */
     public Position(Position position) {
         this(position.x, position.y);
     }
@@ -87,6 +91,10 @@ public class Position {
         y++;
     }
 
+    /**
+     * Méthode permettant de modifier les coordonnées d'une position
+     * @param position la nouvelle position
+     */
     public void setCoord(Position position){
         setX(position.getX());
         setY(position.getY());

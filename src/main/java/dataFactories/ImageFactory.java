@@ -57,74 +57,146 @@ public class ImageFactory {
         }
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du coin en haut à gauche
+     * @return le coin en haut à gauche
+     */
     public BufferedImage getCoinHautGauche() {
         return coinHautGauche;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du coin en haut à droite
+     * @return le coin en haut à droite
+     */
     public BufferedImage getCoinHautDroit() {
         return coinHautDroit;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du coin en bas à gauche
+     * @return le coin en bas à gauche
+     */
     public BufferedImage getCoinBasGauche() {
         return coinBasGauche;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du coin en bas à droite
+     * @return le coin en bas à droite
+     */
     public BufferedImage getCoinBasDroit() {
         return coinBasDroit;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du mur vertical
+     * @return le mur vertical
+     */
     public BufferedImage getMurHorizontal() {
         return murHorizontal;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du mur horizontal
+     * @return le mur horizontal
+     */
     public BufferedImage getMurVertical() {
         return murVertical;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du bout de mur gauche
+     * @return le bout de mur gauche
+     */
     public BufferedImage getBoutGauche() {
         return boutGauche;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du bout de mur droit
+     * @return le bout de mur droit
+     */
     public BufferedImage getBoutDroite() {
         return boutDroite;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du bout de mur du haut
+     * @return le bout de mur du haut
+     */
     public BufferedImage getBoutHaut() {
         return boutHaut;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du bout de mur du bas
+     * @return le bout de mur du bas
+     */
     public BufferedImage getBoutBas() {
         return boutBas;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image de Pacman
+     * @return le fameux Pacman !
+     */
     public BufferedImage getPacman() {
         return pacman;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image de la piece de score
+     * @return la piece de score
+     */
     public BufferedImage getPieceScore() {
         return pieceScore;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image de la piece d'attaque
+     * @return la piece d'attaque
+     */
     public BufferedImage getPieceAttaque() {
         return pieceAttaque;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du fantôme pisteur
+     * @return le fantôme pisteur
+     */
     public BufferedImage getFantomePisteur() {
         return fantomePisteur;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du fantôme peureux
+     * @return le fantôme peureux
+     */
     public BufferedImage getFantomePeureux() {
         return fantomePeureux;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du fantôme piegeur
+     * @return le fantôme piegeur
+     */
     public BufferedImage getFantomePiegeur() {
         return fantomePiegeur;
     }
 
+    /**
+     * Méthode permettant de récupéré l'image du fantome faible
+     * @return le fantôme faible
+     */
     public BufferedImage getFantomeFaible() {
         return fantomeFaible;
     }
 
+    /**
+     * Méthode permettant de récupéré l'instance du singleton
+     * @return l'instance
+     */
     public static ImageFactory getInstance() {
         return instance;
     }

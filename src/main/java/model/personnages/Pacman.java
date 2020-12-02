@@ -22,11 +22,20 @@ public class Pacman extends Personnage {
     private double timeToKill = 0.0;
     private int streak = 1;
 
+    /**
+     * Constructeur du personnage Pacman
+     * @param monde le monde dans lequel évolue pacman
+     * @param position la position actuelle de pacman
+     */
     public Pacman(Monde monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
     }
 
+    /**
+     * La série d'élimination des fantômes
+     * @return le multiplicateur de core issue de la série d'élimination
+     */
     public int getStreak() {
         return streak;
     }
@@ -42,6 +51,9 @@ public class Pacman extends Personnage {
         updateEffects();
     }
 
+    /**
+     * Mise à jour du timer pendant lequel pacman peut tuer des fantômes
+     */
     private void updateEffects() {
         reduceTimeToKill();
     }
@@ -110,6 +122,9 @@ public class Pacman extends Personnage {
         }
     }
 
+    /**
+     * Méthode augmentant le multiplicateur de score issue de la série d'élimination des fantômes
+     */
     private void increaseStreak() {
         streak *= 2;
     }
@@ -147,6 +162,9 @@ public class Pacman extends Personnage {
         }
     }
 
+    /**
+     * Ré-initialisation de la position de Pacman
+     */
     @Override
     public void resetPosition() {
         Position posInit = monde.getPosInitPacman();
@@ -154,6 +172,9 @@ public class Pacman extends Personnage {
         position.setY(posInit.getY());
     }
 
+    /**
+     * Méthode permettant la diminution du nombre de vies de Pacman lorsque celui-ci meurt
+     */
     @Override
     public void die() {
         monde.decreasedVie();
@@ -182,10 +203,17 @@ public class Pacman extends Personnage {
         this.vie = vie;
     }
 
+    /**
+     * Methode qui incrémente de 1 la vie de pacman
+     */
     public void increaseVie(){
         vie++;
     }
 
+    /**
+     * Méthode permettant de définir la direction dans laquelle va Pacman
+     * @param commande la nouvelle direction de Pacman
+     */
     public void setDir(Cmd commande) {
         currentDirection = commande;
     }

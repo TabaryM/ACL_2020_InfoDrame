@@ -1,6 +1,5 @@
 package algorithmes;
 
-import engine.controller.Cmd;
 import model.Monde;
 import model.plateau.Case;
 import model.plateau.Position;
@@ -8,15 +7,30 @@ import model.plateau.Position;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Roberge-Mentec Corentin
+ */
+
 public class AEtoilePiegeur extends AEtoile {
 
     private final String direction;
 
+    /**
+     * Constructeur de la classe fille de AEtoile permettant d'implémenter le fantôme piégeur.
+     * @param monde le monde dans lequel on évolue.
+     * @param pacmanPosition la position du Pacman à atteindre.
+     * @param fantomePosition la position actuelle du fantôme.
+     * @param direction la direction par laquelle le fantôme essaye depiéger le Pacman.
+     */
     public AEtoilePiegeur(Monde monde, Position pacmanPosition, Position fantomePosition, String direction) {
         super(monde, pacmanPosition, fantomePosition);
         this.direction = direction;
     }
 
+    /**
+     * Résolution de la recherche de chemin par l'algorithme de A*.
+     * @param but le but à atteindre (ici Pacman).
+     */
     @Override
     public void resoudreAEtoile(Position but) {
         coutChemin.get(fantomePosition.getX()).set(fantomePosition.getY(),0);

@@ -109,6 +109,11 @@ public class Labyrinthe {
         return plateau[0][0];
     }
 
+    /**
+     * Retourne le caractère à la case demandé
+     * @param position la position de la case demandée
+     * @return char le caractère à la case du plateau
+     */
     public Case getCasePlateau(Position position){
         return getCasePlateau(position.getX(), position.getY());
     }
