@@ -49,6 +49,22 @@ public class FantomePisteur extends Fantome {
 
     @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getFantomePisteur();
+        BufferedImage img;
+
+        switch (this.currentDirection) {
+
+            case UP: img = ImageFactory.getInstance().getFantomePisteurHaut();
+            break;
+
+            case DOWN: img = ImageFactory.getInstance().getFantomePisteurBas();
+            break;
+
+            case LEFT: img = ImageFactory.getInstance().getFantomePisteurGauche();
+            break;
+
+            default: img = ImageFactory.getInstance().getFantomePisteurDroite();
+        }
+
+        return img;
     }
 }

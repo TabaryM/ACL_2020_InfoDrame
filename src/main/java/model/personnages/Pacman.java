@@ -8,6 +8,8 @@ import model.Piece;
 import model.plateau.Case;
 import model.plateau.Position;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import java.util.Collection;
@@ -192,7 +194,41 @@ public class Pacman extends Personnage {
 
     @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getPacman();
+        BufferedImage img;
+        BufferedImage imgRotate;
+
+        if (this.currentDirection.equals(Cmd.IDLE)) {
+            img = ImageFactory.getInstance().getPacman();
+
+        } else {
+            img = ImageFactory.getInstance().getPacmanAnim();
+        }
+
+        switch (this.currentDirection) {
+
+            case UP: {
+                imgRotate = rotateImageByDegrees(img, 270);
+            }
+            break;
+
+            case DOWN: {
+                imgRotate = rotateImageByDegrees(img, 90);
+                System.out.println(imgRotate.getWidth());
+            }
+            break;
+
+            case LEFT: {
+                imgRotate = rotateImageByDegrees(img, 180);
+            }
+            break;
+
+            default: imgRotate = ImageFactory.getInstance().getPacmanAnim();
+            break;
+
+
+        }
+
+        return imgRotate;
     }
     /**
      * Méthode permettant de dire si Pacman est en train d'attaquer
@@ -201,5 +237,33 @@ public class Pacman extends Personnage {
      */
     public boolean isAggressif(){
         return timeToKill > 0.000001;
+    }
+
+    public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
+
+        double rads = Math.toRadians(angle);
+        double sin = Math.abs(Math.sin(rads)), cos = Math.abs(Math.cos(rads));
+        int w = img.getWidth();
+        int h = img.getHeight();
+        int newWidth = (int) Math.floor(w*cos + h*sin);
+        int newHeight = (int) Math.floor(h*cos + w*sin);
+
+        BufferedImage rotated = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2D = rotated.createGraphics();
+        AffineTransform at = new AffineTransform();
+        at.translate((newWidth - w) / 2, (newHeight - h) / 2);
+
+        int x = w/2;
+        int y = h/2;
+
+        at.rotate(rads, x, y);
+        g2D.setTransform(at);
+        g2D.drawImage(img, 0, 0, null);
+        g2D.setColor(Color.RED);
+        g2D.drawRect(0, 0, newWidth - 1, newHeight - 1);
+        g2D.dispose();
+
+        return rotated;
+
     }
 }

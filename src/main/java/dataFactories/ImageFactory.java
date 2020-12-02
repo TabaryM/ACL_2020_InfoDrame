@@ -1,9 +1,12 @@
 package dataFactories;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class ImageFactory {
     private static final ImageFactory instance = new ImageFactory();
@@ -21,10 +24,20 @@ public class ImageFactory {
     private static BufferedImage pacman;
     private static BufferedImage pieceScore;
     private static BufferedImage pieceAttaque;
-    private static BufferedImage fantomePisteur;
-    private static BufferedImage fantomePeureux;
-    private static BufferedImage fantomePiegeur;
+    private static BufferedImage fantomePisteurDroite;
+    private static BufferedImage fantomePisteurHaut;
+    private static BufferedImage fantomePisteurBas;
+    private static BufferedImage fantomePisteurGauche;
+    private static BufferedImage fantomePeureuxDroite;
+    private static BufferedImage fantomePeureuxHaut;
+    private static BufferedImage fantomePeureuxBas;
+    private static BufferedImage fantomePeureuxGauche;
+    private static BufferedImage fantomePiegeurDroite;
+    private static BufferedImage fantomePiegeurHaut;
+    private static BufferedImage fantomePiegeurBas;
+    private static BufferedImage fantomePiegeurGauche;
     private static BufferedImage fantomeFaible;
+    private static Image pacmanAnim;
 
 
     public ImageFactory() {
@@ -45,10 +58,23 @@ public class ImageFactory {
             boutBas = sprite.getSubimage(196, 72, SPRITE_SIZE, SPRITE_SIZE);
             pieceScore = sprite.getSubimage(300, 76, 8, 8);
             pieceAttaque = sprite.getSubimage(231, 71, 18, 18);
-            fantomePisteur = ghostSprite.getSubimage(0, 0, 160, 160);
-            fantomePeureux = ghostSprite.getSubimage(400, 0, 160, 160);
-            fantomePiegeur = ghostSprite.getSubimage(400, 380, 160, 160);
+            fantomePisteurDroite = ghostSprite.getSubimage(0, 0, 160, 160);
+            fantomePisteurHaut = ghostSprite.getSubimage(190, 0, 160, 160);
+            fantomePisteurBas = ghostSprite.getSubimage(0, 190, 160, 160);
+            fantomePisteurGauche = ghostSprite.getSubimage(190, 190, 160, 160);
+            fantomePeureuxDroite = ghostSprite.getSubimage(400, 0, 160, 160);
+            fantomePeureuxHaut = ghostSprite.getSubimage(590, 0, 160, 160);
+            fantomePeureuxBas = ghostSprite.getSubimage(400, 190, 160, 160);
+            fantomePeureuxGauche = ghostSprite.getSubimage(590, 190, 160, 160);
+            fantomePiegeurDroite = ghostSprite.getSubimage(400, 380, 160, 160);
+            fantomePiegeurHaut = ghostSprite.getSubimage(590, 380, 160, 160);
+            fantomePiegeurBas = ghostSprite.getSubimage(400, 570, 160, 160);
+            fantomePiegeurGauche = ghostSprite.getSubimage(590, 570, 160, 160);
             fantomeFaible = spriteAll.getSubimage(946, 0, 210, 210);
+
+            pacmanAnim = new ImageIcon("src/main/resources/images/pacman-eating.gif").getImage();
+
+
 
 
 
@@ -109,23 +135,74 @@ public class ImageFactory {
         return pieceAttaque;
     }
 
-    public BufferedImage getFantomePisteur() {
-        return fantomePisteur;
+    public BufferedImage getFantomePisteurDroite() {
+        return fantomePisteurDroite;
     }
 
-    public BufferedImage getFantomePeureux() {
-        return fantomePeureux;
+    public  BufferedImage getFantomePisteurHaut() {
+        return fantomePisteurHaut;
     }
 
-    public BufferedImage getFantomePiegeur() {
-        return fantomePiegeur;
+    public BufferedImage getFantomePisteurBas() {
+        return fantomePisteurBas;
+    }
+
+    public BufferedImage getFantomePisteurGauche() {
+        return fantomePisteurGauche;
+    }
+
+
+    public  BufferedImage getFantomePeureuxDroite() {
+        return fantomePeureuxDroite;
+    }
+
+    public  BufferedImage getFantomePeureuxHaut() {
+        return fantomePeureuxHaut;
+    }
+
+    public  BufferedImage getFantomePeureuxBas() {
+        return fantomePeureuxBas;
+    }
+
+    public  BufferedImage getFantomePeureuxGauche() {
+        return fantomePeureuxGauche;
+    }
+
+    public BufferedImage getFantomePiegeurDroite() {
+        return fantomePiegeurDroite;
+    }
+
+    public BufferedImage getFantomePiegeurHaut() {
+        return fantomePiegeurHaut;
+    }
+
+    public BufferedImage getFantomePiegeurBas() {
+        return fantomePiegeurBas;
+    }
+
+    public BufferedImage getFantomePiegeurGauche() {
+        return fantomePiegeurGauche;
     }
 
     public BufferedImage getFantomeFaible() {
         return fantomeFaible;
     }
 
+    public BufferedImage getPacmanAnim() {
+        BufferedImage image = new BufferedImage(
+                pacmanAnim.getWidth(null),
+                pacmanAnim.getHeight(null),
+                BufferedImage.TYPE_INT_ARGB);
+
+        Graphics g = image.getGraphics();
+        g.drawImage(pacmanAnim, 0, 0, null);
+
+        return image;
+    }
+
     public static ImageFactory getInstance() {
         return instance;
     }
+
+
 }

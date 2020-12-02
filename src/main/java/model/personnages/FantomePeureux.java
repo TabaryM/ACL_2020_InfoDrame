@@ -24,6 +24,23 @@ public class FantomePeureux extends Fantome {
 
     @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getFantomePeureux();
+        BufferedImage img;
+
+        switch (this.currentDirection) {
+
+            case UP: img = ImageFactory.getInstance().getFantomePeureuxHaut();
+            break;
+
+            case DOWN: img = ImageFactory.getInstance().getFantomePeureuxBas();
+            break;
+
+            case LEFT: img = ImageFactory.getInstance().getFantomePeureuxGauche();
+            break;
+
+            default: img = ImageFactory.getInstance().getFantomePeureuxDroite();
+            break;
+        }
+
+        return img;
     }
 }

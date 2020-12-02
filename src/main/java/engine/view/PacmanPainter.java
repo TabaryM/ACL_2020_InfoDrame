@@ -328,7 +328,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		for (Personnage personnage : personnages) {
 
 			spritePerso = personnage.getImage();
-			if (monde.getPacman().isAggressif() && spritePerso.getWidth() == 160) {
+			if (monde.getPacman().isAggressif() && !personnage.isPacman()) {
 				spritePerso = ImageFactory.getInstance().getFantomeFaible();
 			}
 			BufferedImage persoScale = resize(spritePerso, 20, 20);
