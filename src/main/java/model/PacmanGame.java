@@ -58,16 +58,15 @@ public class PacmanGame implements Game {
 		// System.out.println("Execute "+commande);
 		if(waiting > 0){
 			waiting -= TIMESTEP;
+			if (waiting == 100) {
+				if (monde.pacmanLost()) {
+					monde.resetPacmanVie();
+				}
+				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
+			}
+
 		} else {
-			if (monde.pacmanWon()) {
-				System.out.println("VICTOIRE !");
-				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
-				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
-				setFinished(true);
-			} else if (monde.pacmanLost()) {
-				System.out.println("DEFAITE !");
-				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
-				monde.resetPacmanVie();
+			if (monde.pacmanWon() || monde.pacmanLost()   ) {
 				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
 			} else {
 				monde.setJoueurDir(commande);

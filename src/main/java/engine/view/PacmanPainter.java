@@ -69,6 +69,13 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			monde.setPlay(false);
 			drawMort(monde, graphics2D);
 		}
+		if (monde.pacmanLost()) {
+			drawFontTemp(graphics2D, "Defaite !!");
+		}
+
+		if (monde.pacmanWon()) {
+			drawFontTemp(graphics2D, "Victoire !!");
+		}
 
 		graphics2D.dispose();
 	}
@@ -89,6 +96,20 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
 	}
+
+	public void drawFontTemp(Graphics2D graphics2D, String str) {
+		int height = HEIGHT/2;
+		int width = WIDTH/4;
+		Color font = new Color(255, 255, 0);
+
+		graphics2D.setColor(font);
+		graphics2D.setFont(graphics2D.getFont().deriveFont(100f));
+		graphics2D.drawString(str, width, height);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
+	}
+
 
 	/**
 	 * Dessine le nombre de vie du joueur sur l'image
