@@ -23,6 +23,7 @@ public class Monde {
     private final Fantome fantomePisteur2;
     private final Fantome fantomePisteur3;
     private int score;
+    private int scoreVie;
     private Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
@@ -41,6 +42,7 @@ public class Monde {
         fantomePisteur2 = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         fantomePisteur3 = new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition());
         score = 0;
+        scoreVie = 0;
         personnages = new ArrayList<>();
         personnages.add(pacman);
         personnages.add(fantomePisteur1);
@@ -116,11 +118,12 @@ public class Monde {
     public void increaseScore(int i) {
         int scoreOld = this.score;
         score += i;
-        int nbViesDejaGagnee = score/10000;
-        System.out.println(nbViesDejaGagnee);
-        if(nbViesDejaGagnee != pacman.getVieGagne()){
+        scoreVie += i;
+        if(scoreVie >= 10000){
             increaseVie();
+            scoreVie -= 10000;
         }
+        System.out.println(score);
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
 
@@ -129,7 +132,9 @@ public class Monde {
      */
     public void decreasedVie() {
         int oldVie = pacman.getVie();
-        pacman.decreasedVie();
+        pacman.decreaseVie();
+        // TODO : gérer les attaques de deux fantômes en même temps (pour pas que Pacman perde deux vie au lieu d'une)
+        System.out.println("Anciennes vies : "+oldVie+"\tmaintenant : "+pacman.getVie());
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -143,6 +148,7 @@ public class Monde {
     public void increaseVie() {
         int oldVie = pacman.getVie();
         pacman.increaseVie();
+        System.out.println("Anciennes vies : "+oldVie+"\tmaintenant : "+pacman.getVie());
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -246,4 +252,7 @@ public class Monde {
         return pacman.getVie() < 0;
     }
 
+    public void resetScore() {
+        scoreVie = score = 0;
+    }
 }

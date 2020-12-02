@@ -61,6 +61,7 @@ public class PacmanGame implements Game {
 			if (waiting == 100) {
 				if (monde.pacmanLost()) {
 					monde.resetPacmanVie();
+					monde.resetScore();
 				}
 				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
 			}

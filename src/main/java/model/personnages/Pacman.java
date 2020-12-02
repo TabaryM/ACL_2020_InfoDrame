@@ -20,17 +20,13 @@ import static engine.GameEngineGraphical.TIMESTEP;
  * @author Tabary
  */
 public class Pacman extends Personnage {
-    public static final int baseVie = 3 ;
-    private int vieGagne;
-    private int viePerdues;
+    public int vie = 3 ;
     private double timeToKill = 0.0;
     private int streak = 1;
 
     public Pacman(Monde monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
-        vieGagne = 0;
-        viePerdues = 0;
     }
 
     public int getStreak() {
@@ -117,7 +113,9 @@ public class Pacman extends Personnage {
     }
 
     private void increaseStreak() {
-        streak *= 2;
+        if(streak < 8){
+            streak *= 2;
+        }
     }
 
     /**
@@ -168,8 +166,8 @@ public class Pacman extends Personnage {
     /**
      * Methode qui decrémente de 1 la vie de pacman
      */
-    public void decreasedVie() {
-        this.viePerdues++;
+    public void decreaseVie() {
+        this.vie--;
     }
 
     /**
@@ -177,27 +175,18 @@ public class Pacman extends Personnage {
      * @return int vie
      */
     public int getVie() {
-        return baseVie + vieGagne - viePerdues;
+        return vie;
     }
 
     /**
      * Fixe le nombre de vie à Pacman
      */
     public void resetVie() {
-        vieGagne = 0;
-        viePerdues = 0;
+        vie = 3;
     }
 
     public void increaseVie(){
-        vieGagne++;
-    }
-
-    public int getVieGagne() {
-        return vieGagne;
-    }
-
-    public int getViePerdues() {
-        return viePerdues;
+        vie++;
     }
 
     public void setDir(Cmd commande) {
@@ -241,6 +230,7 @@ public class Pacman extends Personnage {
 
         return imgRotate;
     }
+
     /**
      * Méthode permettant de dire si Pacman est en train d'attaquer
      * @return vrai si Pacman peut manger les fantômes,
