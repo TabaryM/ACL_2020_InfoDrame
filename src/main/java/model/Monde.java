@@ -27,6 +27,7 @@ public class Monde {
     private final Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
+    private boolean play = true;
 
     /**
      * Initialisation du monde à partir d'un labyrinthe
@@ -80,18 +81,20 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
-        fantomePisteur.ia();
-        // Déplace tous les personnages
-        for (Personnage p : personnages){
-            p.move();
-        }
-        // Résout les conflits de positions entre les personnages
-        for (Personnage p : personnages){
-            p.attack();
-        }
-        // Réduits les cooldowns des personnages
-        for (Personnage p : personnages){
-            p.live();
+        if (play) {
+            fantomePisteur.ia();
+            // Déplace tous les personnages
+            for (Personnage p : personnages) {
+                p.move();
+            }
+            // Résout les conflits de positions entre les personnages
+            for (Personnage p : personnages) {
+                p.attack();
+            }
+            // Réduits les cooldowns des personnages
+            for (Personnage p : personnages) {
+                p.live();
+            }
         }
     }
 
@@ -163,6 +166,10 @@ public class Monde {
     public void kill(Personnage personnage) {
         System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
         personnage.die();
+    }
+
+    public void setPlay(boolean play) {
+        this.play = play;
     }
 
     /**
