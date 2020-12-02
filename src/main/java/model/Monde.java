@@ -26,6 +26,7 @@ public class Monde {
     private Labyrinthe labyrinthe;
     private final Collection<Personnage> personnages;
     private final PropertyChangeSupport pcs;
+    private boolean play = true;
     private final Random random;
 
     /**
@@ -96,14 +97,16 @@ public class Monde {
      * Calcule la prochaine étape du jeu
      */
     public void nextStep(){
-        // TODO : tester la condition de victoire (plus de pièces sur le plateau)
-        // TODO : tester la condition de défaite (plus de vie disponible)
-        // Déplace tous les personnages
-        for (Personnage p : personnages) p.move();
-        // Résout les conflits de positions entre les personnages
-        for (Personnage p : personnages) p.attack();
-        // Réduits les cooldowns des personnages
-        for (Personnage p : personnages) p.live();
+        if (play) {
+            // TODO : tester la condition de victoire (plus de pièces sur le plateau)
+            // TODO : tester la condition de défaite (plus de vie disponible)
+            // Déplace tous les personnages
+            for (Personnage p : personnages) p.move();
+            // Résout les conflits de positions entre les personnages
+            for (Personnage p : personnages) p.attack();
+            // Réduits les cooldowns des personnages
+            for (Personnage p : personnages) p.live();
+        }
     }
 
     /**
@@ -198,6 +201,10 @@ public class Monde {
     public void kill(Personnage personnage) {
         System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
         personnage.die();
+    }
+
+    public void setPlay(boolean play) {
+        this.play = play;
     }
 
     /**

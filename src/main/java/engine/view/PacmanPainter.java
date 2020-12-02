@@ -3,7 +3,6 @@ package engine.view;
 import dataFactories.ImageFactory;
 import model.Monde;
 import model.Piece;
-import model.personnages.Pacman;
 import model.personnages.Personnage;
 import model.plateau.Case;
 import model.plateau.Labyrinthe;
@@ -16,11 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -41,7 +36,9 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	protected static final int DECALAGE_Y = 10;
 	private int score = 0;
 	private int vie = 3;
+	private boolean mort = false;
 	private BufferedImage laby;
+	private int animMort = 0;
 
 	/**
 	 * appelle constructeur parent
@@ -66,7 +63,13 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		drawFont(graphics2D);
 		drawIcon(graphics2D);
 		drawPiece(monde, graphics2D);
-		drawPersonnage(monde,graphics2D);
+		if (!mort) {
+			drawPersonnage(monde, graphics2D);
+		} else {
+			monde.setPlay(false);
+			drawMort(monde, graphics2D);
+		}
+
 		graphics2D.dispose();
 	}
 
@@ -361,6 +364,27 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 
 	}
 
+	public void drawMort(Monde monde, Graphics2D graphics2D) {
+		BufferedImage image = ImageFactory.getInstance().getPacmanMort().get(animMort);
+		animMort++;
+		BufferedImage imgScale = resize(image, 20, 20);
+		int decalage = (24 - imgScale.getWidth()) / 2;
+		int x = (monde.getPacman().getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;;
+		int y = (monde.getPacman().getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;;
+		graphics2D.drawImage(imgScale, x, y, null);
+
+		if (animMort == ImageFactory.getInstance().getPacmanMort().size()) {
+			mort = false;
+			animMort = 0;
+			monde.getPacman().resetPosition();
+			monde.setPlay(true);
+
+		}
+
+
+	}
+
+
 	/**
 	 * Redimensionne un image au valeur donner en paramètre
 	 * @param img de type BufferedImage
@@ -395,7 +419,11 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			this.score = (Integer) evt.getNewValue();
 
 		} else if (evt.getPropertyName().equals("vie")) {
-			this.vie = (Integer) evt.getNewValue();
+			int newVie = (Integer) evt.getNewValue();
+			if (this.vie > newVie) {
+				mort = true;
+			}
+			this.vie = newVie;
 
 		}
 	}

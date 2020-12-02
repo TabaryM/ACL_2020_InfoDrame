@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageFactory {
     private static final ImageFactory instance = new ImageFactory();
@@ -37,10 +38,11 @@ public class ImageFactory {
     private static BufferedImage fantomePiegeurBas;
     private static BufferedImage fantomePiegeurGauche;
     private static BufferedImage fantomeFaible;
+    private static List<BufferedImage> pacmanMort;
     private static Image pacmanAnim;
 
 
-    public ImageFactory() {
+    private ImageFactory() {
         try {
             BufferedImage sprite = ImageIO.read(new File("src/main/resources/images/maze.png"));
             BufferedImage ghostSprite = ImageIO.read(new File("src/main/resources/images/Ghost.png"));
@@ -74,12 +76,23 @@ public class ImageFactory {
 
             pacmanAnim = new ImageIcon("src/main/resources/images/pacman-eating.gif").getImage();
 
-
+            BufferedImage temp = ImageIO.read(new File("src/main/resources/images/pacman_sprite.png"));
+            chargementAnimationPacmanMort(temp);
 
 
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void chargementAnimationPacmanMort(BufferedImage img) {
+        pacmanMort = new ArrayList<>();
+        pacmanMort.add(img.getSubimage(42, 2, 15, 15));
+        int i = 1;
+        while (i < 220) {
+            pacmanMort.add(img.getSubimage(i, 244, 15, 15));
+            i = i + 20;
         }
     }
 
@@ -189,14 +202,25 @@ public class ImageFactory {
     }
 
     public BufferedImage getPacmanAnim() {
+        BufferedImage image = drawAnim(pacmanAnim);
+        return image;
+    }
+
+
+    public List<BufferedImage> getPacmanMort() {
+        return pacmanMort;
+    }
+
+
+    public BufferedImage drawAnim(Image anim) {
         BufferedImage image = new BufferedImage(
-                pacmanAnim.getWidth(null),
-                pacmanAnim.getHeight(null),
+                anim.getWidth(null),
+                anim.getHeight(null),
                 BufferedImage.TYPE_INT_ARGB);
 
         Graphics g = image.getGraphics();
-        g.drawImage(pacmanAnim, 0, 0, null);
-
+        g.drawImage(anim, 0, 0, null);
+        g.dispose();
         return image;
     }
 

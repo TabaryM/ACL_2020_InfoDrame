@@ -213,7 +213,6 @@ public class Pacman extends Personnage {
 
             case DOWN: {
                 imgRotate = rotateImageByDegrees(img, 90);
-                System.out.println(imgRotate.getWidth());
             }
             break;
 
