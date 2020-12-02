@@ -35,7 +35,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	protected static final int DECALAGE_X = 100;
 	protected static final int DECALAGE_Y = 10;
 	private int score = 0;
-	private int vie = 3;
+	private int vie;
 	private boolean mort = false;
 	private BufferedImage laby;
 	private int animMort = 0;
@@ -135,6 +135,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 * @param monde de type Monde
 	 */
 	public void drawLaby (Monde monde) {
+		vie = monde.getPacman().getVie();
 		Labyrinthe laby = monde.getLabyrinthe();
 		Graphics2D graphics2D = this.laby.createGraphics();
 		for (int ligne = 0;  ligne < laby.getPlateau().length; ligne++) {
