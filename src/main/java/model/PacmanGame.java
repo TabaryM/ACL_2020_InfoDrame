@@ -20,6 +20,7 @@ import static engine.GameEngineGraphical.TIMESTEP;
 public class PacmanGame implements Game {
 	private final Monde monde;
 	private int waiting;
+	private boolean finished;
 
 	/**
 	 * constructeur avec fichier source pour le help
@@ -62,6 +63,7 @@ public class PacmanGame implements Game {
 				System.out.println("VICTOIRE !");
 				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
 				waiting = 5000; // 10 Secondes, c'est peut-être un peu long
+				setFinished(true);
 			} else if (monde.pacmanLost()) {
 				System.out.println("DEFAITE !");
 				monde.setLabyrinthe(new Labyrinthe("src/main/resources/labyClassic.txt"));
@@ -74,13 +76,17 @@ public class PacmanGame implements Game {
 		}
 	}
 
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+
 	/**
 	 * verifier si le jeu est fini
 	 */
 	@Override
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
-		return false;
+		return finished;
 	}
 
 	/**

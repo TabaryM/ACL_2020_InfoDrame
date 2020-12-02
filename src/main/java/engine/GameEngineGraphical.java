@@ -16,6 +16,12 @@ public class GameEngineGraphical {
 	// TODO : gérer dynamiquement le timstep
 	public static final int TIMESTEP = 100;
 
+	private static double multiplier;
+
+	public static int getTimestep(){
+		return (int)(TIMESTEP * (multiplier));
+	}
+
 	/**
 	 * le game a executer
 	 */
@@ -64,6 +70,7 @@ public class GameEngineGraphical {
 		this.menuController = menuController;
 		this.pauseUI = pauseUI;
 		this.pauseController = pauseController;
+		multiplier = 1;
 	}
 
 	/**
@@ -78,7 +85,7 @@ public class GameEngineGraphical {
 		// Boucle d'affichage du menu principal
 		while (!menuController.play()){
 			menuUI.display();
-			Thread.sleep(TIMESTEP);
+			Thread.sleep(getTimestep());
 		}
 
 		// Suppression de la fenêtre du menu principal
@@ -89,25 +96,30 @@ public class GameEngineGraphical {
 		this.gui.paintLaby(this.game.getMonde());
 
 		// boucle de game
-		while (!this.game.isFinished()) {
-			// demande controle utilisateur
-			Cmd c = this.gameController.getCommand();
+		while(true) {
+			while (!this.game.isFinished()) {
+				// demande controle utilisateur
+				Cmd c = this.gameController.getCommand();
 
-			if (c == Cmd.PAUSE){
-				pauseController.changePlay();
-				gameController.setCommand(Cmd.IDLE);
+				if (c == Cmd.PAUSE){
+					pauseController.changePlay();
+					gameController.setCommand(Cmd.IDLE);
+				}
+				while (!pauseController.play()){
+					pauseUI.display();
+					Thread.sleep(getTimestep());
+				}
+				pauseUI.erase();
+				// fait evoluer le game
+				this.game.evolve(c);
+				// affiche le game
+				this.gui.paint(this.game.getMonde());
+				// met en attente
+				Thread.sleep(getTimestep());
 			}
-			while (!pauseController.play()){
-				pauseUI.display();
-				Thread.sleep(TIMESTEP);
-			}
-			pauseUI.erase();
-			// fait evoluer le game
-			this.game.evolve(c);
-			// affiche le game
-			this.gui.paint(this.game.getMonde());
-			// met en attente
-			Thread.sleep(TIMESTEP);
+			multiplier *= 0.1;
+			game.setFinished(false);
+			System.out.println("ON ACCELERE !!!");
 		}
 	}
 

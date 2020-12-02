@@ -87,7 +87,6 @@ public abstract class Fantome extends Personnage {
     @Override
     public void die() {
         int score = getScore()*monde.getPacmanStreak();
-        System.out.println("Pacman gagne "+ score +" points");
         monde.increaseScore(score);
         resetPosition();
         setSleepingTime(6);

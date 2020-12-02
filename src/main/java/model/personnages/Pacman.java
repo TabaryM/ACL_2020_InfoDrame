@@ -20,13 +20,17 @@ import static engine.GameEngineGraphical.TIMESTEP;
  * @author Tabary
  */
 public class Pacman extends Personnage {
-    private int vie = 3 ;
+    public static final int baseVie = 3 ;
+    private int vieGagne;
+    private int viePerdues;
     private double timeToKill = 0.0;
     private int streak = 1;
 
     public Pacman(Monde monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
+        vieGagne = 0;
+        viePerdues = 0;
     }
 
     public int getStreak() {
@@ -165,7 +169,7 @@ public class Pacman extends Personnage {
      * Methode qui decrémente de 1 la vie de pacman
      */
     public void decreasedVie() {
-        this.vie--;
+        this.viePerdues++;
     }
 
     /**
@@ -173,19 +177,27 @@ public class Pacman extends Personnage {
      * @return int vie
      */
     public int getVie() {
-        return vie;
+        return baseVie + vieGagne - viePerdues;
     }
 
     /**
      * Fixe le nombre de vie à Pacman
-     * @param vie int le nombre de vie de Pacman
      */
-    public void setVie(int vie) {
-        this.vie = vie;
+    public void resetVie() {
+        vieGagne = 0;
+        viePerdues = 0;
     }
 
     public void increaseVie(){
-        vie++;
+        vieGagne++;
+    }
+
+    public int getVieGagne() {
+        return vieGagne;
+    }
+
+    public int getViePerdues() {
+        return viePerdues;
     }
 
     public void setDir(Cmd commande) {

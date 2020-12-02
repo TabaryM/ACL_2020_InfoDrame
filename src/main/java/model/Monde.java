@@ -116,10 +116,10 @@ public class Monde {
     public void increaseScore(int i) {
         int scoreOld = this.score;
         score += i;
-        if(score%10000 == 0) {
-            int oldVie = pacman.getVie();
-            pacman.increaseVie();
-            pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
+        int nbViesDejaGagnee = score/10000;
+        System.out.println(nbViesDejaGagnee);
+        if(nbViesDejaGagnee != pacman.getVieGagne()){
+            increaseVie();
         }
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
@@ -151,7 +151,7 @@ public class Monde {
      */
     public void resetPacmanVie() {
         int oldVie = pacman.getVie();
-        pacman.setVie(3);
+        pacman.resetVie();
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
@@ -202,7 +202,6 @@ public class Monde {
      * @param personnage le personnage qui est mort
      */
     public void kill(Personnage personnage) {
-        System.out.println("AAAAAAAAAAAAAHHHHHHHHH " + personnage.getClass().getSimpleName() + " EST MORT ! ");
         personnage.die();
     }
 

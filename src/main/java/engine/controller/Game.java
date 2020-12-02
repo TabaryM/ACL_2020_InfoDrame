@@ -23,6 +23,8 @@ public interface Game {
 	 */
 	public boolean isFinished();
 
+	public void setFinished(boolean b);
+
 	public Monde getMonde();
 
 }
