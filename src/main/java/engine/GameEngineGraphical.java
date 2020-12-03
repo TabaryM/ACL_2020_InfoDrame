@@ -13,7 +13,6 @@ import engine.view.MenuUI;
  */
 public class GameEngineGraphical {
 
-	// TODO : gérer dynamiquement le timstep
 	public static final int TIMESTEP = 100;
 
 	private static double multiplier;
@@ -119,7 +118,6 @@ public class GameEngineGraphical {
 			}
 			multiplier -= multiplier * 0.1;
 			game.setFinished(false);
-			System.out.println("ON ACCELERE !!!");
 		}
 	}
 
