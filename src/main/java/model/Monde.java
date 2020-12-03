@@ -106,24 +106,11 @@ public class Monde {
      * Calcule la prochaine étape du jeu.
      */
     public void nextStep(){
-        if(play)
-        // Déplace tous les personnages
-        {
-            for (Personnage p : personnages){
-                if(p.getPosition().getX().equals(0) && p.getCurrentDirection().equals(Cmd.LEFT) && p.isPacman()){
-                    p.setPosition(getHauteur(),p.getPosition().getY());
-                }
-                else if(p.getPosition().getX().equals(getHauteur()-1) && p.getCurrentDirection().equals(Cmd.RIGHT)&& p.isPacman()){
-                    p.setPosition(-1,p.getPosition().getY());
-                }
-                else if(p.getPosition().getY().equals(0) && p.getCurrentDirection().equals(Cmd.UP)&& p.isPacman()){
-                    p.setPosition(p.getPosition().getX(), getLargeur());
-                }
-                else if(p.getPosition().getY().equals(getLargeur()-1) && p.getCurrentDirection().equals(Cmd.DOWN)&& p.isPacman()){
-                    p.setPosition(p.getPosition().getX(), -1);
-                }
-                p.move();
-            }
+        if(play) {
+            // Téléporte Pacman si il sort de l'écran
+            pacman.teleport();
+            // Déplace tous les personnages
+            for (Personnage p : personnages) p.move();
             // Résout les conflits de positions entre les personnages
             for (Personnage p : personnages) p.attack();
             // Réduits les cooldowns des personnages

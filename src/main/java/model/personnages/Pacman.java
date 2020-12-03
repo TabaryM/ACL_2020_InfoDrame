@@ -142,24 +142,24 @@ public class Pacman extends Personnage {
     public void move() {
         anciennePosition.setCoord(position);
         Case[] voisins = monde.getVoisins(position);
-        switch (currentDirection){
+        switch (currentDirection) {
             case LEFT:
-                if(voisins[0].getCoutAcces() <= 10) {
+                if (voisins[0].getCoutAcces() <= 10) {
                     position.moveLeft();
                 }
                 break;
             case UP:
-                if(voisins[1].getCoutAcces() <= 10) {
+                if (voisins[1].getCoutAcces() <= 10) {
                     position.moveUp();
                 }
                 break;
             case RIGHT:
-                if(voisins[2].getCoutAcces() <= 10) {
+                if (voisins[2].getCoutAcces() <= 10) {
                     position.moveRight();
                 }
                 break;
             case DOWN:
-                if(voisins[3].getCoutAcces() <= 10) {
+                if (voisins[3].getCoutAcces() <= 10) {
                     position.moveDown();
                 }
                 break;
@@ -295,5 +295,24 @@ public class Pacman extends Personnage {
 
         return rotated;
 
+    }
+
+    /**
+     * Méthode qui téléporte Pacman si il traverse le bord de la carte (comme dans le jeu original)
+     */
+    public void teleport() {
+        // Si Pacman est au bord du monde (sans mur), le téléporte de l'autre coté du monde
+        if(getPosition().getX().equals(0) && getCurrentDirection().equals(Cmd.LEFT)){
+            setPosition(monde.getHauteur(),getPosition().getY());
+        }
+        else if(getPosition().getX().equals(monde.getHauteur()-1) && getCurrentDirection().equals(Cmd.RIGHT)){
+            setPosition(-1,getPosition().getY());
+        }
+        else if(getPosition().getY().equals(0) && getCurrentDirection().equals(Cmd.UP)){
+            setPosition(getPosition().getX(), monde.getLargeur());
+        }
+        else if(getPosition().getY().equals(monde.getLargeur()-1) && getCurrentDirection().equals(Cmd.DOWN)){
+            setPosition(getPosition().getX(), -1);
+        }
     }
 }
