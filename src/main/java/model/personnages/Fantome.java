@@ -70,13 +70,13 @@ public abstract class Fantome extends Personnage {
             }
         }
 
-        // Test si le fanôme a échangé de position avec Pacman
+        // Test si le fantôme a échangé de position avec Pacman
         personnages = monde.getPersonnages();
         personnages.remove(this);
         for(Personnage p : personnages){
             if(p.isPacman()) {
                 if(!((Pacman)p).isAggressif()) {
-                    if (p.getPosition().equals(anciennePosition)) {
+                    if (p.getPosition().equals(anciennePosition) && p.anciennePosition.equals(getPosition())) {
                         monde.kill(p);
                     }
                 }

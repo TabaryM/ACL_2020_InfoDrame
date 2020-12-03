@@ -104,7 +104,7 @@ public class Pacman extends Personnage {
             personnages = monde.getPersonnages();
             personnages.remove(this);
             for(Personnage p : personnages){
-                if(p.getPosition().equals(anciennePosition)){
+                if(p.getPosition().equals(anciennePosition) && p.anciennePosition.equals(getPosition())){
                     monde.kill(p);
                     increaseStreak();
                 }
