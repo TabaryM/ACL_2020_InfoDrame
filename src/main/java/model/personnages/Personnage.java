@@ -77,6 +77,11 @@ public abstract class Personnage implements Drawable {
         return 0;
     }
 
+    /**
+     * Méthode permettant de savoir si le personnage observé est Pacman ou non, grâce au score lors de la mort.
+     * Pacman n'augmentant pas le score inexistant des fantômes.
+     * @return si le personnage est PAcman ou non.
+     */
     public boolean isPacman(){
         return getScore() == 0;
     }

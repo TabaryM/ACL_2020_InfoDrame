@@ -33,7 +33,10 @@ public class PacmanController implements GameController {
 		return this.commandeEnCours;
 	}
 
-
+	/**
+	 * Permet de définir une nouvelle commande en cours
+	 * @param cmd la nouvelle commande en cours
+	 */
 	public void setCommand(Cmd cmd) {
 		commandeEnCours = cmd;
 	}

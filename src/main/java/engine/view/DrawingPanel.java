@@ -93,6 +93,10 @@ public class DrawingPanel extends JPanel {
 				getWidth(), getHeight(), null);
 	}
 
+	/**
+	 * Méthode appelant le dessin du monde
+	 * @param monde le monde à dessiner
+	 */
 	public void paintLaby(Monde monde) {
 		this.painter.drawLaby(monde);
 	}
