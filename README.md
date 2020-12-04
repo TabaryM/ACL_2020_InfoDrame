@@ -21,7 +21,39 @@ Mathieu Tabary
 
 Paul-Emile Watelot
 
+## PacSouls
+Venez jouer à notre jeu. Il est bien.
+
+![ClassDiag](conception/images/PacSouls.png)
+
 # Fonctionalitées prévues et découpage par sprint
+
+## Sprint 4
+### Objectifs
+- Tester les classes du model :
+    - Personnages.
+    - Pacman.
+    - Labyrinthe.
+    - Monde.
+    
+- Fonctionnalités optionnelles :
+    - Ajouter de la musique
+    - Ajouter des fruits pour augmenter le score
+    
+- Bug tracker : 
+    - Les fantômes peuvent se superposer.
+    - Pacman peut aller dans l'enclos des fantômes.
+    - Les fantômes sortent tous en même temps de l'enclos.
+    - Pacman se bloque sur le mur si on tourne trop tôt 
+    (mais c'est un peu compliqué à corriger donc on ne va sûrement pas le faire)
+
+<!--
+Soutenance entre le 16 et le 18 (voir teams pour les détails).
+à déposer dimanche soir.
+-->
+
+### Répartition des responsabilité
+
 
 ## Sprint 3
 ### Objectifs
@@ -57,7 +89,6 @@ Corentin et Paul-Emile : 1
 Jordan : 4
 
 Mathieu : 3 et 5
-
 
 ## Backlog Sprint 3 : 
 
