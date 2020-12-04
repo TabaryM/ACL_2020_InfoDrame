@@ -1,7 +1,9 @@
 package model.personnages;
 
+import algorithmes.AEtoile;
 import engine.controller.Cmd;
 import model.Monde;
+import model.plateau.Case;
 import model.plateau.Position;
 
 import java.util.Collection;
@@ -12,13 +14,23 @@ public abstract class Fantome extends Personnage {
 
     protected Position pacmanPosition;
     private double sleepingTime = 0.0;
+    protected AEtoile aEtoile;
 
+    /**
+     * Constructeur de la superclasse des fantômes
+     * @param monde le monde dans lequel le fantôme évolue
+     * @param position la position du fantôme
+     * @param pacmanPosition la position de Pacman
+     */
     public Fantome(Monde monde, Position position, Position pacmanPosition){
         super(monde, position);
         this.pacmanPosition = pacmanPosition;
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
     }
 
+    /**
+     * Méthode abstraite permettant de lancer l'ia des fantômes
+     */
     public abstract void ia();
 
     /**
@@ -42,11 +54,17 @@ public abstract class Fantome extends Personnage {
         }
     }
 
+    /**
+     * Méthode qui diminue le temps de sommeil des fantômes
+     */
     @Override
     public void live() {
         decreaseSleepingTime();
     }
 
+    /**
+     * Méthode permettant de choisir si les fantômes bougent ou non, en fonction du temps de sommeil
+     */
     @Override
     public void move() {
         anciennePosition.setCoord(position);
@@ -56,8 +74,44 @@ public abstract class Fantome extends Personnage {
         }
     }
 
-    protected abstract void moveConcret();
+    /**
+     * Méthode permettant de faire bouger les fantômes
+     */
+    protected void moveConcret(){
+        if(monde.getPacman().isAggressif()){
+            aEtoile.resoudreLabyFuite();
+        }
+        else{
+            aEtoile.resoudreLabyAttaque();
+        }
 
+        Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
+        nextCase(aCase);
+    }
+
+    /**
+     * Méthode permettant de choisir la directin d'un fantôme en fonction de la prochaine case
+     * @param aCase la prochaine case empruntée par le fantôme
+     */
+    public void nextCase(Case aCase) {
+        if (aCase.getX() < position.getX()) {
+            currentDirection = Cmd.LEFT;
+            position.moveLeft();
+        } else if (aCase.getX() > position.getX()) {
+            currentDirection = Cmd.RIGHT;
+            position.moveRight();
+        } else if (aCase.getY() < position.getY()) {
+            currentDirection = Cmd.UP;
+            position.moveUp();
+        } else if (aCase.getY() > position.getY()) {
+            currentDirection = Cmd.DOWN;
+            position.moveDown();
+        }
+    }
+
+    /**
+     * Méthode permettant l'attque des différents personnages
+     */
     @Override
     public void attack() {
         Collection<Personnage> personnages = monde.getPersonnagesAt(position);
@@ -70,13 +124,13 @@ public abstract class Fantome extends Personnage {
             }
         }
 
-        // Test si le fanôme a échangé de position avec Pacman
+        // Test si le fantôme a échangé de position avec Pacman
         personnages = monde.getPersonnages();
         personnages.remove(this);
         for(Personnage p : personnages){
             if(p.isPacman()) {
                 if(!((Pacman)p).isAggressif()) {
-                    if (p.getPosition().equals(anciennePosition)) {
+                    if (p.getPosition().equals(anciennePosition) && p.anciennePosition.equals(getPosition())) {
                         monde.kill(p);
                     }
                 }
@@ -84,25 +138,38 @@ public abstract class Fantome extends Personnage {
         }
     }
 
+    /**
+     * Méthode permettant la mort des différents personnages
+     */
     @Override
     public void die() {
         int score = getScore()*monde.getPacmanStreak();
-        System.out.println("Pacman gagne "+ score +" points");
         monde.increaseScore(score);
         resetPosition();
         setSleepingTime(6);
     }
 
+    /**
+     * Méthode permettant de reset la position des personnages à la mort de ceux-ci, ou lors des victoires et défaites
+     */
     @Override
     public void resetPosition() {
         setPosition(monde.getPosSpawnFantome());
     }
 
+    /**
+     * Méthode permettant d'obtenir le score d'un fantôme
+     * @return le score d'un fantôme
+     */
     @Override
     public int getScore() {
         return 200;
     }
 
+    /**
+     * Méthode permettant de savoir si un fantôme est endormi ou non
+     * @return l'état du fantôme
+     */
     protected boolean isSleeping(){
         return sleepingTime > 0.000001;
     }

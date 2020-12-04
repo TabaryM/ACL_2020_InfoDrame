@@ -1,54 +1,50 @@
 package model.personnages;
 
-import algorithmes.AEtoile;
+import algorithmes.AEtoilePisteur;
 import dataFactories.ImageFactory;
-import engine.controller.Cmd;
 import model.Monde;
-import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
 public class FantomePisteur extends Fantome {
 
-    private AEtoile aEtoile;
-
+    /**
+     *
+     * @param monde le monde dans lequel le fantôme évolue
+     * @param position la position du fantôme
+     * @param pacmanPosition la position de Pacman
+     */
     public FantomePisteur(Monde monde, Position position, Position pacmanPosition) {
         super(monde, position, pacmanPosition);
     }
 
+    /**
+     * Méthode permettant de lancer l'IA A*
+     */
     @Override
     public void ia() {
-        aEtoile = new AEtoile(monde, pacmanPosition, this.position);
-    }
-
-    @Override
-    public void moveConcret() {
-        if(monde.getPacman().isAggressif()){
-            aEtoile.resoudreLabyFuite();
-        }
-        else{
-            aEtoile.resoudreLabyAttaque();
-        }
-
-        Case aCase = monde.getCaseAt(aEtoile.getProchaineCaseDuChemin());
-        if (aCase.getX() < position.getX()){
-            currentDirection = Cmd.LEFT;
-            position.moveLeft();
-        } else if (aCase.getX() > position.getX()){
-            currentDirection = Cmd.RIGHT;
-            position.moveRight();
-        } else if (aCase.getY() < position.getY()){
-            currentDirection = Cmd.UP;
-            position.moveUp();
-        } else if (aCase.getY() > position.getY()){
-            currentDirection = Cmd.DOWN;
-            position.moveDown();
-        }
+        aEtoile = new AEtoilePisteur(monde, pacmanPosition, this.position);
     }
 
     @Override
     public BufferedImage getImage() {
-        return ImageFactory.getInstance().getFantomePisteur();
+        BufferedImage img;
+
+        switch (this.currentDirection) {
+
+            case UP: img = ImageFactory.getInstance().getFantomePisteurHaut();
+            break;
+
+            case DOWN: img = ImageFactory.getInstance().getFantomePisteurBas();
+            break;
+
+            case LEFT: img = ImageFactory.getInstance().getFantomePisteurGauche();
+            break;
+
+            default: img = ImageFactory.getInstance().getFantomePisteurDroite();
+        }
+
+        return img;
     }
 }

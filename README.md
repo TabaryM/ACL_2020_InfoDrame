@@ -21,7 +21,39 @@ Mathieu Tabary
 
 Paul-Emile Watelot
 
+## PacSouls
+Venez jouer à notre jeu. Il est bien.
+
+![ClassDiag](conception/images/PacSouls.png)
+
 # Fonctionalitées prévues et découpage par sprint
+
+## Sprint 4
+### Objectifs
+- Tester les classes du model :
+    - Personnages.
+    - Pacman.
+    - Labyrinthe.
+    - Monde.
+    
+- Fonctionnalités optionnelles :
+    - Ajouter de la musique
+    - Ajouter des fruits pour augmenter le score
+    
+- Bug tracker : 
+    - Les fantômes peuvent se superposer.
+    - Pacman peut aller dans l'enclos des fantômes.
+    - Les fantômes sortent tous en même temps de l'enclos.
+    - Pacman se bloque sur le mur si on tourne trop tôt 
+    (mais c'est un peu compliqué à corriger donc on ne va sûrement pas le faire)
+
+<!--
+Soutenance entre le 16 et le 18 (voir teams pour les détails).
+à déposer dimanche soir.
+-->
+
+### Répartition des responsabilité
+
 
 ## Sprint 3
 ### Objectifs
@@ -47,17 +79,75 @@ Paul-Emile Watelot
 - Fonctionnalités optionnelles :
     - Ajouter de la musique
     - Ajouter des fruits pour augmenter le score
-    - Empêcher les échanges de places entre un fantôme et Pacman <!-- Mémoire de la position avant déplacement-->
+    - Empêcher les échanges de places entre un fantôme et Pacman
+    - Augmenter la difficulté
 
-<!--
-Idée : augmenter la difficulté
--->
+
 ### Répartition des responsabilité
 Corentin et Paul-Emile : 1
 
 Jordan : 4
 
 Mathieu : 3 et 5
+
+## Backlog Sprint 3 : 
+
+### Fonctionnalités implémentées
+- IA fantômes : 
+    - Le fantôme dit "peureux" bloque les issues quand vous êtes encerclé
+    , mais se suicide quand il peut
+    - Les fantômes piégeurs essaient de vous encercler.
+    
+- Le monde est maintenant similaire à un tore
+(si vous sortez par un côté, vous reviendrez de l'autre côté).
+
+- Animations : 
+    - On voit Pacman manger en se déplaçant.
+    - Les fantômes regardent dans la direction où ils se déplacent.
+    - À la mort de Pacman, on peut le voir disparaître `Mr. Stark! I don't feel so good...`
+
+- Gameplay :
+    - Si Pacman perd toutes ses vies, c'est Game Over : 
+    le monde est réinitialisé et la partie se relance au bout de 5 secondes.
+    - Si Pacman mange toutes les pièces, c'est bien, vous avez gagné, mais ce n'est pas fini :
+    Le monde est réinitialisé et le tempo est diminué (donc tout va plus vite).
+    - Si les fantômes tuent Pacman
+    , ils sont téléportés dans leur enclos pour qu'ils ne le tuent pas en boucle.
+    - Pacman gagne une vie tous les 5000 points de score gagné
+    (ça aide, mais il ne faut pas se reposer sur ses acquis)
+
+- Bug fixes : 
+    - Deux ennemis ne peuvent plus échanger de place impunément (l'un des deux doit mourir).
+    
+- Bugs trouvés : 
+    - Si plusieurs fantômes tuent Pacman au même moment
+    , il perd autant de vies que d'attaques subies.
+
+### Points positifs
+- Chacun a fait ses parties en temps prévus.
+- Rien de mieux par rapport a avant.
+
+### Point Négatifs
+- Rien de pire qu'avant.
+
+
+### Screenshots
+
+There is something wrong, I can feel it!
+
+![ClassDiag](conception/images/encerclement.png)
+
+Vous pouvez passer de l'autre côté du monde pour fuir les fantômes
+
+(Avant)
+
+![ClassDiag](conception/images/portail_1.png)
+
+
+(Après)
+
+![ClassDiag](conception/images/portail_2.png)
+
 
 ## Sprint 2
 ### Objectifs
@@ -95,8 +185,7 @@ Cas de déplacement avec attaque possible :
 ![ClassDiag](conception/diagrammes/sequence/UserPlayingAttaque.svg)
 
 ## Backlog Sprint 2 : 
-<!-- TODO ajouter des images 
--->
+
 ### Fonctionnalités implémentées
 - Les fantômes apparaissent dans l'enclos de départ. (1.1)
 - Le fantôme pisteur va vers Pacman en suivant un des plus court chemin. (1.2.1)

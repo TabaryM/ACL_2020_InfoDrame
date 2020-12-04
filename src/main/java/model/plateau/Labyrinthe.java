@@ -109,6 +109,11 @@ public class Labyrinthe {
         return plateau[0][0];
     }
 
+    /**
+     * Retourne le caractère à la case demandé
+     * @param position la position de la case demandée
+     * @return char le caractère à la case du plateau
+     */
     public Case getCasePlateau(Position position){
         return getCasePlateau(position.getX(), position.getY());
     }
@@ -160,5 +165,14 @@ public class Labyrinthe {
 
     public Map<Position, Piece> getPieces() {
         return pieces;
+    }
+
+    /**
+     * Test si le labyrinthe contient toujours des pièces
+     * @return true si le labyrinthe a 0 pièces,
+     *         false sinon.
+     */
+    public boolean noPiecesLefts(){
+        return pieces.size() == 0;
     }
 }

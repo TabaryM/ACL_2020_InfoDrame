@@ -3,7 +3,6 @@ package engine.view;
 import dataFactories.ImageFactory;
 import model.Monde;
 import model.Piece;
-import model.personnages.Pacman;
 import model.personnages.Personnage;
 import model.plateau.Case;
 import model.plateau.Labyrinthe;
@@ -16,11 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -40,8 +35,10 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	protected static final int DECALAGE_X = 100;
 	protected static final int DECALAGE_Y = 10;
 	private int score = 0;
-	private int vie = 3;
+	private int vie;
+	private boolean mort = false;
 	private BufferedImage laby;
+	private int animMort = 0;
 
 	/**
 	 * appelle constructeur parent
@@ -66,7 +63,20 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		drawFont(graphics2D);
 		drawIcon(graphics2D);
 		drawPiece(monde, graphics2D);
-		drawPersonnage(monde,graphics2D);
+		if (!mort) {
+			drawPersonnage(monde, graphics2D);
+		} else {
+			monde.setPlay(false);
+			drawMort(monde, graphics2D);
+		}
+		if (monde.pacmanLost()) {
+			drawFontTemp(graphics2D, "Defaite !!");
+		}
+
+		if (monde.pacmanWon()) {
+			drawFontTemp(graphics2D, "Victoire !!");
+		}
+
 		graphics2D.dispose();
 	}
 
@@ -86,6 +96,20 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
 		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
 	}
+
+	public void drawFontTemp(Graphics2D graphics2D, String str) {
+		int height = HEIGHT/2;
+		int width = WIDTH/4;
+		Color font = new Color(255, 255, 0);
+
+		graphics2D.setColor(font);
+		graphics2D.setFont(graphics2D.getFont().deriveFont(100f));
+		graphics2D.drawString(str, width, height);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP);
+		graphics2D.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_NORMALIZE);
+	}
+
 
 	/**
 	 * Dessine le nombre de vie du joueur sur l'image
@@ -111,6 +135,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 * @param monde de type Monde
 	 */
 	public void drawLaby (Monde monde) {
+		vie = monde.getPacman().getVie();
 		Labyrinthe laby = monde.getLabyrinthe();
 		Graphics2D graphics2D = this.laby.createGraphics();
 		for (int ligne = 0;  ligne < laby.getPlateau().length; ligne++) {
@@ -328,7 +353,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		for (Personnage personnage : personnages) {
 
 			spritePerso = personnage.getImage();
-			if (monde.getPacman().isAggressif() && spritePerso.getWidth() == 160) {
+			if (monde.getPacman().isAggressif() && !personnage.isPacman()) {
 				spritePerso = ImageFactory.getInstance().getFantomeFaible();
 			}
 			BufferedImage persoScale = resize(spritePerso, 20, 20);
@@ -360,6 +385,27 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 		}
 
 	}
+
+	public void drawMort(Monde monde, Graphics2D graphics2D) {
+		BufferedImage image = ImageFactory.getInstance().getPacmanMort().get(animMort);
+		animMort++;
+		BufferedImage imgScale = resize(image, 20, 20);
+		int decalage = (24 - imgScale.getWidth()) / 2;
+		int x = (monde.getPacman().getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;;
+		int y = (monde.getPacman().getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;;
+		graphics2D.drawImage(imgScale, x, y, null);
+
+		if (animMort == ImageFactory.getInstance().getPacmanMort().size()) {
+			mort = false;
+			animMort = 0;
+			monde.resetAllPosition();
+			monde.setPlay(true);
+
+		}
+
+
+	}
+
 
 	/**
 	 * Redimensionne un image au valeur donner en paramètre
@@ -395,7 +441,11 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 			this.score = (Integer) evt.getNewValue();
 
 		} else if (evt.getPropertyName().equals("vie")) {
-			this.vie = (Integer) evt.getNewValue();
+			int newVie = (Integer) evt.getNewValue();
+			if (this.vie > newVie) {
+				mort = true;
+			}
+			this.vie = newVie;
 
 		}
 	}
