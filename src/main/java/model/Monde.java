@@ -53,6 +53,7 @@ public class Monde {
         this.pcs = new PropertyChangeSupport(this);
     }
 
+    // TODO : tester
     /**
      * Change le labyrinthe du monde
      * @param labyrinthe le nouveau labyrinthe du monde
@@ -73,6 +74,7 @@ public class Monde {
         pcs.addPropertyChangeListener("vie", l);
     }
 
+    // TODO : tester
     /**
      * Méthode permettant d'obtenir la liste des voisins associés à une position.
      * @param position la position pour laquelle on souhaite obtenir les voisins.
@@ -118,6 +120,7 @@ public class Monde {
         }
     }
 
+    // TODO : tester
     /**
      * Méthode permettant d'augmenter le score du joueur en fonction des pièces récupérées.
      * @param i les points ajoutés au score lorsque le joueur récupère une pièce.
@@ -133,6 +136,7 @@ public class Monde {
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
 
+    // TODO : tester
     /**
      * Méthode qui enlève une vie au joueur (pacman).
      */
@@ -143,10 +147,12 @@ public class Monde {
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
+    // TODO : tester
     public void resetAllPosition(){
         for(Personnage p : personnages) p.resetPosition();
     }
 
+    // TODO : tester
     /**
      * Méthode qui ajoute une vie au joueur (pacman)
      */
@@ -156,6 +162,7 @@ public class Monde {
         pcs.firePropertyChange("vie", oldVie, this.pacman.getVie());
     }
 
+    // TODO : tester
     /**
      * Réinitialise le nombre de vie de Pacman
      */
@@ -177,6 +184,7 @@ public class Monde {
         return labyrinthe.getCasePlateau(position);
     }
 
+    // TODO : tester
     /**
      * Regarde à la position passée en paramètre.
      * S'il y a une pièce, la retire du labyrinthe.
@@ -192,6 +200,7 @@ public class Monde {
         return piece;
     }
 
+    // TODO : tester
     /**
      * Méthode listant les personnages à une position.
      * @param position la position où on regarde.
@@ -219,6 +228,7 @@ public class Monde {
         this.play = play;
     }
 
+    // TODO : tester
     /**
      * Retourne une position de spawn pour un fantôme aléatoire parmis toutes disponible.
      * @return Position une position de spawn de fantôme.
@@ -228,6 +238,7 @@ public class Monde {
         return new Position(positions.get(random.nextInt(positions.size())));
     }
 
+    // TODO : tester
     /**
      * Méthode permettant d'obtenir la position initiale (lors du chargement du labyrinthe) de Pacman.
      * @return la position initiale de Pacman.

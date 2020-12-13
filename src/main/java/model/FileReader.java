@@ -24,6 +24,7 @@ public class FileReader {
         return instance;
     }
 
+    // TODO : tester
     /**
      * Construit le plateau de jeu à partir d'un fichier
      * @param chemin le chemin du fichier à lire

@@ -64,6 +64,7 @@ public abstract class Personnage implements Drawable {
         return currentDirection;
     }
 
+    // TODO : tester mock
     public abstract void resetPosition();
 
     public abstract void die();

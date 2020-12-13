@@ -69,6 +69,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         }
     }
 
+    // TODO : tester
     /**
      * Procédure qui permet à Pacman de ramasser une pièce.
      * Si une pièce est ramassée, la retire du monde.
@@ -99,6 +100,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         timeToKill += val * 1000;
     }
 
+    // TODO : tester mock
     /**
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
@@ -124,6 +126,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         }
     }
 
+    // TODO : tester
     /**
      * Méthode augmentant le multiplicateur de score issue de la série d'élimination des fantômes
      */
@@ -133,6 +136,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         }
     }
 
+    // TODO : tester mock
     /**
      * Procédure de déplacement du joueur.
      * Si la case devant Pacman est un couloir Pacman se déplacera sur cette case,
@@ -166,6 +170,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         }
     }
 
+    // TODO : tester mock
     /**
      * Ré-initialisation de la position de Pacman
      */
@@ -297,6 +302,7 @@ public class Pacman extends Personnage implements PacmanInterface {
 
     }
 
+    // TODO : tester mock
     /**
      * Méthode qui téléporte Pacman si il traverse le bord de la carte (comme dans le jeu original)
      */

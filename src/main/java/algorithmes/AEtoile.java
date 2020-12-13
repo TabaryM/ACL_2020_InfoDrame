@@ -38,6 +38,7 @@ public abstract class AEtoile {
         initAEtoile();
     }
 
+    // TODO : tester
     /**
      * Initialisation de l'algorithme A*.
      */
@@ -61,6 +62,7 @@ public abstract class AEtoile {
         }
     }
 
+    // TODO : tester mock
     /**
      * Appel de la résolution du labyrinthe lorsque les fantômes attaquent.
      */
@@ -68,12 +70,14 @@ public abstract class AEtoile {
         resoudreAEtoile(pacmanPosition);
     }
 
+    // TODO : tester
     /**
      * Résolution de la recherche de chemin de A* par les fantômes.
      * @param but le but à atteindre (ici Pacman).
      */
     public abstract void resoudreAEtoile(Position but);
 
+    // TODO : tester mock
     /**
      * Résolution du labyrinthe lorsque les fantômes sont vulnérables face à Pacman.
      */
@@ -101,6 +105,7 @@ public abstract class AEtoile {
         return (int) Math.sqrt((Math.pow(Math.abs(a.getX()-b.getX()),2)+Math.pow(Math.abs(a.getY()-b.getY()),2)));
     }
 
+    // TODO : tester
     /**
      * Reconstruction du chemin à emprunter par le fantôme pour atteindre le Pacman.
      * @param courant la position actuellement regardée.
@@ -114,6 +119,7 @@ public abstract class AEtoile {
         }
     }
 
+    // TODO : tester
     /**
      * Méthode permettant d'obtenir la prochaine case que le fantôme va emprunter.
      * @return la prochaine case empruntée par le fantôme.
