@@ -1,14 +1,11 @@
-package model.personnages;
-
+/*
 import engine.controller.Cmd;
-import exception.PositionException;
 import model.Monde;
 import model.MondeInterface;
+import model.personnages.Pacman;
 import model.plateau.Labyrinthe;
 import model.plateau.LabyrintheInterface;
 import model.plateau.Position;
-import org.easymock.EasyMock;
-import org.easymock.IAnswer;
 import org.junit.jupiter.api.*;
 
 import static org.easymock.EasyMock.*;
@@ -157,4 +154,4 @@ class PacmanTest {
         pacman.move();
         assertEquals(new Position(4, 0), pacman.position);
     }
-}
+}*/
