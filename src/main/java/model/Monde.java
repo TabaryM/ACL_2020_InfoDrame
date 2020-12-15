@@ -24,6 +24,7 @@ public class Monde implements MondeInterface {
     private final PropertyChangeSupport pcs;
     private boolean play = true;
     private final Random random;
+    public static int SCORE_TO_GET_FOR_NEW_LIFE = 5000;
 
     /**
      * Initialisation du monde à partir d'un labyrinthe.
@@ -126,9 +127,9 @@ public class Monde implements MondeInterface {
         int scoreOld = this.score;
         score += i;
         scoreVie += i;
-        if(scoreVie >= 10000){
+        if(scoreVie >= SCORE_TO_GET_FOR_NEW_LIFE){
             increaseVie();
-            scoreVie -= 10000;
+            scoreVie -= SCORE_TO_GET_FOR_NEW_LIFE;
         }
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
