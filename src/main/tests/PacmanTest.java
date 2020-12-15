@@ -1,4 +1,3 @@
-/*
 import engine.controller.Cmd;
 import model.Monde;
 import model.MondeInterface;
@@ -61,21 +60,21 @@ class PacmanTest {
 
         // On vérifie que la position dans le mock est acceptée par Pacman
         pacman = new Pacman(monde, posInitPacman);
-        assertEquals(posInitPacman, pacman.position);
+        assertEquals(posInitPacman, pacman.getPosition());
 
         // On planifie le mock
         expect(monde.getPosInitPacman()).andReturn(posInitPacman);
 
         replay(monde);
         // On change la position pour être sûre que le reset n'est pas une procédure vide
-        pacman.position.setY(1);
-        pacman.position.setX(5);
+        pacman.getPosition().setY(1);
+        pacman.getPosition().setX(5);
 
         // On reset et on vérifie que tout va bien
         pacman.resetPosition();
         verify(monde);
 
-        assertEquals(posInitPacman, pacman.position);
+        assertEquals(posInitPacman, pacman.getPosition());
     }
 
     @Test
@@ -86,7 +85,7 @@ class PacmanTest {
         replay(monde);
         pacman.resetPosition();
         verify(monde);
-        assertNull(pacman.position);
+        assertNull(pacman.getPosition());
         // TODO : faire en sorte de ne jamais avoir de jeu si Pacman n'a pas de position initiale dans le labyrinthe
     }
 
@@ -106,35 +105,35 @@ class PacmanTest {
     void teleportRightEnMarchantVersLeBas(){
         // Début mise en place pour un bon teleport
         pacman.setDir(Cmd.DOWN);
-        pacman.position.moveDown();
+        pacman.getPosition().moveDown();
         // Fin mise en place
 
-        Position position = new Position(pacman.position);
+        Position position = new Position(pacman.getPosition());
         pacman.teleport();
         position.setY(0);
-        pacman.position.moveDown();
-        assertEquals(position, pacman.position);
+        pacman.getPosition().moveDown();
+        assertEquals(position, pacman.getPosition());
     }
 
     @Test
     void teleportRightEnMarchantVersLaDroite(){
         // Début mise en place pour un bon teleport
         pacman.setDir(Cmd.RIGHT);
-        pacman.position.moveRight();
+        pacman.getPosition().moveRight();
         // Fin mise en place
 
-        Position position = new Position(pacman.position);
+        Position position = new Position(pacman.getPosition());
         pacman.teleport();
         position.setX(0);
-        pacman.position.moveRight();
-        assertEquals(position, pacman.position);
+        pacman.getPosition().moveRight();
+        assertEquals(position, pacman.getPosition());
     }
 
     @Test
     void teleportRightLoinDeBords() {
-        Position position = new Position(pacman.position);
+        Position position = new Position(pacman.getPosition());
         pacman.teleport();
-        assertEquals(position, pacman.position);
+        assertEquals(position, pacman.getPosition());
     }
 
     @Test
@@ -152,6 +151,6 @@ class PacmanTest {
         pacman.setDir(Cmd.DOWN);
         pacman.teleport();
         pacman.move();
-        assertEquals(new Position(4, 0), pacman.position);
+        assertEquals(new Position(4, 0), pacman.getPosition());
     }
-}*/
+}

@@ -133,7 +133,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * Initialement et par défaut, vaut 1.
      * Quand Pacman tue un fantôme, est multiplié par 2, jusqu'à une limite maximum de 8.
      */
-    protected void increaseStreak() {
+    public void increaseStreak() {
         if(streak < 8){
             streak *= 2;
         }

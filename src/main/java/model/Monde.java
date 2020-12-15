@@ -35,9 +35,9 @@ public class Monde implements MondeInterface {
         personnages = new ArrayList<>();
         pacman = new Pacman(this, labyrinthe.getPositionInitialPacman());
         personnages.add(pacman);
-        //personnages.add(new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition()));
-        //personnages.add(new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "droite"));
-        //personnages.add(new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "gauche"));
+        personnages.add(new FantomePisteur(this, getPosSpawnFantome(), pacman.getPosition()));
+        personnages.add(new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "droite"));
+        personnages.add(new FantomePiegeur(this, getPosSpawnFantome(), pacman.getPosition(), "gauche"));
         personnages.add(new FantomePeureux(this, getPosSpawnFantome(), pacman.getPosition()));
         score = 0;
         scoreVie = 0;
