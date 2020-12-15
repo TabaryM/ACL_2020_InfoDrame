@@ -43,8 +43,24 @@ class PacmanTest {
         for(int i = 0; i < 5; i++) {
             if((int) Math.pow(streak, i) < 8) {
                 assertSame((int) Math.pow(streak, i), pacman.getStreak());
+            } else {
+                assertSame(8, pacman.getStreak());
             }
             pacman.increaseStreak();
+        }
+    }
+
+    // Test Right et Boundary
+    @RepeatedTest(6)
+    void increaseStreak(RepetitionInfo repetitionInfo) {
+        int streak = 2;
+        for(int i = 0; i < repetitionInfo.getCurrentRepetition()-1; i++){
+            pacman.increaseStreak();
+        }
+        if((int) Math.pow(streak, repetitionInfo.getCurrentRepetition()-1) < 8) {
+            assertSame((int) Math.pow(streak, repetitionInfo.getCurrentRepetition()-1), pacman.getStreak());
+        } else {
+            assertSame(8, pacman.getStreak());
         }
     }
 
