@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * @author Tabary
  */
-public class Labyrinthe {
+public class Labyrinthe implements LabyrintheInterface {
     private final Case[][] plateau;
     private Position posInitPacman;
     private final List<Position> posInitFantome;
@@ -104,6 +104,7 @@ public class Labyrinthe {
      * @param y coordonnée en ordonnée
      * @return char le caractère à la case du plateau
      */
+    @Override
     public Case getCasePlateau(int x, int y){
         if(y < plateau.length  && x < plateau[0].length  && x >= 0 && y >= 0){
             return plateau[y][x];
@@ -117,6 +118,7 @@ public class Labyrinthe {
      * @param position la position de la case demandée
      * @return char le caractère à la case du plateau
      */
+    @Override
     public Case getCasePlateau(Position position){
         return getCasePlateau(position.getX(), position.getY());
     }
@@ -125,6 +127,7 @@ public class Labyrinthe {
      * Retourne la position initiale du joueur
      * @return une copie profonde de la position initiale du joueur
      */
+    @Override
     public Position getPositionInitialPacman() {
         return new Position(posInitPacman);
     }
@@ -133,6 +136,7 @@ public class Labyrinthe {
      * Retourne la liste des positions initiales des fantômes
      * @return copie profonde (à vérifier) de la liste de position initiale
      */
+    @Override
     public List<Position> getPosInitFantome(){
         return new ArrayList<>(posInitFantome);
     }
@@ -143,6 +147,7 @@ public class Labyrinthe {
      * @param position position de la piece
      * @return la pièce se trouvant à la position demandée.
      */
+    @Override
     public Piece getPiece(Position position){
         return pieces.get(position);
     }
@@ -152,22 +157,27 @@ public class Labyrinthe {
      * Méthode permettant de supprimer les pièces que PacMan récupère, une par une.
      * @param pos Position de la piece à retirer
      */
+    @Override
     public void deletePiece(Position pos){
         pieces.remove(pos);
     }
 
+    @Override
     public int getLargeur() {
         return plateau.length;
     }
 
+    @Override
     public int getHauteur() {
         return plateau[0].length;
     }
 
+    @Override
     public Case[][] getPlateau() {
         return plateau;
     }
 
+    @Override
     public Map<Position, Piece> getPieces() {
         return pieces;
     }
@@ -177,6 +187,7 @@ public class Labyrinthe {
      * @return true si le labyrinthe a 0 pièces,
      *         false sinon.
      */
+    @Override
     public boolean noPiecesLefts(){
         return pieces.size() == 0;
     }

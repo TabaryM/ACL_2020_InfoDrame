@@ -3,9 +3,9 @@ package engine.view;
 import dataFactories.ImageFactory;
 import model.Monde;
 import model.Piece;
-import model.personnages.Personnage;
+import model.personnages.PersonnageInterface;
 import model.plateau.Case;
-import model.plateau.Labyrinthe;
+import model.plateau.LabyrintheInterface;
 import model.plateau.Position;
 
 import javax.imageio.ImageIO;
@@ -136,7 +136,7 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 */
 	public void drawLaby (Monde monde) {
 		vie = monde.getPacman().getVie();
-		Labyrinthe laby = monde.getLabyrinthe();
+		LabyrintheInterface laby = monde.getLabyrinthe();
 		Graphics2D graphics2D = this.laby.createGraphics();
 		for (int ligne = 0;  ligne < laby.getPlateau().length; ligne++) {
 			for (int colonne = 0; colonne < laby.getPlateau()[ligne].length; colonne++) {
@@ -348,18 +348,18 @@ public class PacmanPainter implements GamePainter, PropertyChangeListener {
 	 */
 	private void drawPersonnage(Monde monde, Graphics2D graphics2D) {
 		BufferedImage spritePerso;
-		Collection<Personnage> personnages = monde.getPersonnages();
+		Collection<PersonnageInterface> personnageInterfaces = monde.getPersonnages();
 
-		for (Personnage personnage : personnages) {
+		for (PersonnageInterface personnageInterface : personnageInterfaces) {
 
-			spritePerso = personnage.getImage();
-			if (monde.getPacman().isAggressif() && !personnage.isPacman()) {
+			spritePerso = personnageInterface.getImage();
+			if (monde.getPacman().isAggressif() && !personnageInterface.isPacman()) {
 				spritePerso = ImageFactory.getInstance().getFantomeFaible();
 			}
 			BufferedImage persoScale = resize(spritePerso, 20, 20);
 			int decalage = (24 - persoScale.getWidth()) / 2;
-			int posx = (personnage.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
-			int posy = (personnage.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
+			int posx = (personnageInterface.getPosition().getX() * SPRITE_SIZE) + DECALAGE_X + decalage;
+			int posy = (personnageInterface.getPosition().getY() * SPRITE_SIZE) + DECALAGE_Y + decalage;
 			graphics2D.drawImage(persoScale, posx, posy, null);
 		}
 

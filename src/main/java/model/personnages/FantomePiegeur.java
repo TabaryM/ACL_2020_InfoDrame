@@ -2,12 +2,12 @@ package model.personnages;
 
 import algorithmes.AEtoilePiegeur;
 import dataFactories.ImageFactory;
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
-public class FantomePiegeur extends Fantome {
+public class FantomePiegeur extends Fantome implements FantomePiegeurInterface {
 
     private final String direction;
 
@@ -18,7 +18,7 @@ public class FantomePiegeur extends Fantome {
      * @param pacmanPosition la position de Pacman
      * @param direction
      */
-    public FantomePiegeur(Monde monde, Position position, Position pacmanPosition, String direction) {
+    public FantomePiegeur(MondeInterface monde, Position position, Position pacmanPosition, String direction) {
         super(monde, position, pacmanPosition);
         this.direction = direction;
     }
@@ -31,10 +31,12 @@ public class FantomePiegeur extends Fantome {
         aEtoile = new AEtoilePiegeur(monde, pacmanPosition, this.position, direction);
     }
 
+    @Override
     public String getDirection() {
         return direction;
     }
 
+    @Override
     public BufferedImage getImage() {
         BufferedImage img;
 

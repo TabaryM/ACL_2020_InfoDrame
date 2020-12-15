@@ -2,7 +2,7 @@ package model.personnages;
 
 import algorithmes.AEtoile;
 import engine.controller.Cmd;
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Case;
 import model.plateau.Position;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
 
 import static engine.GameEngineGraphical.TIMESTEP;
 
-public abstract class Fantome extends Personnage {
+public abstract class Fantome extends Personnage implements FantomeInterface {
 
     protected Position pacmanPosition;
     private double sleepingTime = 0.0;
@@ -22,21 +22,17 @@ public abstract class Fantome extends Personnage {
      * @param position la position du fantôme
      * @param pacmanPosition la position de Pacman
      */
-    public Fantome(Monde monde, Position position, Position pacmanPosition){
+    public Fantome(MondeInterface monde, Position position, Position pacmanPosition){
         super(monde, position);
         this.pacmanPosition = pacmanPosition;
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est vers la droite
     }
 
     /**
-     * Méthode abstraite permettant de lancer l'ia des fantômes
-     */
-    public abstract void ia();
-
-    /**
      * Fixe une durée de pause pour le fantôme
      * @param time le temps (en seconde) durant lequel le fantôme sera à l'arrêt
      */
+    @Override
     public void setSleepingTime(double time){
         sleepingTime = time * 1000;
     }
@@ -46,6 +42,7 @@ public abstract class Fantome extends Personnage {
      * Décrémente avec le temps de pas de jeu entre deux appels de la fonction nextStep()
      * Ce temps est accessible à GameEngineGraphical.
      */
+    @Override
     public void decreaseSleepingTime() {
         if(isSleeping()){
             sleepingTime -= TIMESTEP;
@@ -95,6 +92,7 @@ public abstract class Fantome extends Personnage {
      * Méthode permettant de choisir la direction d'un fantôme en fonction de la prochaine case
      * @param aCase la prochaine case empruntée par le fantôme
      */
+    @Override
     public void nextCase(Case aCase) {
         if (aCase.getX() < position.getX()) {
             currentDirection = Cmd.LEFT;
@@ -117,23 +115,23 @@ public abstract class Fantome extends Personnage {
      */
     @Override
     public void attack() {
-        Collection<Personnage> personnages = monde.getPersonnagesAt(position);
-        personnages.remove(this);
-        for (Personnage p : personnages){
+        Collection<PersonnageInterface> personnageInterfaces = monde.getPersonnagesAt(position);
+        personnageInterfaces.remove(this);
+        for (PersonnageInterface p : personnageInterfaces){
             if(p.isPacman()) {
-                if(!((Pacman)p).isAggressif()) {
+                if(!((PacmanInterface)p).isAggressif()) {
                     monde.kill(p);
                 }
             }
         }
 
         // Test si le fantôme a échangé de position avec Pacman
-        personnages = monde.getPersonnages();
-        personnages.remove(this);
-        for(Personnage p : personnages){
+        personnageInterfaces = monde.getPersonnages();
+        personnageInterfaces.remove(this);
+        for(PersonnageInterface p : personnageInterfaces){
             if(p.isPacman()) {
-                if(!((Pacman)p).isAggressif()) {
-                    if (p.getPosition().equals(anciennePosition) && p.anciennePosition.equals(getPosition())) {
+                if(!((PacmanInterface)p).isAggressif()) {
+                    if (p.getPosition().equals(anciennePosition) && p.getAnciennePosition().equals(getPosition())) {
                         monde.kill(p);
                     }
                 }

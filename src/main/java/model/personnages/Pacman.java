@@ -2,8 +2,8 @@ package model.personnages;
 
 import dataFactories.ImageFactory;
 import engine.controller.Cmd;
-import exception.PacmanException;
-import model.Monde;
+import exception.*;
+import model.MondeInterface;
 import model.Piece;
 import model.plateau.Case;
 import model.plateau.Position;
@@ -11,7 +11,6 @@ import model.plateau.Position;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-
 import java.util.Collection;
 
 import static engine.GameEngineGraphical.TIMESTEP;
@@ -29,7 +28,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * @param monde le monde dans lequel évolue pacman
      * @param position la position actuelle de pacman
      */
-    public Pacman(Monde monde, Position position){
+    public Pacman(MondeInterface monde, Position position){
         super(monde, new Position(position));
         this.currentDirection = Cmd.IDLE; // L'orientation initiale de Pacman est en sur place
     }
@@ -38,6 +37,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * La série d'élimination des fantômes
      * @return le multiplicateur de core issue de la série d'élimination
      */
+    @Override
     public int getStreak() {
         return streak;
     }
@@ -60,7 +60,7 @@ public class Pacman extends Personnage implements PacmanInterface {
         reduceTimeToKill();
     }
 
-    private void reduceTimeToKill() {
+    protected void reduceTimeToKill() {
         if(isAggressif()) {
             timeToKill -= TIMESTEP;
         } else {
@@ -76,7 +76,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * Augmente le score du joueur de la valeur de la pièce.
      * Augmente le temps d'attaque du joueur du temps accordé par la pièce.
      */
-    private void grabCoin() {
+    protected void grabCoin() {
         Piece piece = monde.grabPieceAt(position);
         if(piece != null){
             monde.increaseScore(piece.getScore());
@@ -104,21 +104,22 @@ public class Pacman extends Personnage implements PacmanInterface {
     /**
      * Procédure qui vérifie si il y a une situation d'attaque entre Pacman et un fantôme (dans les deux sens)
      */
+    @Override
     public void attack() {
         if(isAggressif()){
             // Test si il y a un fantôme sur la case où est Pacman
-            Collection<Personnage> personnages = monde.getPersonnagesAt(position);
-            personnages.remove(this);
-            for (Personnage p : personnages){
+            Collection<PersonnageInterface> personnageInterfaces = monde.getPersonnagesAt(position);
+            personnageInterfaces.remove(this);
+            for (PersonnageInterface p : personnageInterfaces){
                 monde.kill(p);
                 increaseStreak();
             }
 
             // Test si Pacman et un fantôme ont échangé de position
-            personnages = monde.getPersonnages();
-            personnages.remove(this);
-            for(Personnage p : personnages){
-                if(p.getPosition().equals(anciennePosition) && p.anciennePosition.equals(getPosition())){
+            personnageInterfaces = monde.getPersonnages();
+            personnageInterfaces.remove(this);
+            for(PersonnageInterface p : personnageInterfaces){
+                if(p.getPosition().equals(anciennePosition) && p.getAnciennePosition().equals(getPosition())){
                     monde.kill(p);
                     increaseStreak();
                 }
@@ -129,8 +130,10 @@ public class Pacman extends Personnage implements PacmanInterface {
     // TODO : tester
     /**
      * Méthode augmentant le multiplicateur de score issue de la série d'élimination des fantômes
+     * Initialement et par défaut, vaut 1.
+     * Quand Pacman tue un fantôme, est multiplié par 2, jusqu'à une limite maximum de 8.
      */
-    private void increaseStreak() {
+    protected void increaseStreak() {
         if(streak < 8){
             streak *= 2;
         }
@@ -193,6 +196,7 @@ public class Pacman extends Personnage implements PacmanInterface {
     /**
      * Methode qui decrémente de 1 la vie de pacman
      */
+    @Override
     public void decreaseVie() {
         this.vie--;
     }
@@ -201,6 +205,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * Retourne le nombre de vie de pacman
      * @return int vie
      */
+    @Override
     public int getVie() {
         return vie;
     }
@@ -208,6 +213,7 @@ public class Pacman extends Personnage implements PacmanInterface {
     /**
      * Fixe le nombre de vie à Pacman
      */
+    @Override
     public void resetVie() {
         vie = 3;
     }
@@ -215,6 +221,7 @@ public class Pacman extends Personnage implements PacmanInterface {
     /**
      * Methode qui incrémente de 1 la vie de pacman
      */
+    @Override
     public void increaseVie(){
         vie++;
     }
@@ -223,6 +230,7 @@ public class Pacman extends Personnage implements PacmanInterface {
      * Méthode permettant de définir la direction dans laquelle va Pacman
      * @param commande la nouvelle direction de Pacman
      */
+    @Override
     public void setDir(Cmd commande) {
         currentDirection = commande;
     }
@@ -270,10 +278,12 @@ public class Pacman extends Personnage implements PacmanInterface {
      * @return vrai si Pacman peut manger les fantômes,
      *         faux sinon.
      */
+    @Override
     public boolean isAggressif(){
         return timeToKill > 0.000001;
     }
 
+    @Override
     public BufferedImage rotateImageByDegrees(BufferedImage img, double angle) {
 
         double rads = Math.toRadians(angle);
@@ -305,7 +315,10 @@ public class Pacman extends Personnage implements PacmanInterface {
     // TODO : tester mock
     /**
      * Méthode qui téléporte Pacman si il traverse le bord de la carte (comme dans le jeu original)
+     * Pacman DOIT se déplacer après être téléporté.
+     * // TODO changer pour que la bonne execution de cette méthode ne dépende pas de l'environnement d'appel?
      */
+    @Override
     public void teleport() {
         // Si Pacman est au bord du monde (sans mur), le téléporte de l'autre coté du monde
         if(getPosition().getX().equals(0) && getCurrentDirection().equals(Cmd.LEFT)){

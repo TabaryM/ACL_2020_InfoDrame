@@ -1,6 +1,6 @@
 package algorithmes;
 
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Case;
 import model.plateau.Position;
 
@@ -14,7 +14,7 @@ import java.util.Random;
 
 public abstract class AEtoile {
 
-    protected Monde monde;
+    protected MondeInterface monde;
     protected HashMap<Position,Position> predecesseur;
     protected ArrayList<ArrayList<Integer>> coutChemin;
     protected ArrayList<ArrayList<Integer>> meilleurChemin;
@@ -31,7 +31,7 @@ public abstract class AEtoile {
      * @param pacmanPosition la position du Pacman à atteindre.
      * @param fantomePosition la position actuelle du fantôme.
      */
-    public AEtoile(Monde monde, Position pacmanPosition, Position fantomePosition){
+    public AEtoile(MondeInterface monde, Position pacmanPosition, Position fantomePosition){
         this.monde = monde;
         this.pacmanPosition = pacmanPosition;
         this.fantomePosition = fantomePosition;

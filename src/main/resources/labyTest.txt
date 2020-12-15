@@ -1,0 +1,11 @@
+5 //nombre de lignes
+5 //nombre de colonnes
+// 0 : vide
+// 1 : mur
+// 2 : piece
+// 3 : grosse piece
+11101
+1F001
+10101
+000P0
+11101

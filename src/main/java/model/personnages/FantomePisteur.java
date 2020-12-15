@@ -7,7 +7,7 @@ import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
-public class FantomePisteur extends Fantome {
+public class FantomePisteur extends Fantome implements FantomePisteurInterface {
 
     /**
      *

@@ -2,13 +2,13 @@ package model.personnages;
 
 import algorithmes.AEtoilePeureux;
 import dataFactories.ImageFactory;
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Case;
 import model.plateau.Position;
 
 import java.awt.image.BufferedImage;
 
-public class FantomePeureux extends Fantome {
+public class FantomePeureux extends Fantome implements FantomePeureuxInterface {
 
     /**
      * Constructeur de la classe fille du fantôme peureux
@@ -16,7 +16,7 @@ public class FantomePeureux extends Fantome {
      * @param position la position du fantôme
      * @param pacmanPosition la position de Pacman
      */
-    public FantomePeureux(Monde monde, Position position, Position pacmanPosition) {
+    public FantomePeureux(MondeInterface monde, Position position, Position pacmanPosition) {
         super(monde, position, pacmanPosition);
     }
 

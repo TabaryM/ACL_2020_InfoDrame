@@ -1,6 +1,6 @@
 package algorithmes;
 
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Case;
 import model.plateau.Position;
 
@@ -22,7 +22,7 @@ public class AEtoilePiegeur extends AEtoile {
      * @param fantomePosition la position actuelle du fantôme.
      * @param direction la direction par laquelle le fantôme essaye depiéger le Pacman.
      */
-    public AEtoilePiegeur(Monde monde, Position pacmanPosition, Position fantomePosition, String direction) {
+    public AEtoilePiegeur(MondeInterface monde, Position pacmanPosition, Position fantomePosition, String direction) {
         super(monde, pacmanPosition, fantomePosition);
         this.direction = direction;
     }

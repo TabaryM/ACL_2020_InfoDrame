@@ -1,6 +1,6 @@
 package algorithmes;
 
-import model.Monde;
+import model.MondeInterface;
 import model.plateau.Case;
 import model.plateau.Position;
 
@@ -19,7 +19,7 @@ public class AEtoilePeureux extends AEtoile {
      * @param pacmanPosition la position du Pacman à atteindre.
      * @param fantomePosition la position actuelle du fantôme.
      */
-    public AEtoilePeureux(Monde monde, Position pacmanPosition, Position fantomePosition) {
+    public AEtoilePeureux(MondeInterface monde, Position pacmanPosition, Position fantomePosition) {
         super(monde, pacmanPosition, fantomePosition);
     }
 
