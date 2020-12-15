@@ -10,6 +10,7 @@ import org.junit.jupiter.api.*;
 import static org.easymock.EasyMock.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class PacmanTest {
 
     Pacman pacman;
