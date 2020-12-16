@@ -2,9 +2,7 @@ import engine.controller.Cmd;
 import model.Monde;
 import model.MondeInterface;
 import model.personnages.Pacman;
-import model.plateau.Labyrinthe;
-import model.plateau.LabyrintheInterface;
-import model.plateau.Position;
+import model.plateau.*;
 import org.junit.jupiter.api.*;
 
 import static org.easymock.EasyMock.*;

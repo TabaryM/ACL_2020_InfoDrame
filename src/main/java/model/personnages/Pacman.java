@@ -127,7 +127,6 @@ public class Pacman extends Personnage implements PacmanInterface {
         }
     }
 
-    // TODO : tester
     /**
      * Méthode augmentant le multiplicateur de score issue de la série d'élimination des fantômes
      * Initialement et par défaut, vaut 1.
