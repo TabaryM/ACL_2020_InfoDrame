@@ -92,6 +92,14 @@ Venez jouer à notre jeu. Il est bien.
 La liste des tests effectués est disponible
 [ici](https://github.com/TabaryM/ACL_2020_InfoDrame/blob/Sprint4/README.md)
 
+### Points positifs
+  - On a appris comment extraire une interface d'une classe via IntelliJ
+  - On a découvert différents tags de JUnit pouvant faciliter des tests répétitifs.
+
+### Points négatifs
+  - Les tests ont été fait bien trop tard par rapport à la spécification.
+    Si d'autres sprints auraient suivis celui-ci,
+    il aurait fallu faire un refactor global du code pour utiliser principalement des interfaces afin de faciliter les tests en Mock
 
 ## Sprint 3
 ### Objectifs
