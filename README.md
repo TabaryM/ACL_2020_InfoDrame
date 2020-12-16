@@ -1,6 +1,6 @@
-#ACL_2020_InfoDrame
+# ACL_2020_InfoDrame
 
-##Sommaire
+## Sommaire
 - [Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-1)
   - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-3)
   - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-3)
@@ -22,12 +22,12 @@
 - [Sprint 4](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-4)
   - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs)
 
-##Compilation et lancement :
+## Compilation et lancement :
 
 Deux versions différentes ont été créées pour ce dernier sprint,
 une version jouable et une version avec des tests.
 
-###Version jouable
+### Version jouable
 Vous pouvez cloner ce projet, le compiler et lancer le jeu en copiant 
 et collant les 4 lignes suivantes dans votre terminal :
 
@@ -38,7 +38,7 @@ mvn package
 java -jar target\ACL-2020-InfoDrame-0.0-SNAPSHOT.jar
 ```
 
-###Version de test
+### Version de test
 Vous pouvez cloner la branche de test, la compiler et exécuter les tests
 en copiant et collant les 4 lignes suivantes dans votre terminal :
 
@@ -52,7 +52,7 @@ mvn test
 La description plus détaillée des tests effectués est accessible
 [ici](https://github.com/TabaryM/ACL_2020_InfoDrame/blob/Sprint4/README.md)
 
-##Membres du groupe : 
+## Membres du groupe : 
 Corentin Roberge-Mentec
 
 Jordan Scherring
@@ -62,15 +62,15 @@ Mathieu Tabary
 Paul-Emile Watelot
 
 
-##PacSouls
+## PacSouls
 Venez jouer à notre jeu. Il est bien.
 
 ![Photo non contractuelle](conception/images/PacSouls.png)
 
-#Fonctionalitées prévues et découpage par sprint
+# Fonctionalitées prévues et découpage par sprint
 
-##Sprint 4
-###Objectifs
+## Sprint 4
+### Objectifs
 - Tester les classes du model :
     - Personnages.
     - Pacman.
@@ -88,13 +88,13 @@ Venez jouer à notre jeu. Il est bien.
     - Pacman se bloque sur le mur si on tourne trop tôt 
     (mais c'est un peu compliqué à corriger donc on ne va sûrement pas le faire)
 
-##Backlog Sprint 4 :
+## Backlog Sprint 4 :
 La liste des tests effectués est disponible
 [ici](https://github.com/TabaryM/ACL_2020_InfoDrame/blob/Sprint4/README.md)
 
 
-##Sprint 3
-###Objectifs
+## Sprint 3
+### Objectifs
 - 1 Fantomes
     - 1.1 Fantômes piégeurs, un des fantôme tourne dans le sens horaire pour s'approcher de Pacman,
     l'autre dans le sens anti-horaire.
@@ -121,16 +121,16 @@ La liste des tests effectués est disponible
     - Augmenter la difficulté
 
 
-###Répartition des responsabilités
+### Répartition des responsabilités
 Corentin et Paul-Emile : 1
 
 Jordan : 4
 
 Mathieu : 3 et 5
 
-##Backlog Sprint 3 : 
+## Backlog Sprint 3 : 
 
-###Fonctionnalités implémentées
+### Fonctionnalités implémentées
 - IA fantômes : 
     - Le fantôme dit "peureux" bloque les issues quand vous êtes encerclé
     , mais se suicide quand il peut
@@ -161,15 +161,15 @@ Mathieu : 3 et 5
     - Si plusieurs fantômes tuent Pacman au même moment
     , il perd autant de vies que d'attaques subies.
 
-###Points positifs
+### Points positifs
 - Chacun a fait ses parties en temps prévus.
 - Rien de mieux par rapport a avant.
 
-###Point Négatifs
+### Point Négatifs
 - Rien de pire qu'avant.
 
 
-###Screenshots
+### Screenshots
 
 There is something wrong, I can feel it!
 
@@ -186,8 +186,8 @@ Vous pouvez passer de l'autre côté du monde pour fuir les fantômes
 
 ![Photo d'un Pacman tentant de fuir ses ennemis grace au pouvoir de la Deuxième dimension](conception/images/portail_2.png)
 
-##Sprint 2
-###Objectifs
+## Sprint 2
+### Objectifs
 - 1 Fantômes
     - 1.1 Des monstres sont placés dans l’enclos de départ
     - 1.2 Les monstres se déplacent en essayant d’attraper Pac-Man
@@ -202,7 +202,7 @@ Vous pouvez passer de l'autre côté du monde pour fuir les fantômes
     lorsqu’il a mangé l’objet permettant de les tuer. Ceux-ci sont tués à son contact
 - 3 Interface graphique : Dessin du monde et des personnages
 
-###Répartition des responsabilités
+### Répartition des responsabilités
 
 Corentin et Paul-Emile : 1
 
@@ -210,20 +210,20 @@ Mathieu : 2
 
 Jordan : 3
 
-###Diagrammes
-####Diagramme de classe
+### Diagrammes
+#### Diagramme de classe
 Objectif d'implémentation : 
 
 ![Diagramme de classe du sprint 2](conception/diagrammes/class/Objectif_Sprint2.svg)
 
-####Diagrammes de séquence
+#### Diagrammes de séquence
 Cas de déplacement avec attaque possible : 
 
 ![Très petit diagramme de séquence](conception/diagrammes/sequence/UserPlayingAttaque.svg)
 
-##Backlog Sprint 2 : 
+## Backlog Sprint 2 : 
 
-###Fonctionnalités implémentées
+### Fonctionnalités implémentées
 - Les fantômes apparaissent dans l'enclos de départ. (1.1)
 - Le fantôme pisteur va vers Pacman en suivant un des plus court chemin. (1.2.1)
 - Les fantômes fuient Pacman quand il a mangé une pièce d'attaque. (1.3)
@@ -232,27 +232,27 @@ Cas de déplacement avec attaque possible :
 il tue les fantômes s'ils sont sur la même case que lui. (2.2)
 - Les personnages et le labyrinthe sont affiché en temps réel sur l'interface graphique. (3)
 
-###Points positifs
+### Points positifs
 - Bonne répartition des taches (équitable en temps de travail) (très peu de conflits lors de merges)
 - Bonne gestion des branches (toujours aucune perte de données)
 
-###Point Négatifs
+### Point Négatifs
 - Mauvaise préparation du sprint
     - Diagramme de classe incomplet (Factory, Cases)
     - Classes définies au sprint précédent inappropriées
     à l'implémentation des fonctionnalités de ce sprint
 
-###Nouveau diagramme de classe
+### Nouveau diagramme de classe
 
-###Screenshots
+### Screenshots
 Apparition des fantômes dans l'enclos de départ
 ![Photo du monde et du labyrinthe créer a partir d'un fichier texte](conception/images/jeu.png)
 
 Les fantômes ont peur de Pacman quand il a mangé la pièce d'attaque
 ![Photo d'un fantôme qui fuis un Pacman très aggressif](conception/images/fuite_fantome.png)
 
-##Sprint 1
-###Objectifs
+## Sprint 1
+### Objectifs
  - 1 Déplacement du personnage-joueur sur une grille-plateau
  - 2 Affichage d’un HUD contenant les infos suivantes :
  
@@ -279,18 +279,18 @@ Les fantômes ont peur de Pacman quand il a mangé la pièce d'attaque
         - 4.3.2. Grosse pièce : Comme pièce + permet de manger les fantômes
 
 
-###Répartition des responsabilités
+### Répartition des responsabilités
 Mathieu et Paul-Emile : 1 + 4.1 + 4.2
 
 Corentin + Jordan : 2 + 3. + 4.3
 
-###Diagrammes
-####Diagramme de classe
+### Diagrammes
+#### Diagramme de classe
 Objectif d'implémentation : 
 
 ![Diagramme de classe du sprint 1](conception/diagrammes/class/Objectif_Sprint1.svg)
 
-####Diagrammes de séquence
+#### Diagrammes de séquence
 Déroulement du jeu : 
 
 ![Petit diagramme de séquence](conception/diagrammes/sequence/MainGame.svg)
@@ -298,9 +298,9 @@ Déroulement du jeu :
 
 ![Petit diagramme de séquence](conception/diagrammes/sequence/UserPlaying.svg)
 
-##Backlog Sprint 1 : 
+## Backlog Sprint 1 : 
 
-###Fonctionnalitées implémentées
+### Fonctionnalitées implémentées
 - Construction du plateau de jeu par lecture d'un fichier texte (4.1)
 - Création du menu principal (3.1)
 - Création d'un menu de pause (3.2)
@@ -310,17 +310,17 @@ Déroulement du jeu :
     - Déplacement du personnage dans le monde (1) (4.2)
     - Pacman peut ramasser les pièces et augmenter son score (4.3)
 
-###Points positifs
+### Points positifs
 - Bonne utilisation des branches
 - Communication efficace
 - Temps de travail bien utilisé (3 sessions de 3h environ)
 
-###Point Négatifs
+### Point Négatifs
 - Diagramme de classe préliminaire pas assez travaillé :
     - Packages mal définis
     - Classes visuelles mal comprises (perte de temps lors de l'implémentation)
 - Pas assez d'ambition
 
-###Nouveau diagramme de classe
+### Nouveau diagramme de classe
 
 ![Diagramme de classe du sprint 1 corrigé](conception/diagrammes/class/Fin_Sprint1.svg)
