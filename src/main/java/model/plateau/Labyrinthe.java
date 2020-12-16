@@ -27,7 +27,6 @@ public class Labyrinthe implements LabyrintheInterface {
         this(FileReader.getInstance().buildPlateau(path));
     }
 
-    // TODO : tester
     /**
      * Initialise le labyrinthe à partir d'un plateau.
      * @param plateau tableau à deux dimensions contenant les positions des pièces et du joueur
@@ -68,11 +67,6 @@ public class Labyrinthe implements LabyrintheInterface {
                 }
             }
         }
-        // TODO Vérifier que toutes les parties importantes sont initialisées :
-        // Position de spawn de Pacman
-        // Positions de spawns de fantômes
-        // Les bords sont tous des murs (sauf portails)
-        //System.out.println(this);
     }
 
     /**
@@ -97,7 +91,6 @@ public class Labyrinthe implements LabyrintheInterface {
         return stringBuilder.toString();
     }
 
-    // TODO : tester
     /**
      * Retourne le caractère à la case demandé
      * @param x coordonnée en abscisse
@@ -112,7 +105,6 @@ public class Labyrinthe implements LabyrintheInterface {
         return plateau[0][0];
     }
 
-    // TODO : tester
     /**
      * Retourne le caractère à la case demandé
      * @param position la position de la case demandée
@@ -141,7 +133,6 @@ public class Labyrinthe implements LabyrintheInterface {
         return new ArrayList<>(posInitFantome);
     }
 
-    // TODO : tester
     /**
      * Méthode permettant de retrouver le type de pièce située à la position position.
      * @param position position de la piece
@@ -152,7 +143,6 @@ public class Labyrinthe implements LabyrintheInterface {
         return pieces.get(position);
     }
 
-    // TODO : tester
     /**
      * Méthode permettant de supprimer les pièces que PacMan récupère, une par une.
      * @param pos Position de la piece à retirer

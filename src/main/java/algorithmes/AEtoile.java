@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Roberge-Mentec Corentin
  */
 
-public abstract class AEtoile {
+public abstract class AEtoile implements AEtoileInterface {
 
     protected MondeInterface monde;
     protected HashMap<Position,Position> predecesseur;
@@ -38,10 +38,10 @@ public abstract class AEtoile {
         initAEtoile();
     }
 
-    // TODO : tester
     /**
      * Initialisation de l'algorithme A*.
      */
+    @Override
     public void initAEtoile(){
         caseOuverte = new ArrayList<>();
         predecesseur = new HashMap<>();
@@ -62,25 +62,18 @@ public abstract class AEtoile {
         }
     }
 
-    // TODO : tester mock
     /**
      * Appel de la résolution du labyrinthe lorsque les fantômes attaquent.
      */
+    @Override
     public void resoudreLabyAttaque(){
         resoudreAEtoile(pacmanPosition);
     }
 
-    // TODO : tester
-    /**
-     * Résolution de la recherche de chemin de A* par les fantômes.
-     * @param but le but à atteindre (ici Pacman).
-     */
-    public abstract void resoudreAEtoile(Position but);
-
-    // TODO : tester mock
     /**
      * Résolution du labyrinthe lorsque les fantômes sont vulnérables face à Pacman.
      */
+    @Override
     public void resoudreLabyFuite(){
         initAEtoile();
 
@@ -101,15 +94,16 @@ public abstract class AEtoile {
      * @param b la position d'arrivée pour le calcul.
      * @return la distance à vol d'oiseau d'un point donné a à un poiint donné b.
      */
+    @Override
     public Integer getBirdFlyDist(Position a, Position b){
         return (int) Math.sqrt((Math.pow(Math.abs(a.getX()-b.getX()),2)+Math.pow(Math.abs(a.getY()-b.getY()),2)));
     }
 
-    // TODO : tester
     /**
      * Reconstruction du chemin à emprunter par le fantôme pour atteindre le Pacman.
      * @param courant la position actuellement regardée.
      */
+    @Override
     public void reconstruireChemin(Position courant){
         chemin = new ArrayList<>();
         chemin.add(courant);
@@ -119,11 +113,11 @@ public abstract class AEtoile {
         }
     }
 
-    // TODO : tester
     /**
      * Méthode permettant d'obtenir la prochaine case que le fantôme va emprunter.
      * @return la prochaine case empruntée par le fantôme.
      */
+    @Override
     public Position getProchaineCaseDuChemin(){
         Position aCase;
 
