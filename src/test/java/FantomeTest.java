@@ -3,10 +3,7 @@ import model.MondeInterface;
 import model.personnages.Fantome;
 import model.personnages.FantomePeureux;
 import model.personnages.Pacman;
-import model.plateau.Case;
-import model.plateau.Couloir;
-import model.plateau.Labyrinthe;
-import model.plateau.LabyrintheInterface;
+import model.plateau.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,4 +76,37 @@ class FantomeTest {
         assertEquals(400, monde.getScore());
     }
 
+    @Test
+    void resetPosition() {
+        monde = createMock(MondeInterface.class);
+        Position pos = new Position(3, 3);
+
+        // On vérifie que la position dans le mock est acceptée par Pacman
+        fantome = new FantomePeureux(monde, pos, new Position(4,4));
+        assertEquals(pos, fantome.getPosition());
+
+        // On planifie le mock
+        expect(monde.getPosSpawnFantome()).andReturn(pos);
+
+        replay(monde);
+        // On change la position pour être sûre que le reset n'est pas une procédure vide
+        fantome.setPosition(3, 4);
+
+        // On reset et on vérifie que tout va bien
+        fantome.resetPosition();
+        verify(monde);
+
+        assertEquals(pos, fantome.getPosition());
+    }
+
+    @Test
+    void resetPositionNull(){
+        monde = createMock(MondeInterface.class);
+        fantome = new FantomePeureux(monde, new Position(1,1), new Position(4,4));
+        expect(monde.getPosSpawnFantome()).andReturn(null);
+        replay(monde);
+        fantome.resetPosition();
+        verify(monde);
+        assertNull(fantome.getPosition());
+    }
 }
