@@ -11,13 +11,13 @@
   - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-2)
   - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-2)
   - [Diagrammes](https://github.com/TabaryM/ACL_2020_InfoDrame#diagrammes)
-  - [Backlog Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-2-)
+  - [Backlog Sprint 2](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-2-)
 
 - [Sprint 3](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-3)
   - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-1)
   - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-1)
   - [Diagrammes](https://github.com/TabaryM/ACL_2020_InfoDrame#diagrammes)
-  - [Backlog Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-3-)
+  - [Backlog Sprint 3](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-3-)
 
 - [Sprint 4](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-4)
   - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs)
