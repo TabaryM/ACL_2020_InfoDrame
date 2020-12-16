@@ -310,4 +310,9 @@ public class Monde implements MondeInterface {
         scoreVie = score = 0;
         pcs.firePropertyChange("score", scoreOld, this.score);
     }
+
+    @Override
+    public int getScore() {
+        return score;
+    }
 }

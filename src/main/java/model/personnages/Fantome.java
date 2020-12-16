@@ -71,7 +71,6 @@ public abstract class Fantome extends Personnage implements FantomeInterface {
         }
     }
 
-    // TODO : tester mock
     /**
      * Méthode permettant de faire bouger les fantômes
      */
@@ -87,7 +86,7 @@ public abstract class Fantome extends Personnage implements FantomeInterface {
         nextCase(aCase);
     }
 
-    // TODO : tester
+
     /**
      * Méthode permettant de choisir la direction d'un fantôme en fonction de la prochaine case
      * @param aCase la prochaine case empruntée par le fantôme
@@ -109,9 +108,8 @@ public abstract class Fantome extends Personnage implements FantomeInterface {
         }
     }
 
-    // TODO : tester
     /**
-     * Méthode permettant l'attque des différents personnages
+     * Méthode permettant l'attaque des différents personnages
      */
     @Override
     public void attack() {
@@ -139,7 +137,7 @@ public abstract class Fantome extends Personnage implements FantomeInterface {
         }
     }
 
-    // TODO : tester
+
     /**
      * Méthode permettant la mort des différents personnages
      */
