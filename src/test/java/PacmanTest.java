@@ -22,7 +22,6 @@ class PacmanTest {
         labyrinthe = new Labyrinthe("src/main/resources/labyTest.txt");
     }
 
-
     @BeforeEach
     void setUp() {
         monde = new Monde(labyrinthe);
@@ -155,7 +154,7 @@ class PacmanTest {
 
     @Test
     void teleportDansUnMur(){
-        // TODO : on fait quoi si on veut créer un monde a la mano comme ça ?
+        // TODO : Test pertinent
         char[][] tab = new char[5][];
         tab[0] = new char[]{'1', '1', '1', '1', '1'};
         tab[1] = new char[]{'F', '0', '0', '0', '0'};
@@ -168,6 +167,7 @@ class PacmanTest {
         pacman.setDir(Cmd.DOWN);
         pacman.teleport();
         pacman.move();
-        assertEquals(new Position(4, 0), pacman.getPosition());
+        // Sachant qu'il y a un mur de l'autre côté du monde, le personnage ne devrait pas se téléporter.
+        assertEquals(new Position(4, 4), pacman.getPosition());
     }
 }
