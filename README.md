@@ -1,9 +1,35 @@
 # ACL_2020_InfoDrame
 
+## Sommaire
+- [Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-1)
+  - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-3)
+  - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-3)
+  - [Diagrammes](https://github.com/TabaryM/ACL_2020_InfoDrame#diagrammes-1)
+  - [Backlog Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-1-)
+
+- [Sprint 2](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-2)
+  - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-2)
+  - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-2)
+  - [Diagrammes](https://github.com/TabaryM/ACL_2020_InfoDrame#diagrammes)
+  - [Backlog Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-2-)
+
+- [Sprint 3](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-3)
+  - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs-1)
+  - [Répartition des responsabilités](https://github.com/TabaryM/ACL_2020_InfoDrame#r%C3%A9partition-des-responsabilit%C3%A9s-1)
+  - [Diagrammes](https://github.com/TabaryM/ACL_2020_InfoDrame#diagrammes)
+  - [Backlog Sprint 1](https://github.com/TabaryM/ACL_2020_InfoDrame#backlog-sprint-3-)
+
+- [Sprint 4](https://github.com/TabaryM/ACL_2020_InfoDrame#sprint-4)
+  - [Objectifs](https://github.com/TabaryM/ACL_2020_InfoDrame#objectifs)
+
 ## Compilation et lancement :
 
-Vous pouvez cloner ce projet, le compiler et l'executer en copiant 
-et collant les 4 lignes suivantes dans votre terminal
+Deux versions différentes ont été créées pour ce dernier sprint,
+une version jouable et une version avec des tests.
+
+### Version jouable
+Vous pouvez cloner ce projet, le compiler et lancer le jeu en copiant 
+et collant les 4 lignes suivantes dans votre terminal :
 
 ```
 git clone https://github.com/TabaryM/ACL_2020_InfoDrame.git
@@ -11,6 +37,20 @@ cd ACL_2020_InfoDrame
 mvn package
 java -jar target\ACL-2020-InfoDrame-0.0-SNAPSHOT.jar
 ```
+
+### Version de test
+Vous pouvez cloner la branche de test, la compiler et exécuter les tests
+en copiant et collant les 4 lignes suivantes dans votre terminal :
+
+```
+git clone https://github.com/TabaryM/ACL_2020_InfoDrame.git
+cd ACL_2020_InfoDrame
+git checkout Sprint4
+mvn test
+```
+
+La description plus détaillée des tests effectués est accessible
+[ici](https://github.com/TabaryM/ACL_2020_InfoDrame/blob/Sprint4/README.md)
 
 ## Membres du groupe : 
 Corentin Roberge-Mentec
@@ -21,10 +61,11 @@ Mathieu Tabary
 
 Paul-Emile Watelot
 
+
 ## PacSouls
 Venez jouer à notre jeu. Il est bien.
 
-![ClassDiag](conception/images/PacSouls.png)
+![Photo non contractuelle](conception/images/PacSouls.png)
 
 # Fonctionalitées prévues et découpage par sprint
 
@@ -47,12 +88,9 @@ Venez jouer à notre jeu. Il est bien.
     - Pacman se bloque sur le mur si on tourne trop tôt 
     (mais c'est un peu compliqué à corriger donc on ne va sûrement pas le faire)
 
-<!--
-Soutenance entre le 16 et le 18 (voir teams pour les détails).
-à déposer dimanche soir.
--->
-
-### Répartition des responsabilité
+## Backlog Sprint 4 :
+La liste des tests effectués est disponible
+[ici](https://github.com/TabaryM/ACL_2020_InfoDrame/blob/Sprint4/README.md)
 
 
 ## Sprint 3
@@ -83,7 +121,7 @@ Soutenance entre le 16 et le 18 (voir teams pour les détails).
     - Augmenter la difficulté
 
 
-### Répartition des responsabilité
+### Répartition des responsabilités
 Corentin et Paul-Emile : 1
 
 Jordan : 4
@@ -135,19 +173,18 @@ Mathieu : 3 et 5
 
 There is something wrong, I can feel it!
 
-![ClassDiag](conception/images/encerclement.png)
+![Photo d'un Pacman sur le point de se faire encercler](conception/images/encerclement.png)
 
 Vous pouvez passer de l'autre côté du monde pour fuir les fantômes
 
 (Avant)
 
-![ClassDiag](conception/images/portail_1.png)
+![Photo d'un Pacman ayant fui ses ennemis grace au pouvoir de la Deuxième dimension](conception/images/portail_1.png)
 
 
 (Après)
 
-![ClassDiag](conception/images/portail_2.png)
-
+![Photo d'un Pacman tentant de fuir ses ennemis grace au pouvoir de la Deuxième dimension](conception/images/portail_2.png)
 
 ## Sprint 2
 ### Objectifs
@@ -165,7 +202,7 @@ Vous pouvez passer de l'autre côté du monde pour fuir les fantômes
     lorsqu’il a mangé l’objet permettant de les tuer. Ceux-ci sont tués à son contact
 - 3 Interface graphique : Dessin du monde et des personnages
 
-### Répartition des responsabilité
+### Répartition des responsabilités
 
 Corentin et Paul-Emile : 1
 
@@ -177,12 +214,12 @@ Jordan : 3
 #### Diagramme de classe
 Objectif d'implémentation : 
 
-![ClassDiag](conception/diagrammes/class/Objectif_Sprint2.svg)
+![Diagramme de classe du sprint 2](conception/diagrammes/class/Objectif_Sprint2.svg)
 
 #### Diagrammes de séquence
 Cas de déplacement avec attaque possible : 
 
-![ClassDiag](conception/diagrammes/sequence/UserPlayingAttaque.svg)
+![Très petit diagramme de séquence](conception/diagrammes/sequence/UserPlayingAttaque.svg)
 
 ## Backlog Sprint 2 : 
 
@@ -209,10 +246,10 @@ il tue les fantômes s'ils sont sur la même case que lui. (2.2)
 
 ### Screenshots
 Apparition des fantômes dans l'enclos de départ
-![ClassDiag](conception/images/jeu.png)
+![Photo du monde et du labyrinthe créer a partir d'un fichier texte](conception/images/jeu.png)
 
 Les fantômes ont peur de Pacman quand il a mangé la pièce d'attaque
-![ClassDiag](conception/images/fuite_fantome.png)
+![Photo d'un fantôme qui fuis un Pacman très aggressif](conception/images/fuite_fantome.png)
 
 ## Sprint 1
 ### Objectifs
@@ -242,7 +279,7 @@ Les fantômes ont peur de Pacman quand il a mangé la pièce d'attaque
         - 4.3.2. Grosse pièce : Comme pièce + permet de manger les fantômes
 
 
-### Répartition des responsabilité
+### Répartition des responsabilités
 Mathieu et Paul-Emile : 1 + 4.1 + 4.2
 
 Corentin + Jordan : 2 + 3. + 4.3
@@ -251,15 +288,15 @@ Corentin + Jordan : 2 + 3. + 4.3
 #### Diagramme de classe
 Objectif d'implémentation : 
 
-![ClassDiag](conception/diagrammes/class/Objectif_Sprint1.svg)
+![Diagramme de classe du sprint 1](conception/diagrammes/class/Objectif_Sprint1.svg)
 
 #### Diagrammes de séquence
 Déroulement du jeu : 
 
-![ClassDiag](conception/diagrammes/sequence/MainGame.svg)
+![Petit diagramme de séquence](conception/diagrammes/sequence/MainGame.svg)
 
 
-![ClassDiag](conception/diagrammes/sequence/UserPlaying.svg)
+![Petit diagramme de séquence](conception/diagrammes/sequence/UserPlaying.svg)
 
 ## Backlog Sprint 1 : 
 
@@ -286,4 +323,4 @@ Déroulement du jeu :
 
 ### Nouveau diagramme de classe
 
-![ClassDiag](conception/diagrammes/class/Fin_Sprint1.svg)
+![Diagramme de classe du sprint 1 corrigé](conception/diagrammes/class/Fin_Sprint1.svg)
