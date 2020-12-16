@@ -33,7 +33,7 @@ class FantomeTest {
     }
 
     @Test
-    void nextCase() {
+    void nextCaseRight() {
        Case test = labyrinthe.getCasePlateau(1,1);
        fantome.nextCase(test);
        assertEquals(1, fantome.getPosition().getX());
@@ -41,7 +41,7 @@ class FantomeTest {
     }
 
     @Test
-    void nextCaseBouandary() {
+    void nextCaseBoundary() {
         Case test = labyrinthe.getCasePlateau(-1,1);
         fantome.nextCase(test);
         assertEquals(0, fantome.getPosition().getX());
@@ -49,20 +49,19 @@ class FantomeTest {
     }
 
     @Test
-    void attack() {
+    void attackRight() {
         Pacman pacman = new Pacman(monde, monde.getPosInitPacman());
         fantome.setPosition(pacman.getPosition().getX(),pacman.getPosition().getY());
         assertEquals(3, pacman.getVie());
         fantome.attack();
-        assertEquals(3, pacman.getVie());
+        assertEquals(2, pacman.getVie());
         fantome.setPosition(3,3);
         fantome.attack();
-        assertEquals(3, pacman.getVie());
-
+        assertEquals(2, pacman.getVie());
     }
 
     @Test
-    void die() {
+    void dieRight() {
         fantome.setPosition(3,3);
         fantome.die();
         assertEquals(0, fantome.getPosition().getX());
@@ -77,7 +76,7 @@ class FantomeTest {
     }
 
     @Test
-    void resetPosition() {
+    void resetPositionRight() {
         monde = createMock(MondeInterface.class);
         Position pos = new Position(3, 3);
 

@@ -26,17 +26,9 @@ class PacmanTest {
         pacman = new Pacman(monde, monde.getPosInitPacman());
     }
 
-    @Test
-    void grabCoin() {
-    }
-
-    @Test
-    void attack() {
-    }
-
     // Test Right et Boundary
     @Test
-    void increaseStreak() {
+    void increaseStreakFor() {
         int streak = 2;
         for(int i = 0; i < 5; i++) {
             if((int) Math.pow(streak, i) < 8) {
@@ -50,7 +42,7 @@ class PacmanTest {
 
     // Test Right et Boundary
     @RepeatedTest(6)
-    void increaseStreak(RepetitionInfo repetitionInfo) {
+    void increaseStreakJUnit(RepetitionInfo repetitionInfo) {
         int streak = 2;
         for(int i = 0; i < repetitionInfo.getCurrentRepetition()-1; i++){
             pacman.increaseStreak();
@@ -63,11 +55,7 @@ class PacmanTest {
     }
 
     @Test
-    void move() {
-    }
-
-    @Test
-    void resetPosition() {
+    void resetPositionRight() {
         // Création du mock et d'une position dans ce monde mock
         monde = createMock(MondeInterface.class);
         Position posInitPacman = new Position(4, 4);
@@ -101,18 +89,6 @@ class PacmanTest {
         verify(monde);
         assertNull(pacman.getPosition());
         // TODO : faire en sorte de ne jamais avoir de jeu si Pacman n'a pas de position initiale dans le labyrinthe
-    }
-
-    @Test
-    void die() {
-    }
-
-    @Test
-    void increaseVie() {
-    }
-
-    @Test
-    void isAggressif() {
     }
 
     @Test

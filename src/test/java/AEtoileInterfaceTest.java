@@ -44,8 +44,4 @@ class AEtoileInterfaceTest {
         assert(aEtoile.getProchaineCaseDuChemin().getX().equals(2)  && aEtoile.getProchaineCaseDuChemin().getY().equals(3)):"Erreur Aetoile";
     }
 
-    @Test
-    void reconstruireChemin() {
-        //faire un algo annexe pour tester si le chemin trouvé est le meme que celuis produit par l'algo
-    }
 }
