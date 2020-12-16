@@ -67,4 +67,6 @@ public interface MondeInterface {
     boolean pacmanLost();
 
     void resetScore();
+
+    int getScore();
 }
